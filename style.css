@@ -1,0 +1,754 @@
+/* --- Importação da Fonte e Ícones (Font Awesome) --- */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
+/* Font Awesome já importado no HTML para os ícones */
+
+/* --- Paleta 1 (Confiança e Natureza) - Base para as cores, ajustada para os prints --- */
+:root {
+    --azul-principal-site: #1877F2; /* Azul vibrante dos prints */
+    --verde-destaque-site: #2ECC71; /* Verde dos prints */
+    --cinza-fundo-site: #F0F2F5; /* Fundo mais claro, como nos prints */
+    --branco: #FFFFFF;
+    --texto-escuro: #222222;
+    --texto-medio: #444444;
+    --texto-claro: #666666;
+    --borda-clara: #DCDCDC; /* Borda dos cards */
+}
+
+/* --- Reset e Configurações Globais --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: var(--cinza-fundo-site);
+    color: var(--texto-escuro);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1280px; /* Um pouco mais largo para se adequar aos prints */
+    margin: 0 auto;
+    padding: 0 25px; /* Mais padding nas laterais */
+}
+
+a {
+    text-decoration: none;
+    color: var(--azul-principal-site);
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #125bbd; /* Tom mais escuro do azul */
+}
+
+/* --- Cabeçalho e Navegação --- */
+header {
+    background-color: var(--branco);
+    padding: 15px 0;
+    border-bottom: 1px solid var(--borda-clara); /* Borda sutil como nos prints */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;         /* Habilita o alinhamento flexível */
+    align-items: center;   /* ESTA É A LINHA QUE FAZ O ALINHAMENTO VERTICAL */
+    gap: 15px;             /* Espaço entre o logo e o texto */
+    text-decoration: none; /* Remove o sublinhado do link */
+}
+.logo img {
+    height: 50px;
+}
+
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--texto-escuro);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 25px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: var(--texto-escuro);
+    font-weight: 700;
+    transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+    color: var(--azul-principal-site);
+}
+
+.header-cta-button {
+    background-color: var(--azul-principal-site);
+    color: var(--branco);
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    transition: background-color 0.3s, transform 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.header-cta-button:hover {
+    background-color: #125bbd;
+    transform: translateY(-2px);
+}
+
+/* --- Seção Hero --- */
+#hero {
+    background-image: url('hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    color: var(--branco);
+    text-align: left;
+    padding: 150px 20px 100px; /* Mais padding vertical */
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 650px; /* Mais altura para a seção */
+}
+
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6); /* Overlay escuro */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px; /* Aumenta a largura do texto */
+    margin-right: auto;
+}
+
+#hero h1 {
+    font-size: 4.2rem; /* Fonte maior, como no print */
+    margin-bottom: 25px;
+    line-height: 1.1;
+    font-weight: 900; /* Mais negrito */
+}
+
+#hero h1 span {
+    color: var(--azul-principal-site); /* Destaque em azul, como no print */
+}
+
+#hero p {
+    font-size: 1.4rem; /* Fonte maior */
+    margin: 0 0 50px 0; /* Mais espaçamento */
+    max-width: 90%; /* Limita um pouco a largura */
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--azul-principal-site);
+    color: var(--branco);
+    padding: 18px 40px; /* Padding maior */
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 8px;
+    font-size: 1.2rem; /* Fonte maior */
+    transition: background-color 0.3s, transform 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.cta-button:hover {
+    background-color: #125bbd;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.cta-button.large {
+    padding: 20px 50px;
+    font-size: 1.4rem;
+}
+
+.cta-button.secondary {
+    background-color: var(--verde-destaque-site);
+}
+
+.cta-button.secondary:hover {
+    background-color: #26b360;
+}
+
+/* --- Seção Nossas Soluções --- */
+#solutions {
+    padding: 80px 0;
+    background-color: var(--cinza-fundo-site);
+}
+
+.section-title {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: var(--texto-escuro);
+    font-weight: 900;
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.3rem;
+    color: var(--texto-claro);
+    margin-bottom: 60px; /* Mais espaçamento */
+}
+
+.solutions-grid {
+    display: flex; /* Usar flexbox para alinhar na mesma linha */
+    justify-content: center; /* Centralizar os cards */
+    flex-wrap: wrap; /* Permitir quebra de linha em telas menores */
+    gap: 30px; /* Espaçamento entre os cards */
+}
+
+.solution-card {
+    background-color: var(--branco);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    width: calc(25% - 23px); /* 4 cards por linha com gap */
+    min-width: 280px; /* Largura mínima para mobile */
+}
+
+.solution-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.solution-card img {
+    width: 100%;
+    height: 180px; /* Altura da imagem dos cards */
+    object-fit: cover;
+    border-bottom: 1px solid var(--borda-clara); /* Borda sutil */
+}
+
+.solution-card .card-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinha ícone, título e texto à esquerda */
+}
+
+.icon-wrapper {
+    width: 50px; /* Tamanho do círculo do ícone */
+    height: 50px;
+    background-color: var(--azul-principal-site);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    color: var(--branco);
+    font-size: 1.5rem;
+}
+.solution-card:nth-child(2) .icon-wrapper { background-color: var(--verde-destaque-site); }
+.solution-card:nth-child(3) .icon-wrapper { background-color: var(--verde-destaque-site); }
+.solution-card:nth-child(4) .icon-wrapper { background-color: var(--azul-principal-site); }
+
+
+.solution-card h3 {
+    color: var(--texto-escuro);
+    font-size: 1.6rem; /* Fonte maior para título do card */
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.solution-card p {
+    font-size: 1rem;
+    color: var(--texto-medio);
+    margin-bottom: 20px;
+    flex-grow: 1; /* Permite que o parágrafo ocupe o espaço restante */
+}
+
+.saiba-mais {
+    display: block;
+    text-align: left;
+    color: var(--azul-principal-site);
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+/* --- Seção Por Que a ASAS? (Why Us) --- */
+#why-us {
+    background-color: var(--cinza-fundo-site); /* Fundo cinza como nos prints */
+    padding: 100px 0; /* Mais padding vertical */
+}
+
+#why-us .container {
+    display: flex;
+    align-items: center;
+    gap: 80px; /* Mais espaço entre imagem e texto */
+}
+
+.why-us-content {
+    flex: 1;
+}
+
+.why-us-content h2 {
+    font-size: 3.2rem; /* Fonte maior */
+    color: var(--texto-escuro);
+    margin-bottom: 25px;
+    line-height: 1.1;
+    font-weight: 900;
+}
+
+.why-us-content p {
+    font-size: 1.2rem; /* Fonte maior */
+    margin-bottom: 30px;
+    color: var(--texto-medio);
+}
+
+.why-us-image {
+    flex: 1;
+    text-align: center;
+}
+
+.why-us-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* --- Seção CTA Final --- */
+#cta-final {
+    background-color: var(--azul-principal-site);
+    color: var(--branco);
+    text-align: center;
+    padding: 100px 20px; /* Mais padding vertical */
+}
+
+#cta-final h2 {
+    font-size: 3.5rem; /* Fonte maior */
+    margin-bottom: 25px;
+    line-height: 1.1;
+    font-weight: 900;
+}
+
+#cta-final p {
+    font-size: 1.5rem; /* Fonte maior */
+    margin-bottom: 50px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.4;
+}
+
+/* --- Rodapé --- */
+footer {
+    background-color: var(--texto-escuro); /* Rodapé escuro */
+    color: var(--cinza-fundo-site);
+    padding: 40px 20px;
+    margin-top: 40px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.footer-logo {
+    height: 50px;
+    filter: brightness(0) invert(1) saturate(100%) hue-rotate(180deg);
+    margin-bottom: 15px;
+}
+
+.footer-about p {
+    font-size: 0.95rem;
+    color: var(--cinza-fundo-site);
+}
+
+.footer-links h3, .footer-contact-info h3 {
+    color: var(--verde-destaque-site);
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.footer-links ul, .footer-contact-info ul {
+    list-style: none;
+}
+
+.footer-links li, .footer-contact-info li {
+    margin-bottom: 8px;
+}
+
+.footer-contact-info li i {
+    margin-right: 10px;
+    color: var(--verde-destaque-site); /* Ícones em verde */
+}
+
+.footer-links a, .footer-contact-info a {
+    color: var(--cinza-fundo-site);
+    font-size: 0.95rem;
+}
+
+.footer-links a:hover, .footer-contact-info a:hover {
+    color: var(--azul-principal-site);
+}
+
+.copyright {
+    text-align: center;
+    font-size: 0.85rem;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- Modal de Contato --- */
+.modal {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5); /* Fundo semi-transparente */
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-content {
+    background-color: var(--branco);
+    margin: auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    width: 90%;
+    max-width: 1000px; /* Largura máxima do modal */
+    position: relative;
+}
+
+.close-button {
+    color: var(--texto-escuro);
+    font-size: 30px;
+    font-weight: bold;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--azul-principal-site);
+}
+
+.modal-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr; /* Form à esquerda, info à direita */
+    gap: 40px;
+}
+
+.modal-form-section h2, .modal-info-section h2 {
+    font-size: 2.2rem;
+    color: var(--texto-escuro);
+    margin-bottom: 30px;
+    font-weight: 900;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: var(--texto-medio);
+}
+
+.modal-form-section input[type="text"],
+.modal-form-section input[type="email"],
+.modal-form-section input[type="tel"],
+.modal-form-section textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--borda-clara);
+    border-radius: 5px;
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    color: var(--texto-escuro);
+    background-color: var(--cinza-fundo-site);
+}
+
+.modal-form-section input:focus,
+.modal-form-section textarea:focus {
+    outline: none;
+    border-color: var(--azul-principal-site);
+    box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.2);
+}
+
+.modal-form-section textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.modal-form-section .cta-button {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+.modal-info-section {
+    background-color: var(--cinza-fundo-site); /* Fundo claro para infos */
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Espalha os cards de info */
+}
+
+.info-card {
+    background-color: var(--branco);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.info-card:last-of-type {
+    margin-bottom: 0;
+}
+
+.info-card i {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: var(--azul-principal-site); /* Ícones em azul */
+}
+.info-card:nth-of-type(2) i {
+    color: var(--verde-destaque-site); /* Ícone de telefone verde */
+}
+.info-card:nth-of-type(3) i {
+    color: #E4405F; /* Ícone de Instagram (cor da marca) */
+}
+
+
+.info-card p {
+    font-weight: 700;
+    color: var(--texto-medio);
+    margin-bottom: 5px;
+}
+
+.info-card a {
+    font-size: 1.1rem;
+    color: var(--texto-escuro);
+    font-weight: 700;
+}
+
+.contact-person-card {
+    background-color: var(--azul-principal-site); /* Fundo azul para o contato do Marcelo */
+    color: var(--branco);
+    padding: 25px;
+    border-radius: 8px;
+    margin-top: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: center; /* Centraliza o texto */
+}
+
+.contact-person-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+    font-weight: 900;
+}
+
+.contact-person-card p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+
+/* --- Responsividade (Mobile First) --- */
+@media (max-width: 992px) {
+    #hero h1 {
+        font-size: 3.2rem;
+    }
+    #hero p {
+        font-size: 1.2rem;
+    }
+    .section-title {
+        font-size: 2.5rem;
+    }
+    .section-subtitle {
+        font-size: 1.1rem;
+    }
+    .solutions-grid {
+        justify-content: space-around; /* Distribui melhor os cards em 2 colunas */
+    }
+    .solution-card {
+        width: calc(50% - 20px); /* 2 cards por linha */
+    }
+    #why-us .container {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+    .why-us-content {
+        order: 2; /* Texto abaixo da imagem no mobile */
+    }
+    .why-us-image {
+        order: 1;
+    }
+    #why-us-content h2 {
+        font-size: 2.5rem;
+    }
+    #cta-final h2 {
+        font-size: 2.8rem;
+    }
+    #cta-final p {
+        font-size: 1.2rem;
+    }
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .footer-logo {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .modal-grid {
+        grid-template-columns: 1fr; /* Uma coluna no mobile */
+    }
+    .modal-info-section {
+        margin-top: 40px; /* Espaçamento entre form e info */
+    }
+    .contact-person-card {
+        margin-top: 20px;
+    }
+}
+
+
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    nav {
+        gap: 0;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .header-cta-button {
+        display: none; /* Esconde o botão CTA do header em mobile */
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--branco);
+        position: absolute;
+        top: 82px; /* Altura do header */
+        left: 0;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        padding: 20px 0;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .nav-links li a {
+        padding: 10px 20px;
+        display: block;
+    }
+
+    #hero {
+        padding: 100px 20px 80px;
+        text-align: center;
+        min-height: 450px;
+    }
+    .hero-content {
+        margin-right: auto;
+        margin-left: auto;
+    }
+    #hero h1 {
+        font-size: 2.5rem;
+    }
+
+    #hero p {
+        font-size: 1.1rem;
+    }
+
+    .section-title {
+        font-size: 2.2rem;
+    }
+
+    #cta-final h2 {
+        font-size: 2.2rem;
+    }
+
+    .cta-button.large {
+        padding: 15px 30px;
+        font-size: 1.1rem;
+    }
+
+    .solution-card {
+        width: 100%; /* Um card por linha */
+    }
+
+    .modal-content {
+        padding: 20px;
+    }
+    .modal-form-section h2, .modal-info-section h2 {
+        font-size: 1.8rem;
+    }
+}
