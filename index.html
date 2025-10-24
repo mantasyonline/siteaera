@@ -9,32 +9,45 @@
 </head>
 <body>
 
-    <header>
-        <div class="container">
-            <a href="#" class="logo">
-                <img src="logo2.jpg" alt="ASAS Logo">
-		<span>Aera Soluções Ambientais e Sustentáveis</span>
-            </a>
-            <nav id="main-nav">
-                <button class="hamburger" aria-label="Abrir menu">☰</button>
-                <ul class="nav-links">
-                    <li><a href="#hero">Início</a></li>
-                    <li><a href="#solutions">Soluções</a></li>
-                    <li><a href="#why-us">Sobre Nós</a></li>
-                    <li><a href="#contact">Contato</a></li>
-                </ul>
-                <a href="#" class="header-cta-button open-modal">Fale Conosco</a>
-            </nav>
-        </div>
-    </header>
+<header>
+    <div class="container">
+        <a href="index.html" class="logo">
+            <img src="logo2.jpg" alt="ASAS Logo">
+            <span>Aera Soluções Ambientais e Sustentáveis</span>
+        </a>
+        <nav id="main-nav">
+            <button class="hamburger" aria-label="Abrir menu">☰</button>
+            <ul class="nav-links">
+                <li><a href="index.html#hero">Início</a></li>
+                
+                <li class="dropdown-container">
+                    <a href="index.html#solutions">Soluções <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="licenciamento.html"><i class="fas fa-file-contract"></i> Licenciamento e Conformidade</a></li>
+                        <li><a href="gestao-residuos.html"><i class="fas fa-recycle"></i> Gestão de Resíduos</a></li>
+                        <li><a href="esg.html"><i class="fas fa-leaf"></i> ESG e Sustentabilidade</a></li>
+                        <li><a href="recursos-hidricos.html"><i class="fas fa-tint"></i> Recursos Hídricos e Inovação</a></li>
+                        <li><a href="captacao-sustentavel.html"><i class="fas fa-hand-holding-usd"></i> Financiamento Sustentável</a></li>
+                        <li><a href="atendimento-franquias.html"><i class="fas fa-store-alt"></i> Soluções para Franquias</a></li>
+                        <li><a href="gestao-socioambiental.html"><i class="fas fa-users"></i> Gestão Socioambiental</a></li>
+                        <li><a href="areas-contaminadas.html"><i class="fas fa-biohazard"></i> Áreas Contaminadas</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="nossa-historia.html">Sobre Nós</a></li> <li><a href="#contact-modal" class="open-modal">Contato</a></li>
+            </ul>
+            <a href="#" class="header-cta-button open-modal">Fale Conosco</a>
+        </nav>
+    </div>
+</header>
 
     <main>
         <section id="hero">
             <div class="container">
                 <div class="hero-content">
-                    <h1>Há 16 anos, a ASAS vai além da consultoria: <span>fazemos junto com você.</span></h1>
+                    <h1>A ASAS vai além da consultoria: <span>fazemos junto com você.</span></h1>
                     <p>Nossa missão é agregar valor ao seu negócio, disseminando a cultura circular, promovendo ações que reduzem riscos e custos, e transformando resultados ambientais em reconhecimento para sua marca.</p>
-                    <a href="#solutions" class="cta-button">Conheça nossas soluções →</a>
+                    <a href="index.html#solutions" class="cta-button">Conheça nossas soluções →</a>
                 </div>
             </div>
         </section>
@@ -51,7 +64,7 @@
                             <div class="icon-wrapper"><i class="fas fa-file-contract"></i></div>
                             <h3>Licenciamento e Conformidade</h3>
                             <p>Licenciamento ambiental, outorgas, auditorias e representação junto a órgãos ambientais.</p>
-                            <a href="#" class="saiba-mais">Saiba Mais →</a>
+                            <a href="licenciamento.html" class="saiba-mais">Saiba Mais →</a>
                         </div>
                     </div>
                     
@@ -61,7 +74,7 @@
                             <div class="icon-wrapper"><i class="fas fa-recycle"></i></div>
                             <h3>Gestão de Resíduos</h3>
                             <p>Logística reversa, destinação adequada e estratégias de redução de custos com resíduos.</p>
-                            <a href="#" class="saiba-mais">Saiba Mais →</a>
+                            <a href="gestao-residuos.html" class="saiba-mais">Saiba Mais →</a>
                         </div>
                     </div>
 
@@ -71,7 +84,7 @@
                             <div class="icon-wrapper"><i class="fas fa-leaf"></i></div>
                             <h3>ESG e Sustentabilidade</h3>
                             <p>Due diligence, programas ESG, relatórios de sustentabilidade e comunicação socioambiental.</p>
-                            <a href="#" class="saiba-mais">Saiba Mais →</a>
+                            <a href="esg.html" class="saiba-mais">Saiba Mais →</a>
                         </div>
                     </div>
 
@@ -81,7 +94,47 @@
                             <div class="icon-wrapper"><i class="fas fa-tint"></i></div>
                             <h3>Recursos Hídricos e Inovação</h3>
                             <p>Monitoramento ambiental, PRAD, fitorremediação e soluções inovadoras para efluentes.</p>
-                            <a href="#" class="saiba-mais">Saiba Mais →</a>
+                            <a href="recursos-hidricos.html" class="saiba-mais">Saiba Mais →</a>
+                        </div>
+                    </div>
+
+                    <div class="solution-card">
+                        <img src="solution-captacao.jpg" alt="Financiamento Sustentável (Green Finance)">
+                        <div class="card-content">
+                            <div class="icon-wrapper"><i class="fas fa-hand-holding-usd"></i></div>
+                            <h3>Financiamento Sustentável (Green Finance)</h3>
+                            <p>Assessoria para estruturar projetos e acessar fundos verdes e de impacto (IFC, BID, etc.).</p>
+                            <a href="captacao-sustentavel.html" class="saiba-mais">Saiba Mais →</a>
+                        </div>
+                    </div>
+                    
+                    <div class="solution-card">
+                        <img src="solution-franquias.jpg" alt="Atendimento a Franquias">
+                        <div class="card-content">
+                            <div class="icon-wrapper"><i class="fas fa-store-alt"></i></div>
+                            <h3>Soluções para Franquias</h3>
+                            <p>Padronize a conformidade e a gestão ambiental de todas as unidades da sua rede.</p>
+                            <a href="atendimento-franquias.html" class="saiba-mais">Saiba Mais →</a>
+                        </div>
+                    </div>
+
+                    <div class="solution-card">
+                        <img src="solution-socioambiental.jpg" alt="Gestão Socioambiental">
+                        <div class="card-content">
+                            <div class="icon-wrapper"><i class="fas fa-users"></i></div>
+                            <h3>Gestão Socioambiental</h3>
+                            <p>Elaboramos e executamos Planos de Gestão Ambiental e Comunicação Social no campo.</p>
+                            <a href="gestao-socioambiental.html" class="saiba-mais">Saiba Mais →</a>
+                        </div>
+                    </div>
+
+                    <div class="solution-card">
+                        <img src="solution-gac.jpg" alt="Áreas Contaminadas">
+                        <div class="card-content">
+                            <div class="icon-wrapper"><i class="fas fa-biohazard"></i></div>
+                            <h3>Áreas Contaminadas</h3>
+                            <p>Do diagnóstico à remediação. Recuperamos passivos ambientais e ativos imobiliários.</p>
+                            <a href="areas-contaminadas.html" class="saiba-mais">Saiba Mais →</a>
                         </div>
                     </div>
 
@@ -97,7 +150,7 @@
                 <div class="why-us-content">
                     <h2>Há 16 anos transformando <br>resultados ambientais</h2>
                     <p>A ASAS vai além da consultoria: fazemos junto com você. Agregamos valor ao seu negócio disseminando a cultura circular, promovendo ações que reduzem riscos e custos, e transformando resultados ambientais em reconhecimento para sua marca.</p>
-                    <a href="#solutions" class="cta-button secondary">Conheça nossa história →</a>
+                    <a href="nossa-historia.html" class="cta-button secondary">Conheça nossa história →</a>
                 </div>
             </div>
         </section>
@@ -112,34 +165,33 @@
 
     </main>
 
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-about">
-                    <img src="logo2.jpg" alt="ASAS Logo Branco" class="footer-logo">
-                    <p>Há 16 anos, a ASAS vai além da consultoria: fazemos junto com você.</p>
-                </div>
-                <div class="footer-links">
-                    <h3>Links Rápidos</h3>
-                    <ul>
-                        <li><a href="#hero">Início</a></li>
-                        <li><a href="#why-us">Sobre Nós</a></li>
-                        <li><a href="#solutions">Soluções</a></li>
-                        <li><a href="#contact-modal">Contato</a></li>
-                    </ul>
-                </div>
-                <div class="footer-contact-info">
-                    <h3>Contato</h3>
-                    <ul>
-                        <li><i class="fas fa-envelope"></i> <a href="mailto:aerasustentavel@gmail.com">aerasustentavel@gmail.com</a></li>
-                        <li><i class="fas fa-phone-alt"></i> <a href="tel:+5511986490720">(11) 98649-0720</a></li>
-                        <li><i class="fab fa-instagram"></i> <a href="https://instagram.com/aeraambiental" target="_blank">@aeraambiental</a></li>
-                    </ul>
-                </div>
+<footer id="contact">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <img src="logo2.jpg" alt="ASAS Logo Branco" class="footer-logo">
+                <p>Há 16 anos, a ASAS vai além da consultoria: fazemos junto com você.</p>
             </div>
-            <p class="copyright">&copy; 2025 ASAS - Aera Soluções Ambientais e Sustentáveis. Todos os direitos reservados.</p>
+            <div class="footer-links">
+                <h3>Links Rápidos</h3>
+                <ul>
+                    <li><a href="index.html#hero">Início</a></li>
+                    <li><a href="nossa-historia.html">Sobre Nós</a></li> <li><a href="index.html#solutions">Soluções</a></li>
+                    <li><a href="#contact-modal" class="open-modal">Contato</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact-info">
+                <h3>Contato</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> <a href="mailto:aerasustentavel@gmail.com">aerasustentavel@gmail.com</a></li>
+                    <li><i class="fas fa-phone-alt"></i> <a href="tel:+5511986490720">(11) 98649-0720</a></li>
+                    <li><i class="fab fa-instagram"></i> <a href="https://instagram.com/aeraambiental" target="_blank">@aeraambiental</a></li>
+                </ul>
+            </div>
         </div>
-    </footer>
+        <p class="copyright">&copy; 2025 ASAS - Aera Soluções Ambientais e Sustentáveis. Todos os direitos reservados.</p>
+    </div>
+</footer>
 
     <div id="contact-modal" class="modal">
         <div class="modal-content">

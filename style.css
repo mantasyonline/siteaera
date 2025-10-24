@@ -12,6 +12,9 @@
     --texto-medio: #444444;
     --texto-claro: #666666;
     --borda-clara: #DCDCDC; /* Borda dos cards */
+    --laranja-destaque: #F39C12;
+    --roxo-destaque: #8E44AD;
+    --vermelho-destaque: #E74C3C;
 }
 
 /* --- Reset e Configurações Globais --- */
@@ -70,9 +73,15 @@ header .container {
     align-items: center;   /* ESTA É A LINHA QUE FAZ O ALINHAMENTO VERTICAL */
     gap: 15px;             /* Espaço entre o logo e o texto */
     text-decoration: none; /* Remove o sublinhado do link */
+    color: var(--texto-escuro); /* Garante que o span tenha a cor correta */
 }
 .logo img {
     height: 50px;
+}
+.logo span {
+    font-weight: 700;
+    font-size: 1.1rem;
+    line-height: 1.2;
 }
 
 .hamburger {
@@ -281,9 +290,15 @@ nav {
     color: var(--branco);
     font-size: 1.5rem;
 }
+/* Cores dos Ícones */
+.solution-card:nth-child(1) .icon-wrapper { background-color: var(--azul-principal-site); }
 .solution-card:nth-child(2) .icon-wrapper { background-color: var(--verde-destaque-site); }
 .solution-card:nth-child(3) .icon-wrapper { background-color: var(--verde-destaque-site); }
 .solution-card:nth-child(4) .icon-wrapper { background-color: var(--azul-principal-site); }
+.solution-card:nth-child(5) .icon-wrapper { background-color: var(--laranja-destaque); }
+.solution-card:nth-child(6) .icon-wrapper { background-color: var(--roxo-destaque); }
+.solution-card:nth-child(7) .icon-wrapper { background-color: var(--roxo-destaque); }
+.solution-card:nth-child(8) .icon-wrapper { background-color: var(--vermelho-destaque); }
 
 
 .solution-card h3 {
@@ -379,7 +394,7 @@ footer {
     background-color: var(--texto-escuro); /* Rodapé escuro */
     color: var(--cinza-fundo-site);
     padding: 40px 20px;
-    margin-top: 40px;
+    /* margin-top: 40px; */ /* Removido para páginas de serviço */
 }
 
 .footer-grid {
@@ -609,6 +624,9 @@ footer {
 
 /* --- Responsividade (Mobile First) --- */
 @media (max-width: 992px) {
+    .logo span {
+        display: none; /* Esconde o texto do logo em telas menores */
+    }
     #hero h1 {
         font-size: 3.2rem;
     }
@@ -751,4 +769,254 @@ footer {
     .modal-form-section h2, .modal-info-section h2 {
         font-size: 1.8rem;
     }
+}
+
+/* ========================================= */
+/* --- NOVOS ESTILOS PÁGINAS DE SERVIÇO --- */
+/* ========================================= */
+
+/* --- Hero das Páginas de Serviço --- */
+.service-hero {
+    background-color: var(--azul-principal-site);
+    color: var(--branco);
+    padding: 100px 20px 80px;
+    text-align: center;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Imagens de fundo específicas para cada serviço */
+.service-hero.licenciamento { background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('solution-licenciamento.jpg'); }
+.service-hero.residuos { background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('solution-residuos.jpg'); }
+.service-hero.esg { background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('solution-esg.jpg'); }
+.service-hero.hidricos { background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('solution-hidricos.jpg'); }
+.service-hero.captacao { background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('solution-captacao.jpg'); }
+.service-hero.franquias { background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('solution-franquias.jpg'); }
+.service-hero.socioambiental { background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('solution-socioambiental.jpg'); }
+.service-hero.gac { background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('solution-gac.jpg'); }
+
+
+.service-hero h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+
+.service-hero p {
+    font-size: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+    opacity: 0.9;
+    line-height: 1.4;
+}
+
+/* --- Conteúdo das Páginas de Serviço --- */
+.service-content {
+    padding: 80px 0;
+    background-color: var(--branco); /* Fundo branco para o conteúdo */
+}
+
+.service-content .container {
+    max-width: 900px; /* Limita a largura do texto para melhor legibilidade */
+}
+
+.service-content h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--texto-escuro);
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.service-content p, .service-content li {
+    font-size: 1.1rem;
+    color: var(--texto-medio);
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+.service-content p.lead {
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--texto-escuro);
+    margin-bottom: 30px;
+}
+
+.service-content ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.service-content li {
+    position: relative;
+    padding-left: 30px; /* Espaço para o ícone */
+    margin-bottom: 15px;
+}
+
+.service-content li::before {
+    content: '\f058'; /* Ícone de check do Font Awesome */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    color: var(--verde-destaque-site);
+    position: absolute;
+    left: 0;
+    top: 4px;
+    font-size: 1.1rem;
+}
+
+.service-content .cta-section {
+    background-color: var(--cinza-fundo-site);
+    padding: 50px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.service-content .cta-section h2 {
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.service-content .cta-section p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+/* --- Ajustes de Responsividade para Páginas de Serviço --- */
+@media (max-width: 768px) {
+    .service-hero {
+        padding: 80px 20px 60px;
+    }
+    .service-hero h1 {
+        font-size: 2.5rem;
+    }
+    .service-hero p {
+        font-size: 1.2rem;
+    }
+    .service-content {
+        padding: 60px 0;
+    }
+    .service-content .cta-section {
+        padding: 30px;
+    }
+}
+
+/* ========================================= */
+/* --- ESTILOS DO DROPDOWN "SOLUÇÕES" --- */
+/* ========================================= */
+
+.dropdown-icon {
+    font-size: 0.7rem; /* Tamanho do ícone de seta */
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-container {
+    position: relative; /* Âncora para o menu flutuante */
+}
+
+.dropdown-menu {
+    display: none; /* Escondido por padrão */
+    position: absolute;
+    top: 100%; /* Alinha abaixo do link "Soluções" */
+    left: 0;
+    background-color: var(--branco);
+    min-width: 350px; /* Largura para caber os nomes */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-radius: 0 0 5px 5px;
+    z-index: 101;
+    padding: 10px 0;
+    list-style: none;
+    border-top: 3px solid var(--azul-principal-site); /* Destaque azul */
+}
+
+.dropdown-menu li a {
+    padding: 12px 20px;
+    display: block;
+    color: var(--texto-medio);
+    font-weight: 400; /* Texto normal, não negrito */
+    white-space: nowrap; /* Impede que os links quebrem linha */
+    text-align: left; /* Garante alinhamento */
+}
+
+.dropdown-menu li a:hover {
+    background-color: var(--cinza-fundo-site);
+    color: var(--azul-principal-site);
+}
+
+/* --- Lógica de Hover (Desktop) --- */
+@media (min-width: 769px) {
+    .dropdown-container:hover .dropdown-menu {
+        display: block; /* Mostra no hover */
+    }
+    .dropdown-container:hover .dropdown-icon {
+        transform: rotate(180deg); /* Gira a seta */
+    }
+}
+
+/* --- Lógica de Clique (Mobile) --- */
+@media (max-width: 768px) {
+    .dropdown-menu {
+        position: static; /* Remove flutuação no mobile */
+        box-shadow: none;
+        min-width: 100%;
+        border-radius: 0;
+        border-top: none;
+        background-color: #f7f7f7; /* Fundo levemente diferente */
+        padding: 0;
+        margin-top: 5px;
+    }
+
+    .dropdown-menu li a {
+        padding: 10px 30px; /* Mais indentação */
+        text-align: center;
+        font-size: 0.9rem;
+        white-space: normal; /* Permite quebra de linha no mobile */
+    }
+    
+    /* A classe .active será adicionada pelo JS */
+    .dropdown-menu.active {
+        display: block;
+    }
+
+    /* Gira o ícone quando o link/menu está ativo no JS */
+    .dropdown-container > a.active .dropdown-icon {
+        transform: rotate(180deg);
+    }
+}
+/* ========================================= */
+/* --- ESTILOS DOS ÍCONES NO DROPDOWN --- */
+/* ========================================= */
+
+.dropdown-menu li a i {
+    margin-right: 12px;
+    font-size: 1rem;
+    width: 20px; /* Largura fixa para alinhar o texto */
+    text-align: center;
+    color: var(--azul-principal-site); /* Cor padrão do ícone */
+}
+
+/* Cores específicas para combinar com os cards */
+.dropdown-menu li:nth-child(2) a i { color: var(--verde-destaque-site); }
+.dropdown-menu li:nth-child(3) a i { color: var(--verde-destaque-site); }
+.dropdown-menu li:nth-child(4) a i { color: var(--azul-principal-site); }
+.dropdown-menu li:nth-child(5) a i { color: var(--laranja-destaque); }
+.dropdown-menu li:nth-child(6) a i { color: var(--roxo-destaque); }
+.dropdown-menu li:nth-child(7) a i { color: var(--roxo-destaque); }
+.dropdown-menu li:nth-child(8) a i { color: var(--vermelho-destaque); }
+
+
+/* Ajuste no mobile */
+@media (max-width: 768px) {
+    .dropdown-menu li a i {
+        /* No mobile, o menu já é apertado, então é melhor esconder os ícones */
+        display: none; 
+    }
+}
+
+/* --- FUNDO HERO PÁGINA "SOBRE NÓS" --- */
+.service-hero.sobre { 
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('why-us-hands.jpg'); 
 }

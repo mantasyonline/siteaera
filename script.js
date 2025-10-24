@@ -10,6 +10,30 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // --- LÓGICA DO DROPDOWN (GAVETA) NO MOBILE ---
+    const dropdownToggle = document.querySelector('.dropdown-container > a');
+
+    if (dropdownToggle) {
+        dropdownToggle.addEventListener('click', function(e) {
+            // Só ativa a lógica de clique no mobile (telas <= 768px)
+            if (window.innerWidth <= 768) {
+                e.preventDefault(); // Previne a navegação para #solutions
+                
+                // Adiciona/remove classe 'active' para girar o ícone
+                this.classList.toggle('active'); 
+                
+                // Seleciona o próximo elemento (a ul.dropdown-menu)
+                const dropdownMenu = this.nextElementSibling;
+                
+                if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+                    // Adiciona/remove classe 'active' para mostrar/esconder o menu
+                    dropdownMenu.classList.toggle('active');
+                }
+            }
+            // Em telas maiores, o :hover do CSS cuida disso e o link funciona
+        });
+    }
+
     // --- LÓGICA DE ROLAGEM SUAVE (LINKS-ÂNCORA) ---
     // Seleciona todos os links que começam com #, mas NÃO os links que são só "#" ou o link do modal
     const scrollLinks = document.querySelectorAll('a[href^="#"]:not([href="#"]):not([href="#contact-modal"])'); 
@@ -28,6 +52,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Fecha o menu hambúrguer (se estiver aberto)
                 if (window.innerWidth <= 768) {
                     navMenu.classList.remove('active');
+                    // Também fecha o dropdown de soluções se estiver aberto
+                    const activeDropdown = document.querySelector('.dropdown-menu.active');
+                    if (activeDropdown) {
+                        activeDropdown.classList.remove('active');
+                        document.querySelector('.dropdown-container > a').classList.remove('active');
+                    }
                 }
             }
         });
