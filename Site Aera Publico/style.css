@@ -1,0 +1,230 @@
+/* --- Importação da Fonte e Ícones (Font Awesome) --- */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
+
+:root {
+    --azul-principal-site: #1877F2;
+    --verde-destaque-site: #2ECC71;
+    --cinza-fundo-site: #F0F2F5;
+    --branco: #FFFFFF;
+    --texto-escuro: #222222;
+    --texto-medio: #444444;
+    --texto-claro: #666666;
+    --borda-clara: #DCDCDC;
+    --laranja-destaque: #F39C12;
+    --roxo-destaque: #8E44AD;
+    --vermelho-destaque: #E74C3C;
+}
+
+/* --- Reset e Configurações Globais --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Lato', sans-serif; background-color: var(--cinza-fundo-site); color: var(--texto-escuro); line-height: 1.6; }
+.container { max-width: 1280px; margin: 0 auto; padding: 0 25px; }
+a { text-decoration: none; color: var(--azul-principal-site); transition: color 0.3s; }
+a:hover { color: #125bbd; }
+
+/* --- Cabeçalho e Navegação --- */
+header { background-color: var(--branco); padding: 15px 0; border-bottom: 1px solid var(--borda-clara); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+header .container { display: flex; justify-content: space-between; align-items: center; }
+.logo { display: flex; align-items: center; gap: 15px; color: var(--texto-escuro); }
+.logo img { height: 50px; }
+.logo span { font-weight: 700; font-size: 1.1rem; line-height: 1.2; }
+.hamburger { display: none; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: var(--texto-escuro); }
+nav { display: flex; align-items: center; gap: 30px; }
+.nav-links { list-style: none; display: flex; }
+.nav-links li { margin-left: 25px; }
+.nav-links li a { color: var(--texto-escuro); font-weight: 700; transition: color 0.3s; }
+.nav-links li a:hover { color: var(--azul-principal-site); }
+.header-cta-button { background-color: var(--azul-principal-site); color: var(--branco); padding: 10px 20px; font-weight: 700; border-radius: 5px; font-size: 0.95rem; transition: background-color 0.3s, transform 0.3s; border: none; cursor: pointer; }
+.header-cta-button:hover { background-color: #125bbd; transform: translateY(-2px); }
+
+/* --- Seção Hero --- */
+#hero { background-image: url('hero-bg.jpg'); background-size: cover; background-position: center; color: var(--branco); text-align: left; padding: 150px 20px 100px; position: relative; display: flex; align-items: center; min-height: 650px; }
+#hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.6); }
+.hero-content { position: relative; z-index: 2; max-width: 800px; margin-right: auto; }
+#hero h1 { font-size: 4.2rem; margin-bottom: 25px; line-height: 1.1; font-weight: 900; }
+#hero h1 span { color: var(--azul-principal-site); }
+#hero p { font-size: 1.4rem; margin: 0 0 50px 0; max-width: 90%; }
+.cta-button { display: inline-block; background-color: var(--azul-principal-site); color: var(--branco); padding: 18px 40px; font-weight: 700; border-radius: 8px; font-size: 1.2rem; transition: background-color 0.3s, transform 0.3s; border: none; cursor: pointer; text-align: center;}
+.cta-button:hover { background-color: #125bbd; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); color:#fff;}
+.cta-button.large { padding: 20px 50px; font-size: 1.4rem; }
+.cta-button.secondary { background-color: var(--verde-destaque-site); }
+.cta-button.secondary:hover { background-color: #26b360; }
+
+/* --- Seção Nossas Soluções --- */
+#solutions { padding: 80px 0; background-color: var(--cinza-fundo-site); }
+.section-title { text-align: center; font-size: 3rem; margin-bottom: 15px; color: var(--texto-escuro); font-weight: 900; }
+.section-subtitle { text-align: center; font-size: 1.3rem; color: var(--texto-claro); margin-bottom: 60px; }
+.solutions-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; }
+.solution-card { background-color: var(--branco); border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: transform 0.3s, box-shadow 0.3s; display: flex; flex-direction: column; width: calc(25% - 23px); min-width: 280px; }
+.solution-card:hover { transform: translateY(-8px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+.solution-card img { width: 100%; height: 180px; object-fit: cover; border-bottom: 1px solid var(--borda-clara); }
+.solution-card.app-card img { padding: 20px; object-fit: contain; background-color: #f7f9fc; }
+.solution-card .card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; align-items: flex-start; }
+.icon-wrapper { width: 50px; height: 50px; background-color: var(--azul-principal-site); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-bottom: 15px; color: var(--branco); font-size: 1.5rem; }
+.solution-card h3 { color: var(--texto-escuro); font-size: 1.6rem; margin-bottom: 10px; font-weight: 700; }
+.solution-card p { font-size: 1rem; color: var(--texto-medio); margin-bottom: 20px; flex-grow: 1; }
+.saiba-mais { display: block; text-align: left; color: var(--azul-principal-site); font-weight: 700; font-size: 1rem; }
+
+/* --- Seção Por Que a AERA? --- */
+#why-us { background-color: var(--cinza-fundo-site); padding: 100px 0; }
+#why-us .container { display: flex; align-items: center; gap: 80px; }
+.why-us-content { flex: 1; }
+.why-us-content h2 { font-size: 3.2rem; color: var(--texto-escuro); margin-bottom: 25px; line-height: 1.1; font-weight: 900; }
+.why-us-content p { font-size: 1.2rem; margin-bottom: 30px; color: var(--texto-medio); }
+.why-us-image { flex: 1; text-align: center; }
+.why-us-image img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+
+/* --- Seção CTA Final --- */
+#cta-final { background-color: var(--azul-principal-site); color: var(--branco); text-align: center; padding: 100px 20px; }
+#cta-final h2 { font-size: 3.5rem; margin-bottom: 25px; line-height: 1.1; font-weight: 900; }
+#cta-final p { font-size: 1.5rem; margin-bottom: 50px; max-width: 900px; margin-left: auto; margin-right: auto; line-height: 1.4; }
+
+/* --- Rodapé --- */
+footer { background-color: var(--texto-escuro); color: var(--cinza-fundo-site); padding: 40px 20px; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; margin-bottom: 30px; text-align: left; }
+.footer-logo {
+    height: 50px;
+    margin-bottom: 15px;
+    /* Mágica do CSS para remover o fundo branco e deixar o logo branco: */
+    filter: grayscale(100%) invert(100%) brightness(200%);
+    mix-blend-mode: screen;
+}.footer-about p { font-size: 0.95rem; color: var(--cinza-fundo-site); }
+.footer-links h3, .footer-contact-info h3 { color: var(--verde-destaque-site); margin-bottom: 15px; font-size: 1.2rem; }
+.footer-links ul, .footer-contact-info ul { list-style: none; }
+.footer-links li, .footer-contact-info li { margin-bottom: 8px; }
+.footer-contact-info li i { margin-right: 10px; color: var(--verde-destaque-site); }
+.footer-links a, .footer-contact-info a { color: var(--cinza-fundo-site); font-size: 0.95rem; }
+.footer-links a:hover, .footer-contact-info a:hover { color: var(--azul-principal-site); }
+.copyright { text-align: center; font-size: 0.85rem; margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+
+/* --- Responsividade --- */
+@media (max-width: 992px) {
+    .logo span { display: none; }
+    #hero h1 { font-size: 3.2rem; }
+    #hero p { font-size: 1.2rem; }
+    .section-title { font-size: 2.5rem; }
+    .solutions-grid { justify-content: space-around; }
+    .solution-card { width: calc(50% - 20px); }
+    #why-us .container { flex-direction: column; text-align: center; gap: 40px; }
+    .why-us-content { order: 2; }
+    .why-us-image { order: 1; }
+    #cta-final h2 { font-size: 2.8rem; }
+    .footer-grid { grid-template-columns: 1fr; text-align: center; }
+    .footer-logo { margin-left: auto; margin-right: auto; }
+}
+
+@media (max-width: 768px) {
+    header .container { flex-direction: row; justify-content: space-between; }
+    nav { gap: 0; }
+    .hamburger { display: block; }
+    .header-cta-button { display: none; }
+    .nav-links { display: none; flex-direction: column; width: 100%; background-color: var(--branco); position: absolute; top: 82px; left: 0; box-shadow: 0 5px 10px rgba(0,0,0,0.1); padding: 20px 0; }
+    .nav-links.active { display: flex; }
+    .nav-links li { margin: 10px 0; text-align: center; }
+    .nav-links li a { padding: 10px 20px; display: block; }
+    #hero { padding: 100px 20px 80px; text-align: center; min-height: 450px; }
+    #hero h1 { font-size: 2.5rem; }
+    .section-title { font-size: 2.2rem; }
+    #cta-final h2 { font-size: 2.2rem; }
+    .cta-button.large { padding: 15px 30px; font-size: 1.1rem; }
+    .solution-card { width: 100%; }
+}
+
+/* --- ESTILOS PÁGINAS DE SERVIÇO --- */
+.service-hero { background-color: var(--azul-principal-site); color: var(--branco); padding: 100px 20px 80px; text-align: center; position: relative; background-size: cover; background-position: center; }
+.service-hero.licenciamento { background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('solution-licenciamento.jpg'); }
+.service-hero.residuos { background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('solution-residuos.jpg'); }
+.service-hero.esg { background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('solution-esg.jpg'); }
+.service-hero.captacao { background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('solution-captacao.jpg'); }
+.service-hero.franquias { background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('solution-franquias.jpg'); }
+.service-hero.socioambiental { background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('solution-socioambiental.jpg'); }
+.service-hero.gac { background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('solution-gac.jpg'); }
+.service-hero.sobre { background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('why-us-hands.jpg'); }
+
+/* Fundos novos para APPs (Gradientes limpos) */
+.service-hero.aera-app-hero { background-image: linear-gradient(135deg, #1877F2, #0A4EAB); }
+.service-hero.aera-residuos-hero { background-image: linear-gradient(135deg, #2ECC71, #18A558); }
+
+/* ========================================== */
+/* --- ESTILOS PARA O VÍDEO DE FUNDO DO APP --- */
+/* ========================================== */
+.service-hero.has-video {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 20px;
+    min-height: 500px;
+}
+.bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    object-fit: contain; /* Essa é a mágica que remove o 'zoom' e evita cortes */
+    background-color: #000; /* Deixa o fundo preto caso a tela seja mais larga que o vídeo, dando um ar de cinema */
+}
+.video-overlay-dark {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75); /* Escuro o suficiente para o texto saltar */
+    z-index: 2;
+    transition: opacity 0.5s ease;
+}
+.hero-content-overlay {
+    position: relative;
+    z-index: 3;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Transições quando o vídeo dá Play (classes adicionadas pelo JS) */
+.is-playing .hero-content-overlay {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20px);
+}
+.is-playing .video-overlay-dark {
+    opacity: 0; /* Remove a camada escura para o vídeo ficar limpo e nítido */
+    pointer-events: none;
+}
+/* ========================================== */
+
+.service-hero h1 { font-size: 3.5rem; font-weight: 900; margin-bottom: 20px; }
+.service-hero p { font-size: 1.5rem; max-width: 900px; margin: 0 auto; opacity: 0.9; line-height: 1.4; }
+.service-content { padding: 80px 0; background-color: var(--branco); }
+.service-content .container { max-width: 900px; }
+.service-content h2 { font-size: 2.2rem; font-weight: 700; color: var(--texto-escuro); margin-top: 40px; margin-bottom: 20px; }
+.service-content p, .service-content li { font-size: 1.1rem; color: var(--texto-medio); margin-bottom: 20px; line-height: 1.7; }
+.service-content p.lead { font-size: 1.3rem; font-weight: 400; color: var(--texto-escuro); margin-bottom: 30px; }
+.service-content ul { list-style: none; padding-left: 0; }
+.service-content li { position: relative; padding-left: 30px; margin-bottom: 15px; }
+.service-content li::before { content: '\f058'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--verde-destaque-site); position: absolute; left: 0; top: 4px; font-size: 1.1rem; }
+.service-content .cta-section { background-color: var(--cinza-fundo-site); padding: 50px; border-radius: 10px; text-align: center; margin-top: 60px; }
+.service-content .cta-section h2 { font-size: 2rem; margin-top: 0; margin-bottom: 15px; }
+.service-content .cta-section p { font-size: 1.1rem; margin-bottom: 30px; }
+
+/* --- DROPDOWN "SOLUÇÕES" --- */
+.dropdown-icon { font-size: 0.7rem; margin-left: 5px; transition: transform 0.3s ease; }
+.dropdown-container { position: relative; }
+.dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background-color: var(--branco); min-width: 350px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-radius: 0 0 5px 5px; z-index: 101; padding: 10px 0; list-style: none; border-top: 3px solid var(--azul-principal-site); }
+.dropdown-menu li a { padding: 12px 20px; display: block; color: var(--texto-medio); font-weight: 400; white-space: nowrap; text-align: left; }
+.dropdown-menu li a:hover { background-color: var(--cinza-fundo-site); color: var(--azul-principal-site); }
+.dropdown-menu li a i { margin-right: 12px; font-size: 1rem; width: 20px; text-align: center; color: var(--azul-principal-site); }
+
+@media (min-width: 769px) {
+    .dropdown-container:hover .dropdown-menu { display: block; }
+    .dropdown-container:hover .dropdown-icon { transform: rotate(180deg); }
+}
+
+@media (max-width: 768px) {
+    .dropdown-menu { position: static; box-shadow: none; min-width: 100%; border-radius: 0; border-top: none; background-color: #f7f7f7; padding: 0; margin-top: 5px; }
+    .dropdown-menu li a { padding: 10px 30px; text-align: center; font-size: 0.9rem; white-space: normal; }
+    .dropdown-menu.active { display: block; }
+    .dropdown-container > a.active .dropdown-icon { transform: rotate(180deg); }
+    .dropdown-menu li a i { display: none; }
+}

@@ -1,0 +1,118 @@
+/* --- Importação da Fonte --- */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+/* --- Paleta (Baseada no site original) --- */
+:root {
+    --azul-principal: #1877F2; /* Azul dos botões e links */
+    --verde-destaque: #2ECC71; /* Verde dos destaques e subtítulos */
+    --cinza-fundo: #F0F2F5; /* Fundo principal */
+    --texto-escuro: #222222;
+    --texto-claro: #666666;
+    --branco: #FFFFFF;
+}
+
+/* --- Reset e Configurações Globais --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: var(--cinza-fundo);
+    color: var(--texto-escuro);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Cabeçalho e Navegação --- */
+header {
+    background-color: var(--branco);
+    padding: 15px 0;
+    border-bottom: 2px solid var(--cinza-fundo); /* Linha sutil */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;
+}
+
+/* Menu Hambúrguer (Mobile) */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--texto-escuro);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 25px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: var(--texto-escuro);
+    font-weight: 700;
+    transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+    color: var(--azul-principal);
+}
+
+.header-cta-button {
+    background-color: var(--azul-principal);
+    color: var(--branco);
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.header-cta-button:hover {
+    background-color: #125bbd;
+    transform: translateY(-2px);
+}
+
+/* --- Seção Hero --- */
+#hero {
+    background-image: url('hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    color: var(--branco);
+    text-align: left;
+    padding: 1
