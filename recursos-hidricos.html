@@ -1,43 +1,59 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recursos Hídricos e Inovação - ASAS Soluções Ambientais</title>
+    <title>Recursos Hídricos e Inovação — AERA Soluções Ambientais</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
-<header>
+<header class="site-header" id="site-header">
     <div class="container">
-        <a href="index.html" class="logo">
-            <img src="logo2.jpg" alt="ASAS Logo">
-            <span>Aera Soluções Ambientais e Sustentáveis</span>
-        </a>
-        <nav id="main-nav">
-            <button class="hamburger" aria-label="Abrir menu">☰</button>
-            <ul class="nav-links">
-                <li><a href="index.html#hero">Início</a></li>
-                
-                <li class="dropdown-container">
-                    <a href="index.html#solutions">Soluções <i class="fas fa-chevron-down dropdown-icon"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="licenciamento.html"><i class="fas fa-file-contract"></i> Licenciamento e Conformidade</a></li>
-                        <li><a href="gestao-residuos.html"><i class="fas fa-recycle"></i> Gestão de Resíduos</a></li>
-                        <li><a href="esg.html"><i class="fas fa-leaf"></i> ESG e Sustentabilidade</a></li>
-                        <li><a href="recursos-hidricos.html"><i class="fas fa-tint"></i> Recursos Hídricos e Inovação</a></li>
-                        <li><a href="captacao-sustentavel.html"><i class="fas fa-hand-holding-usd"></i> Financiamento Sustentável</a></li>
-                        <li><a href="atendimento-franquias.html"><i class="fas fa-store-alt"></i> Soluções para Franquias</a></li>
-                        <li><a href="gestao-socioambiental.html"><i class="fas fa-users"></i> Gestão Socioambiental</a></li>
-                        <li><a href="areas-contaminadas.html"><i class="fas fa-biohazard"></i> Áreas Contaminadas</a></li>
-                    </ul>
-                </li>
+        <div class="header-inner">
+            <a href="index.html" class="header-logo">
+                <img src="logo2.png" alt="AERA">
+                <div class="logo-text"><b class="logo-brand">AERA</b><span class="logo-sub">Soluções Ambientais</span></div>
+            </a>
 
-                <li><a href="nossa-historia.html">Sobre Nós</a></li> <li><a href="#contact-modal" class="open-modal">Contato</a></li>
-            </ul>
-            <a href="#" class="header-cta-button open-modal">Fale Conosco</a>
-        </nav>
+            <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <line x1="3" y1="12" x2="21" y2="12"/>
+                    <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
+
+            <nav class="header-nav" id="main-nav" aria-label="Navegação principal">
+                <ul class="nav-list">
+                    <li><a href="index.html">Início</a></li>
+                    <li class="nav-dropdown">
+                        <a href="index.html#solucoes">Soluções <i class="fas fa-chevron-down icon-chevron"></i></a>
+                        <ul class="dropdown-panel">
+                            <li><a href="aera-app.html"><span class="dp-icon"><i class="fas fa-laptop-code"></i></span>AERA APP</a></li>
+                            <li><a href="licenciamento.html"><span class="dp-icon"><i class="fas fa-file-contract"></i></span>Licenciamento e Conformidade</a></li>
+                            <li><a href="gestao-residuos.html"><span class="dp-icon"><i class="fas fa-recycle"></i></span>Gestão de Resíduos</a></li>
+                            <li><a href="esg.html"><span class="dp-icon"><i class="fas fa-leaf"></i></span>ESG e Sustentabilidade</a></li>
+                            <li><a href="captacao-sustentavel.html"><span class="dp-icon"><i class="fas fa-hand-holding-usd"></i></span>Financiamento Sustentável</a></li>
+                            <li><a href="atendimento-franquias.html"><span class="dp-icon"><i class="fas fa-store-alt"></i></span>Soluções para Franquias</a></li>
+                            <li><a href="areas-contaminadas.html"><span class="dp-icon"><i class="fas fa-biohazard"></i></span>Áreas Contaminadas</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="nossa-historia.html">Sobre Nós</a></li>
+                    <li><a href="https://wa.me/5511986490720?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20consultor%20da%20AERA." target="_blank">Contato</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-cta-group">
+                <a href="#" data-app-link class="btn btn--outline btn--sm">
+                    <i class="fas fa-th-large"></i> Acessar AERA APP
+                </a>
+                <a href="https://wa.me/5511986490720?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20consultor%20da%20AERA." target="_blank" class="btn btn--primary btn--sm">
+                    Fale Conosco
+                </a>
+            </div>
+        </div>
     </div>
 </header>
 
@@ -52,7 +68,7 @@
 
         <section class="service-content">
             <div class="container">
-                <p class="lead">A água é o recurso mais crítico do século. A ASAS une sua expertise de 16 anos em conformidade legal com soluções inovadoras para garantir a segurança hídrica da sua operação. Da gestão de outorgas a projetos de reúso e fitorremediação, nós trazemos a engenharia ambiental de ponta para o seu dia a dia.</p>
+                <p class="lead">A água é o recurso mais crítico do século. A AERA une sua expertise de 16 anos em conformidade legal com soluções inovadoras para garantir a segurança hídrica da sua operação. Da gestão de outorgas a projetos de reúso e fitorremediação, nós trazemos a engenharia ambiental de ponta para o seu dia a dia.</p>
                 
                 <h2>Nossos Serviços Detalhados:</h2>
                 <ul>
@@ -63,44 +79,73 @@
                     <li><strong>Gerenciamento de Áreas Contaminadas:</strong> Conduzimos todas as etapas de investigação e remediação de passivos ambientais.</li>
                 </ul>
 
-                <h2>Por que escolher a ASAS?</h2>
+                <h2>Por que escolher a AERA?</h2>
                 <p>Nós "fazemos junto" aplicando ciência e inovação. Entendemos os desafios da indústria e trazemos soluções que vão além do básico, focando em eficiência e sustentabilidade real.</p>
 
                 <div class="cta-section">
                     <h2>Inove na gestão da água e recupere ativos ambientais.</h2>
                     <p>Conheça nossas soluções hídricas avançadas.</p>
-                    <button class="cta-button large open-modal">Entre em contato →</button>
+                    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;"><button class="cta-button open-modal">Falar com um consultor →</button><a href="https://wa.me/5511986490720?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20consultor%20da%20AERA." target="_blank" class="btn btn--app btn--lg"><i class="fab fa-whatsapp"></i> WhatsApp</a></div>
                 </div>
             </div>
         </section>
 
     </main>
 
-<footer id="contact">
+<footer class="site-footer">
     <div class="container">
         <div class="footer-grid">
-            <div class="footer-about">
-                <img src="logo2.jpg" alt="ASAS Logo Branco" class="footer-logo">
-                <p>Há 16 anos, a ASAS vai além da consultoria: fazemos junto com você.</p>
+            <div class="footer-brand">
+                <img src="logo2.png" alt="AERA">
+                <p>Desde 2009, unindo especialização técnica, inovação tecnológica e propósito ambiental para transformar a gestão das empresas.</p>
+                <div class="footer-socials">
+                    <a href="https://instagram.com/aerasustentavel" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/5511986490720" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="mailto:aerasustentavel@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                </div>
             </div>
-            <div class="footer-links">
-                <h3>Links Rápidos</h3>
+            <div class="footer-col">
+                <h4>Navegação</h4>
                 <ul>
-                    <li><a href="index.html#hero">Início</a></li>
-                    <li><a href="nossa-historia.html">Sobre Nós</a></li> <li><a href="index.html#solutions">Soluções</a></li>
-                    <li><a href="#contact-modal" class="open-modal">Contato</a></li>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="nossa-historia.html">Sobre Nós</a></li>
+                    <li><a href="aera-app.html">AERA APP</a></li>
+                    <li><a href="index.html#solucoes">Soluções</a></li>
                 </ul>
             </div>
-            <div class="footer-contact-info">
-                <h3>Contato</h3>
+            <div class="footer-col">
+                <h4>Soluções</h4>
                 <ul>
-                    <li><i class="fas fa-envelope"></i> <a href="mailto:aerasustentavel@gmail.com">aerasustentavel@gmail.com</a></li>
-                    <li><i class="fas fa-phone-alt"></i> <a href="tel:+5511986490720">(11) 98649-0720</a></li>
-                    <li><i class="fab fa-instagram"></i> <a href="https://instagram.com/aeraambiental" target="_blank">@aeraambiental</a></li>
+                    <li><a href="licenciamento.html">Licenciamento</a></li>
+                    <li><a href="gestao-residuos.html">Gestão de Resíduos</a></li>
+                    <li><a href="esg.html">ESG e Sustentabilidade</a></li>
+                    <li><a href="captacao-sustentavel.html">Financiamento Sustentável</a></li>
+                    <li><a href="atendimento-franquias.html">Soluções para Franquias</a></li>
+                    <li><a href="areas-contaminadas.html">Áreas Contaminadas</a></li>
                 </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contato</h4>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:aerasustentavel@gmail.com">aerasustentavel@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <a href="https://wa.me/5511986490720" target="_blank" rel="noopener">(11) 98649-0720</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-instagram"></i>
+                    <a href="https://instagram.com/aerasustentavel" target="_blank" rel="noopener">@aerasustentavel</a>
+                </div>
             </div>
         </div>
-        <p class="copyright">&copy; 2025 ASAS - Aera Soluções Ambientais e Sustentáveis. Todos os direitos reservados.</p>
+        <div class="footer-bottom">
+            <p>&copy; 2026 AERA — Soluções Ambientais e Sustentáveis. Todos os direitos reservados.</p>
+            <div class="footer-app-link">
+                <a href="#" data-app-link><i class="fas fa-th-large"></i> Acessar AERA APP</a>
+            </div>
+        </div>
     </div>
 </footer>
 

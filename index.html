@@ -1,195 +1,403 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AERA - Soluções Ambientais e Sustentáveis</title>
+    <title>AERA — Soluções Ambientais e AERA APP</title>
+    <meta name="description" content="A AERA oferece consultoria ambiental especializada e o AERA APP — a plataforma que centraliza gestão de licenças, ESG, resíduos e conformidade em um só lugar. Desde 2009.">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
-<header>
+<header class="site-header" id="site-header">
     <div class="container">
-        <a href="index.html" class="logo">
-            <img src="logo2.png" alt="AERA Logo">
-            <span>Aera Soluções Ambientais e Sustentáveis</span>
-        </a>
-        <nav id="main-nav">
-            <button class="hamburger" aria-label="Abrir menu">☰</button>
-            <ul class="nav-links">
-                <li><a href="index.html#hero">Início</a></li>
-                <li class="dropdown-container">
-                    <a href="index.html#solutions">Soluções <i class="fas fa-chevron-down dropdown-icon"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="aera-app.html"><i class="fas fa-laptop-code"></i> AERA APP</a></li>
-                        <li><a href="aera-residuos.html"><i class="fas fa-recycle"></i> AERA Resíduos</a></li>
-                        <li><a href="licenciamento.html"><i class="fas fa-file-contract"></i> Licenciamento e Conformidade</a></li>
-                        <li><a href="gestao-residuos.html"><i class="fas fa-trash-alt"></i> Gestão de Resíduos</a></li>
-                        <li><a href="esg.html"><i class="fas fa-leaf"></i> ESG e Sustentabilidade</a></li>
-                        <li><a href="captacao-sustentavel.html"><i class="fas fa-hand-holding-usd"></i> Financiamento Sustentável</a></li>
-                        <li><a href="atendimento-franquias.html"><i class="fas fa-store-alt"></i> Soluções para Franquias</a></li>
-                        <li><a href="areas-contaminadas.html"><i class="fas fa-biohazard"></i> Áreas Contaminadas</a></li>
-                    </ul>
-                </li>
-                <li><a href="nossa-historia.html">Sobre Nós</a></li>
-                <li><a href="https://wa.me/5511986490720?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20consultor%20da%20AERA." target="_blank">Contato</a></li>
-            </ul>
-            <a href="https://wa.me/5511986490720?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20consultor%20da%20AERA." target="_blank" class="header-cta-button">Fale Conosco</a>
-        </nav>
+        <div class="header-inner">
+            <a href="index.html" class="header-logo">
+                <img src="logo2.png" alt="AERA">
+                <div class="logo-text"><b class="logo-brand">AERA</b><span class="logo-sub">Soluções Ambientais</span></div>
+            </a>
+
+            <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <line x1="3" y1="12" x2="21" y2="12"/>
+                    <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
+
+            <nav class="header-nav" id="main-nav" aria-label="Navegação principal">
+                <ul class="nav-list">
+                    <li><a href="index.html">Início</a></li>
+                    <li class="nav-dropdown">
+                        <a href="index.html#solucoes">Soluções <i class="fas fa-chevron-down icon-chevron"></i></a>
+                        <ul class="dropdown-panel">
+                            <li><a href="aera-app.html"><span class="dp-icon"><i class="fas fa-laptop-code"></i></span>AERA APP</a></li>
+                            <li><a href="licenciamento.html"><span class="dp-icon"><i class="fas fa-file-contract"></i></span>Licenciamento e Conformidade</a></li>
+                            <li><a href="gestao-residuos.html"><span class="dp-icon"><i class="fas fa-recycle"></i></span>Gestão de Resíduos</a></li>
+                            <li><a href="esg.html"><span class="dp-icon"><i class="fas fa-leaf"></i></span>ESG e Sustentabilidade</a></li>
+                            <li><a href="captacao-sustentavel.html"><span class="dp-icon"><i class="fas fa-hand-holding-usd"></i></span>Financiamento Sustentável</a></li>
+                            <li><a href="atendimento-franquias.html"><span class="dp-icon"><i class="fas fa-store-alt"></i></span>Soluções para Franquias</a></li>
+                            <li><a href="areas-contaminadas.html"><span class="dp-icon"><i class="fas fa-biohazard"></i></span>Áreas Contaminadas</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="nossa-historia.html">Sobre Nós</a></li>
+                    <li><a href="https://wa.me/5511986490720?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20consultor%20da%20AERA." target="_blank">Contato</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-cta-group">
+                <a href="#" data-app-link class="btn btn--outline btn--sm">
+                    <i class="fas fa-th-large"></i> Acessar AERA APP
+                </a>
+                <a href="https://wa.me/5511986490720?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20consultor%20da%20AERA." target="_blank" class="btn btn--primary btn--sm">
+                    Fale Conosco
+                </a>
+            </div>
+        </div>
     </div>
 </header>
 
 <main>
-    <section id="hero">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="inicio">
         <div class="container">
-            <div class="hero-content">
-                <h1>A AERA vai além da consultoria: <span>fazemos junto com você.</span></h1>
-                <p>Nossa missão é agregar valor ao seu negócio, disseminando a cultura circular, promovendo ações que reduzem riscos e custos, e transformando resultados ambientais em reconhecimento para sua marca.</p>
-                <a href="index.html#solutions" class="cta-button">Conheça nossas soluções →</a>
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span class="dot"></span>
+                        Tecnologia + Sustentabilidade
+                    </div>
+                    <h1>Gestão ambiental completa <span class="highlight">em uma só plataforma.</span></h1>
+                    <p class="hero-subtitle">A AERA une consultoria especializada e tecnologia própria para simplificar a conformidade, automatizar processos e transformar sustentabilidade em vantagem competitiva.</p>
+                    <div class="hero-cta-group">
+                        <a href="#" data-app-link class="btn btn--app btn--lg">
+                            <i class="fas fa-th-large"></i> Acessar AERA APP
+                        </a>
+                        <a href="#solucoes" class="btn btn--white btn--lg">
+                            Conheça nossas soluções
+                        </a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <div class="value">+15 anos</div>
+                            <div class="label">de atuação no mercado</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="value">100%</div>
+                            <div class="label">digital e na nuvem</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="value">1 plataforma</div>
+                            <div class="label">para toda a gestão</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-app-card">
+                    <img src="aera_logo.png" alt="AERA APP">
+                    <h3>AERA APP</h3>
+                    <p>Sua plataforma de gestão ambiental e sustentabilidade</p>
+                    <div class="hero-app-feats">
+                        <div class="hero-app-feat"><i class="fas fa-check-circle"></i>Dashboard ESG</div>
+                        <div class="hero-app-feat"><i class="fas fa-check-circle"></i>Gestão de Licenças</div>
+                        <div class="hero-app-feat"><i class="fas fa-check-circle"></i>Controle de Resíduos</div>
+                        <div class="hero-app-feat"><i class="fas fa-check-circle"></i>Alertas Automáticos</div>
+                    </div>
+                    <a href="#" data-app-link class="btn btn--app" style="width:100%;justify-content:center;margin-top:4px;">
+                        <i class="fas fa-sign-in-alt"></i> Entrar no aplicativo
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="solutions">
+    <!-- ===== SOBRE A AERA ===== -->
+    <section class="about-section" id="sobre">
         <div class="container">
-            <h2 class="section-title">Nossas Soluções</h2>
-            <p class="section-subtitle">Você precisa, nós atendemos. Conheça nossos softwares e serviços de consultoria.</p>
-            <div class="solutions-grid">
-
-                <div class="solution-card app-card">
-                    <img src="aera_logo.png" alt="AERA APP">
-                    <div class="card-content">
-                        <div class="icon-wrapper" style="background-color: #1877F2;"><i class="fas fa-laptop-code"></i></div>
-                        <h3>AERA APP</h3>
-                        <p>O software definitivo para centralizar, automatizar e simplificar toda a gestão ambiental e de sustentabilidade do seu negócio.</p>
-                        <a href="aera-app.html" class="saiba-mais">Saiba Mais →</a>
+            <div class="about-grid">
+                <div class="about-img-wrap">
+                    <img src="why-us-hands.jpg" alt="Equipe AERA em ação">
+                    <div class="about-badge">
+                        <div class="num">2009</div>
+                        <div class="lbl">Fundação da AERA</div>
                     </div>
                 </div>
-
-                <div class="solution-card app-card">
-                    <img src="aera_icon.png" alt="AERA Resíduos">
-                    <div class="card-content">
-                        <div class="icon-wrapper" style="background-color: #2ECC71;"><i class="fas fa-recycle"></i></div>
-                        <h3>AERA Resíduos</h3>
-                        <p>Plataforma SaaS especializada na gestão completa, rastreabilidade e logística reversa de resíduos de ponta a ponta.</p>
-                        <a href="aera-residuos.html" class="saiba-mais">Saiba Mais →</a>
-                    </div>
+                <div class="about-content">
+                    <span class="section-label">Sobre a AERA</span>
+                    <h2 class="section-heading">Mais de 15 anos transformando desafios ambientais em resultados.</h2>
+                    <p class="section-text">A AERA vai além da consultoria: <strong>fazemos junto com você</strong>. Com especialização técnica profunda e tecnologia própria, ajudamos empresas a operar com conformidade, reduzir riscos e construir uma reputação sólida em sustentabilidade.</p>
+                    <p class="section-text">Da gestão de licenças e resíduos às estratégias ESG, tudo integrado ao AERA APP — nossa plataforma digital que centraliza e automatiza a gestão ambiental do seu negócio.</p>
+                    <a href="nossa-historia.html" class="btn btn--outline btn--lg">Conheça nossa história</a>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <div class="solution-card">
-                    <img src="solution-licenciamento.jpg" alt="Licenciamento Ambiental">
-                    <div class="card-content">
-                        <div class="icon-wrapper"><i class="fas fa-file-contract"></i></div>
+    <!-- ===== AERA APP ===== -->
+    <section class="app-section" id="aera-app">
+        <div class="container app-section-inner">
+            <div class="app-section-header">
+                <span class="section-label section-label--light">AERA APP</span>
+                <h2 class="section-heading section-heading--white">Uma plataforma. Todo o controle.</h2>
+                <p class="section-text section-text--muted">O AERA APP reúne gestão de licenças, rastreabilidade de resíduos, indicadores ESG e controle de emissões em um único ambiente — acessível em qualquer dispositivo, em tempo real.</p>
+            </div>
+
+            <div class="app-access-bar">
+                <div class="app-access-bar-copy">
+                    <h3>Já é assinante? Acesse agora o AERA APP.</h3>
+                    <p>Sua plataforma de gestão ambiental está a um clique de distância.</p>
+                </div>
+                <div class="app-access-bar-btns">
+                    <a href="#" data-app-link class="btn btn--app btn--lg">
+                        <i class="fas fa-th-large"></i> Acessar AERA APP
+                    </a>
+                    <a href="aera-app.html" class="btn btn--sm" style="color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:15px 22px;">
+                        Saiba mais
+                    </a>
+                </div>
+            </div>
+
+            <div class="app-features-grid">
+                <div class="app-feature-card">
+                    <div class="app-feat-icon"><i class="fas fa-chart-line"></i></div>
+                    <h4>Dashboard ESG em Tempo Real</h4>
+                    <p>Monitore seus indicadores ambientais, sociais e de governança com visualizações claras e atualizadas automaticamente.</p>
+                </div>
+                <div class="app-feature-card">
+                    <div class="app-feat-icon"><i class="fas fa-bell"></i></div>
+                    <h4>Alertas de Prazos e Licenças</h4>
+                    <p>Nunca perca um prazo de renovação. Alertas automáticos antes do vencimento de licenças e condicionantes ambientais.</p>
+                </div>
+                <div class="app-feature-card">
+                    <div class="app-feat-icon"><i class="fas fa-recycle"></i></div>
+                    <h4>Gestão Completa de Resíduos</h4>
+                    <p>Rastreabilidade total, emissão de MTRs e CDFs, homologação de fornecedores — tudo integrado em um só lugar.</p>
+                </div>
+                <div class="app-feature-card">
+                    <div class="app-feat-icon"><i class="fas fa-folder-open"></i></div>
+                    <h4>Documentação Centralizada</h4>
+                    <p>CADRIs, outorgas, alvarás e licenças seguros na nuvem. Acesse qualquer documento em segundos, de qualquer lugar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== COMO FUNCIONA ===== -->
+    <section class="how-section" id="como-funciona">
+        <div class="container">
+            <div class="section-header-center">
+                <span class="section-label section-label--center">Como funciona</span>
+                <h2 class="section-heading">Simples de começar. Poderoso para crescer.</h2>
+                <p class="section-text">Em três etapas, integramos a AERA à sua operação e você começa a colher resultados concretos.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Diagnóstico e Onboarding</h3>
+                    <p>Nossa equipe entende os desafios específicos do seu negócio e configura a plataforma com os parâmetros e requisitos da sua empresa.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Integração e Digitalização</h3>
+                    <p>Migramos seus documentos e processos para o AERA APP. Você passa a ter visibilidade total sobre licenças, resíduos e indicadores em um só lugar.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Gestão Contínua com Suporte</h3>
+                    <p>Com alertas automáticos e o apoio dos nossos consultores, você mantém a conformidade em dia e toma decisões com dados confiáveis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SOLUÇÕES ===== -->
+    <section class="solutions-section" id="solucoes">
+        <div class="container">
+            <div class="section-header-center">
+                <span class="section-label section-label--center">Consultoria Especializada</span>
+                <h2 class="section-heading">Soluções para cada desafio ambiental</h2>
+                <p class="section-text">Além do AERA APP, oferecemos consultoria técnica especializada em todas as frentes da gestão ambiental e sustentabilidade.</p>
+            </div>
+            <div class="solutions-grid-v2">
+                <div class="solution-card-v2">
+                    <div class="sol-card-img"><img src="solution-licenciamento.jpg" alt="Licenciamento Ambiental"></div>
+                    <div class="sol-card-body">
+                        <div class="card-icon-v2"><i class="fas fa-file-contract"></i></div>
                         <h3>Licenciamento e Conformidade</h3>
-                        <p>Licenciamento ambiental, outorgas, auditorias e representação junto a órgãos ambientais.</p>
-                        <a href="licenciamento.html" class="saiba-mais">Saiba Mais →</a>
+                        <p>Licenciamento ambiental, outorgas, auditorias e representação junto a órgãos reguladores.</p>
+                        <a href="licenciamento.html" class="card-link">Ver solução <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-
-                <div class="solution-card">
-                    <img src="solution-residuos.jpg" alt="Gestão de Resíduos">
-                    <div class="card-content">
-                        <div class="icon-wrapper"><i class="fas fa-trash-alt"></i></div>
+                <div class="solution-card-v2">
+                    <div class="sol-card-img"><img src="solution-residuos.jpg" alt="Gestão de Resíduos"></div>
+                    <div class="sol-card-body">
+                        <div class="card-icon-v2"><i class="fas fa-recycle"></i></div>
                         <h3>Gestão de Resíduos</h3>
-                        <p>Logística reversa, destinação adequada e estratégias de redução de custos com resíduos.</p>
-                        <a href="gestao-residuos.html" class="saiba-mais">Saiba Mais →</a>
+                        <p>Logística reversa, destinação adequada e estratégias para reduzir custos operacionais com resíduos.</p>
+                        <a href="gestao-residuos.html" class="card-link">Ver solução <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-
-                <div class="solution-card">
-                    <img src="solution-esg.jpg" alt="ESG e Sustentabilidade">
-                    <div class="card-content">
-                        <div class="icon-wrapper"><i class="fas fa-leaf"></i></div>
+                <div class="solution-card-v2">
+                    <div class="sol-card-img"><img src="solution-esg.jpg" alt="ESG e Sustentabilidade"></div>
+                    <div class="sol-card-body">
+                        <div class="card-icon-v2"><i class="fas fa-leaf"></i></div>
                         <h3>ESG e Sustentabilidade</h3>
                         <p>Due diligence, programas ESG, relatórios de sustentabilidade e comunicação socioambiental.</p>
-                        <a href="esg.html" class="saiba-mais">Saiba Mais →</a>
+                        <a href="esg.html" class="card-link">Ver solução <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-
-                <div class="solution-card">
-                    <img src="solution-captacao.jpg" alt="Financiamento Sustentável (Green Finance)">
-                    <div class="card-content">
-                        <div class="icon-wrapper"><i class="fas fa-hand-holding-usd"></i></div>
+                <div class="solution-card-v2">
+                    <div class="sol-card-img"><img src="solution-captacao.jpg" alt="Financiamento Sustentável"></div>
+                    <div class="sol-card-body">
+                        <div class="card-icon-v2"><i class="fas fa-hand-holding-usd"></i></div>
                         <h3>Financiamento Sustentável</h3>
-                        <p>Assessoria para estruturar projetos e acessar fundos verdes e de impacto (IFC, BID, etc.).</p>
-                        <a href="captacao-sustentavel.html" class="saiba-mais">Saiba Mais →</a>
+                        <p>Assessoria para estruturar projetos e acessar fundos verdes e de impacto (IFC, BID e outros).</p>
+                        <a href="captacao-sustentavel.html" class="card-link">Ver solução <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-
-                <div class="solution-card">
-                    <img src="solution-franquias.jpg" alt="Atendimento a Franquias">
-                    <div class="card-content">
-                        <div class="icon-wrapper"><i class="fas fa-store-alt"></i></div>
+                <div class="solution-card-v2">
+                    <div class="sol-card-img"><img src="solution-franquias.jpg" alt="Soluções para Franquias"></div>
+                    <div class="sol-card-body">
+                        <div class="card-icon-v2"><i class="fas fa-store-alt"></i></div>
                         <h3>Soluções para Franquias</h3>
-                        <p>Padronize a conformidade e a gestão ambiental de todas as unidades da sua rede.</p>
-                        <a href="atendimento-franquias.html" class="saiba-mais">Saiba Mais →</a>
+                        <p>Padronize a conformidade e a gestão ambiental em todas as unidades da sua rede de franquias.</p>
+                        <a href="atendimento-franquias.html" class="card-link">Ver solução <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-
-                <div class="solution-card">
-                    <img src="solution-gac.jpg" alt="Áreas Contaminadas">
-                    <div class="card-content">
-                        <div class="icon-wrapper"><i class="fas fa-biohazard"></i></div>
+                <div class="solution-card-v2">
+                    <div class="sol-card-img"><img src="solution-gac.jpg" alt="Áreas Contaminadas"></div>
+                    <div class="sol-card-body">
+                        <div class="card-icon-v2"><i class="fas fa-biohazard"></i></div>
                         <h3>Áreas Contaminadas</h3>
-                        <p>Do diagnóstico à remediação. Recuperamos passivos ambientais e ativos imobiliários.</p>
-                        <a href="areas-contaminadas.html" class="saiba-mais">Saiba Mais →</a>
+                        <p>Do diagnóstico à remediação: recuperamos passivos ambientais e ativos imobiliários.</p>
+                        <a href="areas-contaminadas.html" class="card-link">Ver solução <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <section id="why-us">
+    <!-- ===== DIFERENCIAIS ===== -->
+    <section class="differentials-section" id="diferenciais">
         <div class="container">
-            <div class="why-us-image">
-                <img src="why-us-hands.jpg" alt="Mãos segurando uma planta">
+            <div class="section-header-center">
+                <span class="section-label section-label--center">Por que a AERA</span>
+                <h2 class="section-heading">Experiência, tecnologia e compromisso.</h2>
+                <p class="section-text">O que nos diferencia no mercado de soluções ambientais e sustentabilidade.</p>
             </div>
-            <div class="why-us-content">
-                <h2>Desde 2009 transformando <br>resultados ambientais</h2>
-                <p>A AERA vai além da consultoria: fazemos junto com você. Agregamos valor ao seu negócio disseminando a cultura circular, promovendo ações que reduzem riscos e custos, e transformando resultados ambientais em reconhecimento para sua marca.</p>
-                <a href="nossa-historia.html" class="cta-button secondary">Conheça nossa história →</a>
+            <div class="differentials-grid">
+                <div class="diff-card">
+                    <div class="diff-icon"><i class="fas fa-code-branch"></i></div>
+                    <h3>Tecnologia que entende o setor</h3>
+                    <p>O AERA APP foi desenvolvido por especialistas ambientais. Cada funcionalidade resolve um problema real, não é uma feature genérica de TI.</p>
+                </div>
+                <div class="diff-card">
+                    <div class="diff-icon"><i class="fas fa-users"></i></div>
+                    <h3>Consultoria que vai a fundo</h3>
+                    <p>Não entregamos apenas relatórios. Trabalhamos ao lado da sua equipe, como um parceiro estratégico comprometido com seus resultados.</p>
+                </div>
+                <div class="diff-card">
+                    <div class="diff-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Segurança jurídica e conformidade</h3>
+                    <p>Desde 2009, ajudamos empresas a operar dentro da lei, antecipar riscos regulatórios e manter documentação impecável para auditorias.</p>
+                </div>
+                <div class="diff-card">
+                    <div class="diff-icon"><i class="fas fa-leaf"></i></div>
+                    <h3>Sustentabilidade com resultado real</h3>
+                    <p>Transformamos a agenda ambiental em vantagem competitiva. Nossos clientes reduzem custos, obtêm financiamentos e fortalecem a marca.</p>
+                </div>
+                <div class="diff-card">
+                    <div class="diff-icon"><i class="fas fa-sync-alt"></i></div>
+                    <h3>Solução integrada e escalável</h3>
+                    <p>Do app à consultoria, tudo no mesmo ecossistema. A AERA cresce com você, do primeiro licenciamento à estratégia ESG corporativa.</p>
+                </div>
+                <div class="diff-card">
+                    <div class="diff-icon"><i class="fas fa-headset"></i></div>
+                    <h3>Suporte dedicado e próximo</h3>
+                    <p>Equipe técnica disponível para orientar, resolver e evoluir. Você nunca fica sozinho diante de um desafio ambiental.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="cta-final">
+    <!-- ===== CTA FINAL ===== -->
+    <section class="cta-final" id="contato">
         <div class="container">
-            <h2>Pronto para transformar a gestão ambiental em vantagem competitiva?</h2>
-            <p>Fale com a AERA e descubra como podemos agregar valor ao seu negócio.</p>
-            <a href="https://wa.me/5511986490720?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20consultor%20da%20AERA." target="_blank" class="cta-button large">Fale Conosco pelo WhatsApp →</a>
+            <div class="cta-final-inner">
+                <h2>Pronto para transformar sua gestão ambiental?</h2>
+                <p>Fale com a AERA e descubra como o AERA APP e nossa equipe de especialistas podem proteger sua empresa e gerar resultados concretos.</p>
+                <div class="cta-final-btns">
+                    <a href="#" data-app-link class="btn btn--white btn--xl">
+                        <i class="fas fa-th-large"></i> Acessar AERA APP
+                    </a>
+                    <a href="https://wa.me/5511986490720?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20consultor%20da%20AERA." target="_blank"
+                       class="btn btn--xl" style="color:white;border:2px solid rgba(255,255,255,.4);border-radius:12px;padding:18px 44px;">
+                        <i class="fab fa-whatsapp"></i> Fale pelo WhatsApp
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
 
 </main>
 
-<footer id="contact">
+<footer class="site-footer">
     <div class="container">
         <div class="footer-grid">
-            <div class="footer-about">
-                <img src="logo2.png" alt="AERA Logo Branco" class="footer-logo">
-                <p>Desde 2009, a AERA vai além da consultoria: fazemos junto com você.</p>
+            <div class="footer-brand">
+                <img src="logo2.png" alt="AERA">
+                <p>Desde 2009, unindo especialização técnica, inovação tecnológica e propósito ambiental para transformar a gestão das empresas.</p>
+                <div class="footer-socials">
+                    <a href="https://instagram.com/aerasustentavel" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/5511986490720" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="mailto:aerasustentavel@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                </div>
             </div>
-            <div class="footer-links">
-                <h3>Links Rápidos</h3>
+            <div class="footer-col">
+                <h4>Navegação</h4>
                 <ul>
-                    <li><a href="index.html#hero">Início</a></li>
+                    <li><a href="index.html">Início</a></li>
                     <li><a href="nossa-historia.html">Sobre Nós</a></li>
-                    <li><a href="index.html#solutions">Soluções</a></li>
-                    <li><a href="https://wa.me/5511986490720?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20consultor%20da%20AERA." target="_blank">Contato</a></li>
+                    <li><a href="aera-app.html">AERA APP</a></li>
+                    <li><a href="index.html#solucoes">Soluções</a></li>
+                    <li><a href="index.html#contato">Contato</a></li>
                 </ul>
             </div>
-            <div class="footer-contact-info">
-                <h3>Contato</h3>
+            <div class="footer-col">
+                <h4>Soluções</h4>
                 <ul>
-                    <li><i class="fas fa-envelope"></i> <a href="mailto:aerasustentavel@gmail.com">aerasustentavel@gmail.com</a></li>
-                    <li><i class="fas fa-phone-alt"></i> <a href="https://wa.me/5511986490720" target="_blank">(11) 98649-0720</a></li>
-                    <li><i class="fab fa-instagram"></i> <a href="https://instagram.com/aerasustentavel" target="_blank">@aerasustentavel</a></li>
+                    <li><a href="licenciamento.html">Licenciamento</a></li>
+                    <li><a href="gestao-residuos.html">Gestão de Resíduos</a></li>
+                    <li><a href="esg.html">ESG e Sustentabilidade</a></li>
+                    <li><a href="captacao-sustentavel.html">Financiamento Sustentável</a></li>
+                    <li><a href="atendimento-franquias.html">Soluções para Franquias</a></li>
+                    <li><a href="areas-contaminadas.html">Áreas Contaminadas</a></li>
                 </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contato</h4>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:aerasustentavel@gmail.com">aerasustentavel@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <a href="https://wa.me/5511986490720" target="_blank" rel="noopener">(11) 98649-0720</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-instagram"></i>
+                    <a href="https://instagram.com/aerasustentavel" target="_blank" rel="noopener">@aerasustentavel</a>
+                </div>
             </div>
         </div>
-        <p class="copyright">&copy; 2026 AERA - Soluções Ambientais e Sustentáveis. Todos os direitos reservados.</p>
+        <div class="footer-bottom">
+            <p>&copy; 2026 AERA — Soluções Ambientais e Sustentáveis. Todos os direitos reservados.</p>
+            <div class="footer-app-link">
+                <a href="#" data-app-link><i class="fas fa-th-large"></i> Acessar AERA APP</a>
+            </div>
+        </div>
     </div>
 </footer>
 

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar — AERA APP</title>
+    <meta name="description" content="Acesse o AERA APP — sua plataforma de gestão ambiental e sustentabilidade.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { -webkit-font-smoothing:antialiased; }
+        body {
+            font-family:'Inter',-apple-system,sans-serif;
+            background:#F0F4FB;
+            min-height:100vh;
+            display:flex; flex-direction:column;
+            align-items:center; justify-content:center;
+            padding:24px;
+            font-size:14px; line-height:1.6;
+        }
+
+        /* ---- Wrapper ---- */
+        .login-wrap { width:100%; max-width:420px; }
+
+        /* ---- Logo topo ---- */
+        .login-logo {
+            display:flex; align-items:center; justify-content:center;
+            gap:12px; margin-bottom:32px;
+        }
+        .login-logo img { width:46px; height:46px; border-radius:12px; box-shadow:0 4px 16px rgba(24,119,242,.25); }
+        .login-logo-text {}
+        .login-logo-name { font-size:1.5rem; font-weight:800; color:#1877F2; letter-spacing:-.02em; display:block; line-height:1; }
+        .login-logo-sub  { font-size:.75rem; color:#94A3B8; display:block; margin-top:2px; }
+
+        /* ---- Card ---- */
+        .login-card {
+            background:#fff;
+            border-radius:20px;
+            box-shadow:0 4px 24px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.04);
+            padding:36px 36px 32px;
+        }
+        .login-card-title { font-size:1.125rem; font-weight:700; color:#0F172A; margin-bottom:4px; }
+        .login-card-sub   { font-size:.875rem; color:#64748B; margin-bottom:24px; }
+
+        /* ---- Inputs ---- */
+        .form-group { margin-bottom:16px; }
+        .form-label {
+            display:flex; align-items:center; justify-content:space-between;
+            font-size:.875rem; font-weight:500; color:#334155; margin-bottom:6px;
+        }
+        .form-label a { font-size:.75rem; color:#1877F2; font-weight:500; text-decoration:none; }
+        .form-label a:hover { color:#1462CC; }
+        .form-input {
+            width:100%; padding:11px 14px;
+            border:1px solid #E2E8F0; border-radius:10px;
+            font-family:inherit; font-size:.9375rem; color:#0F172A;
+            background:#fff; outline:none;
+            transition:border-color .2s, box-shadow .2s;
+        }
+        .form-input::placeholder { color:#94A3B8; }
+        .form-input:hover { border-color:#94A3B8; }
+        .form-input:focus { border-color:#1877F2; box-shadow:0 0 0 3px rgba(24,119,242,.12); }
+        .form-input.error { border-color:#EF4444; }
+        .form-input.error:focus { box-shadow:0 0 0 3px rgba(239,68,68,.1); }
+        .form-error { font-size:.75rem; color:#EF4444; margin-top:4px; display:none; }
+        .form-error.visible { display:block; }
+
+        /* Senha com toggle */
+        .input-wrap { position:relative; }
+        .input-wrap .form-input { padding-right:44px; }
+        .pwd-toggle {
+            position:absolute; right:12px; top:50%; transform:translateY(-50%);
+            background:none; border:none; cursor:pointer; color:#94A3B8;
+            display:flex; align-items:center; justify-content:center; padding:4px;
+            transition:color .2s;
+        }
+        .pwd-toggle:hover { color:#475569; }
+        .pwd-toggle svg { width:18px; height:18px; }
+
+        /* ---- Alert de erro geral ---- */
+        .alert-error {
+            display:none; align-items:flex-start; gap:10px;
+            border-left:3px solid #EF4444; background:#FEF2F2;
+            border-radius:8px; padding:12px 14px; margin-bottom:18px;
+        }
+        .alert-error.visible { display:flex; }
+        .alert-error svg { flex-shrink:0; color:#EF4444; margin-top:1px; }
+        .alert-error p  { font-size:.875rem; color:#B91C1C; }
+
+        /* ---- Botão submit ---- */
+        .btn-submit {
+            width:100%; padding:13px;
+            background:linear-gradient(135deg, #1877F2 0%, #0F4EA3 100%);
+            color:#fff; border:none; border-radius:10px;
+            font-family:inherit; font-size:.9375rem; font-weight:700;
+            cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;
+            transition:all .2s; box-shadow:0 2px 8px rgba(24,119,242,.3);
+            margin-top:6px;
+        }
+        .btn-submit:hover:not(:disabled) { background:linear-gradient(135deg, #1462CC 0%, #0A3A7A 100%); transform:translateY(-1px); box-shadow:0 4px 16px rgba(24,119,242,.4); }
+        .btn-submit:active  { transform:translateY(0); }
+        .btn-submit:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+        .spinner {
+            width:18px; height:18px; border:2.5px solid rgba(255,255,255,.4);
+            border-top-color:#fff; border-radius:50%;
+            animation:spin .7s linear infinite;
+        }
+        @keyframes spin { to { transform:rotate(360deg); } }
+
+        /* ---- Divisor ---- */
+        .divider { position:relative; text-align:center; margin:22px 0; }
+        .divider::before { content:''; position:absolute; top:50%; left:0; right:0; height:1px; background:#E2E8F0; }
+        .divider span { position:relative; background:#fff; padding:0 12px; font-size:.75rem; color:#94A3B8; }
+
+        /* ---- Links rodapé card ---- */
+        .login-footer-text { text-align:center; font-size:.875rem; color:#64748B; }
+        .login-footer-text a { color:#1877F2; font-weight:600; text-decoration:none; }
+        .login-footer-text a:hover { color:#1462CC; }
+
+        /* ---- Demo notice ---- */
+        .demo-notice {
+            display:none;
+            background:#EFF6FF; border:1px solid #BFDBFE;
+            border-radius:12px; padding:20px 22px; margin-top:16px; text-align:center;
+        }
+        .demo-notice.visible { display:block; }
+        .demo-notice p { font-size:.875rem; color:#1E40AF; line-height:1.6; margin-bottom:14px; }
+        .demo-notice .btn-wa {
+            display:inline-flex; align-items:center; gap:8px;
+            background:#25D366; color:#fff; padding:10px 20px;
+            border-radius:8px; font-size:.875rem; font-weight:700; text-decoration:none;
+            transition:background .2s;
+        }
+        .demo-notice .btn-wa:hover { background:#1AAD54; color:#fff; }
+        .demo-notice .btn-wa svg { width:18px; height:18px; }
+
+        /* ---- Copyright ---- */
+        .login-copy { text-align:center; font-size:.75rem; color:#94A3B8; margin-top:20px; }
+
+        /* ---- Voltar ---- */
+        .back-link {
+            display:inline-flex; align-items:center; gap:6px;
+            font-size:.8125rem; color:#64748B; text-decoration:none; margin-bottom:20px;
+            transition:color .2s;
+        }
+        .back-link:hover { color:#1877F2; }
+        .back-link svg { width:14px; height:14px; }
+    </style>
+</head>
+<body>
+
+<div class="login-wrap">
+    <a href="index.html" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M5 12l7-7M5 12l7 7"/></svg>
+        Voltar ao site
+    </a>
+
+    <!-- Logo -->
+    <div class="login-logo">
+        <img src="aera_icon.png" alt="AERA APP">
+        <div class="login-logo-text">
+            <span class="login-logo-name">AERA</span>
+            <span class="login-logo-sub">Soluções Ambientais</span>
+        </div>
+    </div>
+
+    <!-- Card de login -->
+    <div class="login-card">
+        <h1 class="login-card-title">Bem-vindo de volta</h1>
+        <p class="login-card-sub">Acesse sua conta para continuar</p>
+
+        <!-- Alerta de erro geral -->
+        <div class="alert-error" id="alert-error">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <p id="alert-error-msg">E-mail ou senha incorretos.</p>
+        </div>
+
+        <form id="login-form" novalidate>
+            <div class="form-group">
+                <label class="form-label" for="email">
+                    E-mail <span style="color:#1877F2;">*</span>
+                </label>
+                <input class="form-input" id="email" type="email" name="email"
+                       placeholder="seu@email.com.br" autocomplete="email" required>
+                <p class="form-error" id="email-error">Informe um e-mail válido.</p>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="password">
+                    Senha <span style="color:#1877F2;">*</span>
+                    <a href="#">Esqueci minha senha</a>
+                </label>
+                <div class="input-wrap">
+                    <input class="form-input" id="password" type="password" name="password"
+                           placeholder="••••••••" autocomplete="current-password" required>
+                    <button type="button" class="pwd-toggle" id="pwd-toggle" aria-label="Mostrar senha">
+                        <svg id="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </button>
+                </div>
+                <p class="form-error" id="password-error">A senha é obrigatória.</p>
+            </div>
+
+            <button type="submit" class="btn-submit" id="btn-submit">
+                Entrar
+            </button>
+        </form>
+
+        <!-- Demo notice (aparece quando o app não está configurado) -->
+        <div class="demo-notice" id="demo-notice">
+            <p>
+                <strong>Prévia da tela de login do AERA APP.</strong><br>
+                A plataforma está em configuração final. Fale com nossa equipe para solicitar seu acesso.
+            </p>
+            <a href="https://wa.me/5511986490720?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20acesso%20ao%20AERA%20APP." target="_blank" rel="noopener" class="btn-wa">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                Solicitar acesso via WhatsApp
+            </a>
+        </div>
+
+        <div class="divider"><span>ou</span></div>
+
+        <p class="login-footer-text">
+            Ainda não tem conta? <a href="https://wa.me/5511986490720?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20o%20AERA%20APP." target="_blank">Fale conosco</a>
+        </p>
+    </div>
+
+    <p class="login-copy">&copy; 2026 AERA — Soluções Ambientais e Sustentáveis</p>
+</div>
+
+<script src="script.js"></script>
+<script>
+(function() {
+    /* ---- Mostrar/ocultar senha ---- */
+    const pwdInput  = document.getElementById('password');
+    const pwdToggle = document.getElementById('pwd-toggle');
+    const eyeIcon   = document.getElementById('eye-icon');
+
+    const eyeOpen = `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
+    const eyeOff  = `<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>`;
+
+    if (pwdToggle) {
+        pwdToggle.addEventListener('click', function () {
+            const show = pwdInput.type === 'password';
+            pwdInput.type = show ? 'text' : 'password';
+            eyeIcon.innerHTML = show ? eyeOff : eyeOpen;
+        });
+    }
+
+    /* ---- Validação e submit ---- */
+    const form        = document.getElementById('login-form');
+    const btnSubmit   = document.getElementById('btn-submit');
+    const alertBox    = document.getElementById('alert-error');
+    const alertMsg    = document.getElementById('alert-error-msg');
+    const demoNotice  = document.getElementById('demo-notice');
+    const emailInput  = document.getElementById('email');
+    const emailErr    = document.getElementById('email-error');
+    const passwordErr = document.getElementById('password-error');
+
+    function showError(el, errEl) { el.classList.add('error'); errEl.classList.add('visible'); }
+    function clearError(el, errEl) { el.classList.remove('error'); errEl.classList.remove('visible'); }
+
+    emailInput.addEventListener('input', () => clearError(emailInput, emailErr));
+    pwdInput.addEventListener('input',   () => clearError(pwdInput, passwordErr));
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const emailVal = emailInput.value.trim();
+        const pwdVal   = pwdInput.value;
+        let valid = true;
+
+        alertBox.classList.remove('visible');
+        clearError(emailInput, emailErr);
+        clearError(pwdInput, passwordErr);
+
+        if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+            showError(emailInput, emailErr); valid = false;
+        }
+        if (!pwdVal) {
+            showError(pwdInput, passwordErr); valid = false;
+        }
+        if (!valid) return;
+
+        /* Loading state */
+        btnSubmit.disabled = true;
+        btnSubmit.innerHTML = '<div class="spinner"></div> Entrando...';
+
+        /* Se AERA_APP_URL está configurado, redireciona para o app real */
+        if (typeof AERA_APP_URL !== 'undefined' && AERA_APP_URL && AERA_APP_URL !== '#') {
+            setTimeout(() => { window.location.href = AERA_APP_URL; }, 600);
+            return;
+        }
+
+        /* Demo: mostra notice de configuração pendente */
+        setTimeout(function () {
+            btnSubmit.disabled = false;
+            btnSubmit.innerHTML = 'Entrar';
+            demoNotice.classList.add('visible');
+            demoNotice.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 1200);
+    });
+})();
+</script>
+</body>
+</html>

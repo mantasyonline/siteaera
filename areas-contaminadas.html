@@ -1,42 +1,59 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Áreas Contaminadas - ASAS Soluções Ambientais</title>
+    <title>Áreas Contaminadas — AERA Soluções Ambientais</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
-<header>
+<header class="site-header" id="site-header">
     <div class="container">
-        <a href="index.html" class="logo">
-            <img src="logo2.png" alt="AERA Logo">
-            <span>Aera Soluções Ambientais e Sustentáveis</span>
-        </a>
-        <nav id="main-nav">
-            <button class="hamburger" aria-label="Abrir menu">☰</button>
-            <ul class="nav-links">
-                <li><a href="index.html#hero">Início</a></li>
-                <li class="dropdown-container">
-                    <a href="index.html#solutions">Soluções <i class="fas fa-chevron-down dropdown-icon"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="aera-app.html"><i class="fas fa-laptop-code"></i> AERA APP</a></li>
-                        <li><a href="aera-residuos.html"><i class="fas fa-recycle"></i> AERA Resíduos</a></li>
-                        <li><a href="licenciamento.html"><i class="fas fa-file-contract"></i> Licenciamento e Conformidade</a></li>
-                        <li><a href="gestao-residuos.html"><i class="fas fa-trash-alt"></i> Gestão de Resíduos</a></li>
-                        <li><a href="esg.html"><i class="fas fa-leaf"></i> ESG e Sustentabilidade</a></li>
-                        <li><a href="captacao-sustentavel.html"><i class="fas fa-hand-holding-usd"></i> Financiamento Sustentável</a></li>
-                        <li><a href="atendimento-franquias.html"><i class="fas fa-store-alt"></i> Soluções para Franquias</a></li>
-                        <li><a href="areas-contaminadas.html"><i class="fas fa-biohazard"></i> Áreas Contaminadas</a></li>
-                    </ul>
-                </li>
-                <li><a href="nossa-historia.html">Sobre Nós</a></li>
-                <li><a href="https://wa.me/5511986490720?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20consultor%20da%20AERA." target="_blank">Contato</a></li>
-            </ul>
-            <a href="https://wa.me/5511986490720?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20consultor%20da%20AERA." target="_blank" class="header-cta-button">Fale Conosco</a>
-        </nav>
+        <div class="header-inner">
+            <a href="index.html" class="header-logo">
+                <img src="logo2.png" alt="AERA">
+                <div class="logo-text"><b class="logo-brand">AERA</b><span class="logo-sub">Soluções Ambientais</span></div>
+            </a>
+
+            <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <line x1="3" y1="12" x2="21" y2="12"/>
+                    <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
+
+            <nav class="header-nav" id="main-nav" aria-label="Navegação principal">
+                <ul class="nav-list">
+                    <li><a href="index.html">Início</a></li>
+                    <li class="nav-dropdown">
+                        <a href="index.html#solucoes">Soluções <i class="fas fa-chevron-down icon-chevron"></i></a>
+                        <ul class="dropdown-panel">
+                            <li><a href="aera-app.html"><span class="dp-icon"><i class="fas fa-laptop-code"></i></span>AERA APP</a></li>
+                            <li><a href="licenciamento.html"><span class="dp-icon"><i class="fas fa-file-contract"></i></span>Licenciamento e Conformidade</a></li>
+                            <li><a href="gestao-residuos.html"><span class="dp-icon"><i class="fas fa-recycle"></i></span>Gestão de Resíduos</a></li>
+                            <li><a href="esg.html"><span class="dp-icon"><i class="fas fa-leaf"></i></span>ESG e Sustentabilidade</a></li>
+                            <li><a href="captacao-sustentavel.html"><span class="dp-icon"><i class="fas fa-hand-holding-usd"></i></span>Financiamento Sustentável</a></li>
+                            <li><a href="atendimento-franquias.html"><span class="dp-icon"><i class="fas fa-store-alt"></i></span>Soluções para Franquias</a></li>
+                            <li><a href="areas-contaminadas.html"><span class="dp-icon"><i class="fas fa-biohazard"></i></span>Áreas Contaminadas</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="nossa-historia.html">Sobre Nós</a></li>
+                    <li><a href="https://wa.me/5511986490720?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20consultor%20da%20AERA." target="_blank">Contato</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-cta-group">
+                <a href="#" data-app-link class="btn btn--outline btn--sm">
+                    <i class="fas fa-th-large"></i> Acessar AERA APP
+                </a>
+                <a href="https://wa.me/5511986490720?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20consultor%20da%20AERA." target="_blank" class="btn btn--primary btn--sm">
+                    Fale Conosco
+                </a>
+            </div>
+        </div>
     </div>
 </header>
 
@@ -51,7 +68,7 @@
 
         <section class="service-content">
             <div class="container">
-                <p class="lead">Um passivo ambiental é um risco silencioso que pode desvalorizar um imóvel, gerar multas milionárias e paralisar operações. O Gerenciamento de Áreas Contaminadas (GAC) é o processo técnico e legal para identificar, avaliar e remediar esses riscos. A ASAS conduz todas as etapas com rigor técnico, seguindo as normas (CONAMA 420) e as diretrizes dos órgãos ambientais (CETESB, etc.).</p>
+                <p class="lead">Um passivo ambiental é um risco silencioso que pode desvalorizar um imóvel, gerar multas milionárias e paralisar operações. O Gerenciamento de Áreas Contaminadas (GAC) é o processo técnico e legal para identificar, avaliar e remediar esses riscos. A AERA conduz todas as etapas com rigor técnico, seguindo as normas (CONAMA 420) e as diretrizes dos órgãos ambientais (CETESB, etc.).</p>
                 
                 <h2>Nossos Serviços Detalhados (As 5 Etapas do GAC):</h2>
                 <ul>
@@ -62,45 +79,73 @@
                     <li><strong>Etapa 5: Execução da Remediação e Monitoramento:</strong> Implementamos o plano e monitoramos os resultados até que as metas sejam atingidas e a área possa ser reabilitada.</li>
                 </ul>
 
-                <h2>Por que escolher a ASAS?</h2>
+                <h2>Por que escolher a AERA?</h2>
                 <p>Conduzimos o GAC com foco em segurança jurídica e viabilidade econômica. Nossa experiência em engenharia garante a escolha da melhor tecnologia de remediação, otimizando custos e prazos para resolver seu passivo ambiental de forma definitiva.</p>
 
                 <div class="cta-section">
                     <h2>Precisa resolver um passivo ambiental?</h2>
                     <p>Comece com um diagnóstico preciso. Fale com nossos especialistas.</p>
-                    <button class="cta-button large open-modal">Entre em contato →</button>
+                    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;"><button class="cta-button open-modal">Falar com um consultor →</button><a href="https://wa.me/5511986490720?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20consultor%20da%20AERA." target="_blank" class="btn btn--app btn--lg"><i class="fab fa-whatsapp"></i> WhatsApp</a></div>
                 </div>
             </div>
         </section>
 
     </main>
 
-<footer id="contact">
+<footer class="site-footer">
     <div class="container">
         <div class="footer-grid">
-            <div class="footer-about">
-                <img src="logo2.png" alt="AERA Logo Branco" class="footer-logo">
-                <p>Desde 2009, a AERA vai além da consultoria: fazemos junto com você.</p>
+            <div class="footer-brand">
+                <img src="logo2.png" alt="AERA">
+                <p>Desde 2009, unindo especialização técnica, inovação tecnológica e propósito ambiental para transformar a gestão das empresas.</p>
+                <div class="footer-socials">
+                    <a href="https://instagram.com/aerasustentavel" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/5511986490720" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="mailto:aerasustentavel@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                </div>
             </div>
-            <div class="footer-links">
-                <h3>Links Rápidos</h3>
+            <div class="footer-col">
+                <h4>Navegação</h4>
                 <ul>
-                    <li><a href="index.html#hero">Início</a></li>
+                    <li><a href="index.html">Início</a></li>
                     <li><a href="nossa-historia.html">Sobre Nós</a></li>
-                    <li><a href="index.html#solutions">Soluções</a></li>
-                    <li><a href="https://wa.me/5511986490720?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20consultor%20da%20AERA." target="_blank">Contato</a></li>
+                    <li><a href="aera-app.html">AERA APP</a></li>
+                    <li><a href="index.html#solucoes">Soluções</a></li>
                 </ul>
             </div>
-            <div class="footer-contact-info">
-                <h3>Contato</h3>
+            <div class="footer-col">
+                <h4>Soluções</h4>
                 <ul>
-                    <li><i class="fas fa-envelope"></i> <a href="mailto:aerasustentavel@gmail.com">aerasustentavel@gmail.com</a></li>
-                    <li><i class="fas fa-phone-alt"></i> <a href="https://wa.me/5511986490720" target="_blank">(11) 98649-0720</a></li>
-                    <li><i class="fab fa-instagram"></i> <a href="https://instagram.com/aerasustentavel" target="_blank">@aerasustentavel</a></li>
+                    <li><a href="licenciamento.html">Licenciamento</a></li>
+                    <li><a href="gestao-residuos.html">Gestão de Resíduos</a></li>
+                    <li><a href="esg.html">ESG e Sustentabilidade</a></li>
+                    <li><a href="captacao-sustentavel.html">Financiamento Sustentável</a></li>
+                    <li><a href="atendimento-franquias.html">Soluções para Franquias</a></li>
+                    <li><a href="areas-contaminadas.html">Áreas Contaminadas</a></li>
                 </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contato</h4>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:aerasustentavel@gmail.com">aerasustentavel@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <a href="https://wa.me/5511986490720" target="_blank" rel="noopener">(11) 98649-0720</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-instagram"></i>
+                    <a href="https://instagram.com/aerasustentavel" target="_blank" rel="noopener">@aerasustentavel</a>
+                </div>
             </div>
         </div>
-        <p class="copyright">&copy; 2026 AERA - Soluções Ambientais e Sustentáveis. Todos os direitos reservados.</p>
+        <div class="footer-bottom">
+            <p>&copy; 2026 AERA — Soluções Ambientais e Sustentáveis. Todos os direitos reservados.</p>
+            <div class="footer-app-link">
+                <a href="#" data-app-link><i class="fas fa-th-large"></i> Acessar AERA APP</a>
+            </div>
+        </div>
     </div>
 </footer>
 

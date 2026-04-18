@@ -1,147 +1,214 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nossa História - ASAS Soluções Ambientais</title>
+    <title>Nossa História — AERA Soluções Ambientais e Sustentáveis</title>
+    <meta name="description" content="Conheça a história da AERA — fundada em 2009, une conhecimento técnico profundo, inovação e propósito para transformar a gestão ambiental das empresas.">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
-<header>
+<header class="site-header" id="site-header">
     <div class="container">
-        <a href="index.html" class="logo">
-            <img src="logo2.png" alt="AERA Logo">
-            <span>Aera Soluções Ambientais e Sustentáveis</span>
-        </a>
-        <nav id="main-nav">
-            <button class="hamburger" aria-label="Abrir menu">☰</button>
-            <ul class="nav-links">
-                <li><a href="index.html#hero">Início</a></li>
-                <li class="dropdown-container">
-                    <a href="index.html#solutions">Soluções <i class="fas fa-chevron-down dropdown-icon"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="aera-app.html"><i class="fas fa-laptop-code"></i> AERA APP</a></li>
-                        <li><a href="aera-residuos.html"><i class="fas fa-recycle"></i> AERA Resíduos</a></li>
-                        <li><a href="licenciamento.html"><i class="fas fa-file-contract"></i> Licenciamento e Conformidade</a></li>
-                        <li><a href="gestao-residuos.html"><i class="fas fa-trash-alt"></i> Gestão de Resíduos</a></li>
-                        <li><a href="esg.html"><i class="fas fa-leaf"></i> ESG e Sustentabilidade</a></li>
-                        <li><a href="captacao-sustentavel.html"><i class="fas fa-hand-holding-usd"></i> Financiamento Sustentável</a></li>
-                        <li><a href="atendimento-franquias.html"><i class="fas fa-store-alt"></i> Soluções para Franquias</a></li>
-                        <li><a href="areas-contaminadas.html"><i class="fas fa-biohazard"></i> Áreas Contaminadas</a></li>
-                    </ul>
-                </li>
-                <li><a href="nossa-historia.html">Sobre Nós</a></li>
-                <li><a href="https://wa.me/5511986490720?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20consultor%20da%20AERA." target="_blank">Contato</a></li>
-            </ul>
-            <a href="https://wa.me/5511986490720?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20consultor%20da%20AERA." target="_blank" class="header-cta-button">Fale Conosco</a>
-        </nav>
+        <div class="header-inner">
+            <a href="index.html" class="header-logo">
+                <img src="logo2.png" alt="AERA">
+                <div class="logo-text"><b class="logo-brand">AERA</b><span class="logo-sub">Soluções Ambientais</span></div>
+            </a>
+
+            <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <line x1="3" y1="12" x2="21" y2="12"/>
+                    <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
+
+            <nav class="header-nav" id="main-nav" aria-label="Navegação principal">
+                <ul class="nav-list">
+                    <li><a href="index.html">Início</a></li>
+                    <li class="nav-dropdown">
+                        <a href="index.html#solucoes">Soluções <i class="fas fa-chevron-down icon-chevron"></i></a>
+                        <ul class="dropdown-panel">
+                            <li><a href="aera-app.html"><span class="dp-icon"><i class="fas fa-laptop-code"></i></span>AERA APP</a></li>
+                            <li><a href="licenciamento.html"><span class="dp-icon"><i class="fas fa-file-contract"></i></span>Licenciamento e Conformidade</a></li>
+                            <li><a href="gestao-residuos.html"><span class="dp-icon"><i class="fas fa-recycle"></i></span>Gestão de Resíduos</a></li>
+                            <li><a href="esg.html"><span class="dp-icon"><i class="fas fa-leaf"></i></span>ESG e Sustentabilidade</a></li>
+                            <li><a href="captacao-sustentavel.html"><span class="dp-icon"><i class="fas fa-hand-holding-usd"></i></span>Financiamento Sustentável</a></li>
+                            <li><a href="atendimento-franquias.html"><span class="dp-icon"><i class="fas fa-store-alt"></i></span>Soluções para Franquias</a></li>
+                            <li><a href="areas-contaminadas.html"><span class="dp-icon"><i class="fas fa-biohazard"></i></span>Áreas Contaminadas</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="nossa-historia.html">Sobre Nós</a></li>
+                    <li><a href="https://wa.me/5511986490720?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20consultor%20da%20AERA." target="_blank">Contato</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-cta-group">
+                <a href="#" data-app-link class="btn btn--outline btn--sm">
+                    <i class="fas fa-th-large"></i> Acessar AERA APP
+                </a>
+                <a href="https://wa.me/5511986490720?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20consultor%20da%20AERA." target="_blank" class="btn btn--primary btn--sm">
+                    Fale Conosco
+                </a>
+            </div>
+        </div>
     </div>
 </header>
 
-    <main>
-        
-        <section class="service-hero sobre">
-            <div class="container">
-                <h1>Nossa História</h1>
-                <p>Como a paixão por transformar desafios em oportunidades deu vida à ASAS.</p>
-            </div>
-        </section>
+<main>
 
-        <section class="service-content">
-            <div class="container">
-                <p class="lead">A ASAS nasceu do propósito de transformar desafios ambientais em oportunidades sustentáveis — e essa visão tem tudo a ver com a trajetória do seu fundador, Marcelo Lopes.</p>
+    <section class="service-hero sobre">
+        <div class="container">
+            <h1>Nossa História</h1>
+            <p>Como a paixão por transformar desafios ambientais em oportunidades reais deu origem à AERA.</p>
+        </div>
+    </section>
 
-                <p>Desde o início de sua carreira, Marcelo sempre acreditou que sustentabilidade vai muito além de cumprir exigências legais. É sobre gerar valor, repensar processos e criar impacto positivo duradouro. Sua trajetória começou no setor de gestão de resíduos, onde atuou em grandes empresas do grupo Solvi, como a Essencis Soluções Ambientais, tendo contato direto com tecnologias inovadoras como aterros industriais, coprocessamento, incineração, biodigestão, pirólise e recuperação de metais.</p>
-                
-                <p>Ao longo de mais de uma década, Marcelo participou de projetos complexos em todo o Brasil, liderando equipes multidisciplinares e coordenando programas de licenciamento, auditoria ambiental, recuperação de áreas degradadas e educação ambiental. Com uma visão cada vez mais sistêmica, buscou ampliar sua formação e se especializou em Desenvolvimento Sustentável, ESG e Economia Circular, além de atuar como auditor das normas ISO 14001 e ISO 45001.</p>
-                
-                <p>Essas experiências despertaram um novo propósito: criar uma empresa que unisse conhecimento técnico, inovação e propósito. Assim surgiu a ASAS – Aera Soluções Ambientais e Sustentáveis, um projeto que reflete a maturidade de uma trajetória construída com ética, paixão e resultados concretos.</p>
-                
-                <p>Hoje, a ASAS oferece soluções que vão desde a gestão de resíduos e consultoria em sustentabilidade até o desenvolvimento de estratégias ESG e certificações ambientais, apoiando empresas que desejam operar com responsabilidade e visão de futuro.</p>
-                
-                <p>A trajetória de Marcelo é a prova de que é possível unir engenharia de ponta, propósito e resultados concretos. Agora, convidamos você a fazer parte desta jornada. Traga seus desafios para a ASAS e descubra como nossa experiência pode transformar a gestão ambiental da sua empresa em uma poderosa vantagem competitiva. Vamos voar juntos?</p>
+    <section class="service-content">
+        <div class="container">
+            <p class="lead">A AERA nasceu do propósito de transformar desafios ambientais em oportunidades sustentáveis — e essa visão tem tudo a ver com a trajetória do seu fundador, Marcelo Lopes.</p>
 
-                <div class="cta-section">
-                    <h2>Pronto para transformar sua gestão ambiental?</h2>
-                    <p>Fale com quem entende do assunto e faz junto com você.</p>
-                    <button class="cta-button large open-modal">Entre em contato →</button>
+            <p>Desde o início de sua carreira, Marcelo sempre acreditou que sustentabilidade vai muito além de cumprir exigências legais. É sobre gerar valor real, repensar processos e criar impacto positivo e duradouro. Sua trajetória começou no setor de gestão de resíduos, atuando em grandes empresas do grupo Solvi — como a Essencis Soluções Ambientais —, com contato direto com tecnologias inovadoras como aterros industriais, coprocessamento, incineração, biodigestão, pirólise e recuperação de metais.</p>
+
+            <p>Ao longo de mais de uma década, Marcelo participou de projetos complexos em todo o Brasil, liderando equipes multidisciplinares e coordenando programas de licenciamento, auditoria ambiental, recuperação de áreas degradadas e educação ambiental. Com uma visão cada vez mais sistêmica, buscou ampliar sua formação e se especializou em Desenvolvimento Sustentável, ESG e Economia Circular — além de atuar como auditor das normas ISO 14001 e ISO 45001.</p>
+
+            <p>Essas experiências despertaram um novo propósito: criar uma empresa que unisse conhecimento técnico profundo, inovação tecnológica e propósito genuíno. Assim surgiu a AERA — Soluções Ambientais e Sustentáveis — um projeto que reflete a maturidade de uma trajetória construída com ética, paixão e resultados concretos.</p>
+
+            <p>Hoje, a AERA oferece um ecossistema completo: do AERA APP — nossa plataforma de gestão ambiental desenvolvida internamente — a serviços de consultoria especializada em licenciamento, gestão de resíduos, estratégias ESG, financiamento sustentável e remediação de áreas contaminadas. Tudo integrado, tudo pensado para empresas que querem operar com responsabilidade e visão de futuro.</p>
+
+            <p>A trajetória da AERA é a prova de que é possível unir engenharia de ponta, tecnologia própria e propósito transformador. Convidamos você a fazer parte desta jornada — traga seus desafios e descubra como nossa experiência pode transformar a gestão ambiental da sua empresa em uma poderosa vantagem competitiva.</p>
+
+            <div class="cta-section">
+                <h2>Pronto para transformar sua gestão ambiental?</h2>
+                <p>Fale com a AERA. Conheça o AERA APP ou fale com um dos nossos consultores.</p>
+                <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+                    <a href="#" data-app-link class="btn btn--app btn--lg">
+                        <i class="fas fa-th-large"></i> Acessar AERA APP
+                    </a>
+                    <button class="cta-button open-modal">Falar com um consultor →</button>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-    </main>
+</main>
 
-<footer id="contact">
+<footer class="site-footer">
     <div class="container">
         <div class="footer-grid">
-            <div class="footer-about">
-                <img src="logo2.png" alt="AERA Logo Branco" class="footer-logo">
-                <p>Desde 2009, a AERA vai além da consultoria: fazemos junto com você.</p>
+            <div class="footer-brand">
+                <img src="logo2.png" alt="AERA">
+                <p>Desde 2009, unindo especialização técnica, inovação tecnológica e propósito ambiental para transformar a gestão das empresas.</p>
+                <div class="footer-socials">
+                    <a href="https://instagram.com/aerasustentavel" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/5511986490720" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="mailto:aerasustentavel@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                </div>
             </div>
-            <div class="footer-links">
-                <h3>Links Rápidos</h3>
+            <div class="footer-col">
+                <h4>Navegação</h4>
                 <ul>
-                    <li><a href="index.html#hero">Início</a></li>
+                    <li><a href="index.html">Início</a></li>
                     <li><a href="nossa-historia.html">Sobre Nós</a></li>
-                    <li><a href="index.html#solutions">Soluções</a></li>
-                    <li><a href="https://wa.me/5511986490720?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20consultor%20da%20AERA." target="_blank">Contato</a></li>
+                    <li><a href="aera-app.html">AERA APP</a></li>
+                    <li><a href="index.html#solucoes">Soluções</a></li>
                 </ul>
             </div>
-            <div class="footer-contact-info">
-                <h3>Contato</h3>
+            <div class="footer-col">
+                <h4>Soluções</h4>
                 <ul>
-                    <li><i class="fas fa-envelope"></i> <a href="mailto:aerasustentavel@gmail.com">aerasustentavel@gmail.com</a></li>
-                    <li><i class="fas fa-phone-alt"></i> <a href="https://wa.me/5511986490720" target="_blank">(11) 98649-0720</a></li>
-                    <li><i class="fab fa-instagram"></i> <a href="https://instagram.com/aerasustentavel" target="_blank">@aerasustentavel</a></li>
+                    <li><a href="licenciamento.html">Licenciamento</a></li>
+                    <li><a href="gestao-residuos.html">Gestão de Resíduos</a></li>
+                    <li><a href="esg.html">ESG e Sustentabilidade</a></li>
+                    <li><a href="captacao-sustentavel.html">Financiamento Sustentável</a></li>
+                    <li><a href="atendimento-franquias.html">Soluções para Franquias</a></li>
+                    <li><a href="areas-contaminadas.html">Áreas Contaminadas</a></li>
                 </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contato</h4>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:aerasustentavel@gmail.com">aerasustentavel@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <a href="https://wa.me/5511986490720" target="_blank" rel="noopener">(11) 98649-0720</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-instagram"></i>
+                    <a href="https://instagram.com/aerasustentavel" target="_blank" rel="noopener">@aerasustentavel</a>
+                </div>
             </div>
         </div>
-        <p class="copyright">&copy; 2026 AERA - Soluções Ambientais e Sustentáveis. Todos os direitos reservados.</p>
+        <div class="footer-bottom">
+            <p>&copy; 2026 AERA — Soluções Ambientais e Sustentáveis. Todos os direitos reservados.</p>
+            <div class="footer-app-link">
+                <a href="#" data-app-link><i class="fas fa-th-large"></i> Acessar AERA APP</a>
+            </div>
+        </div>
     </div>
 </footer>
 
-    <div id="contact-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <div class="modal-grid">
-                <div class="modal-form-section">
-                    <h2>Envie sua mensagem</h2>
-                    <form action="https://formspree.io/f/mrbyneyq" method="POST">
-                        <div class="form-group">
-                            <label for="name">Nome *</label>
-                            <input type="text" id="name" name="name" placeholder="Seu nome completo" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email *</label>
-                            <input type="email" id="email" name="email" placeholder="seu@email.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Telefone</label>
-                            <input type="tel" id="phone" name="phone" placeholder="(11) 98765-4321">
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Assunto *</label>
-                            <input type="text" id="subject" name="subject" placeholder="Como podemos ajudar?" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Mensagem *</label>
-                            <textarea id="message" name="message" placeholder="Conte-nos mais sobre sua necessidade..." rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="cta-button">Enviar Mensagem</button>
-                    </form>
+<div id="contact-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <div class="modal-grid">
+            <div class="modal-form-section">
+                <h2>Envie sua mensagem</h2>
+                <form action="https://formspree.io/f/mrbyneyq" method="POST">
+                    <div class="form-group">
+                        <label for="name">Nome *</label>
+                        <input type="text" id="name" name="name" placeholder="Seu nome completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Telefone</label>
+                        <input type="tel" id="phone" name="phone" placeholder="(11) 98765-4321">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Assunto *</label>
+                        <input type="text" id="subject" name="subject" placeholder="Como podemos ajudar?" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensagem *</label>
+                        <textarea id="message" name="message" placeholder="Conte-nos mais sobre sua necessidade..." rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button">Enviar Mensagem</button>
+                </form>
+            </div>
+            <div class="modal-info-section">
+                <h2>Informações de Contato</h2>
+                <div class="info-card">
+                    <i class="fas fa-envelope"></i>
+                    <p>Email</p>
+                    <a href="mailto:aerasustentavel@gmail.com">aerasustentavel@gmail.com</a>
                 </div>
-                <div class="modal-info-section">
-                    <h2>Informações de Contato</h2>
-                    <div class="info-card">
-                        <i class="fas fa-envelope"></i>
-                        <p>Email</p>
-                        <a href="mailto:aerasustentavel@gmail.com">aerasustentavel@gmail.com</a>
-                    </div>
-                    <div class="info-card">
-                        <i class="fas fa-phone-alt"></i>
-                        <p>Telefone</p>
-                        <a href="tel:+5511986490720">+55 (11) 98649-0720</a>
-                    </div>
-                    <div class="info-card">
+                <div class="info-card">
+                    <i class="fab fa-whatsapp"></i>
+                    <p>WhatsApp</p>
+                    <a href="tel:+5511986490720">+55 (11) 98649-0720</a>
+                </div>
+                <div class="info-card">
+                    <i class="fab fa-instagram"></i>
+                    <p>Instagram</p>
+                    <a href="https://instagram.com/aerasustentavel" target="_blank">@aerasustentavel</a>
+                </div>
+                <div class="contact-person-card">
+                    <h3>Marcelo Lopes</h3>
+                    <p>Fundador e Consultor Sênior</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
