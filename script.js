@@ -35,10 +35,22 @@ document.addEventListener('DOMContentLoaded', function () {
     /* ---- Menu hambúrguer ---- */
     const hamburger = document.getElementById('hamburger');
     const mainNav   = document.getElementById('main-nav');
+
+    function closeNav() {
+        if (!mainNav) return;
+        mainNav.classList.remove('active');
+        hamburger && hamburger.setAttribute('aria-expanded', 'false');
+        /* limpa todos os painéis abertos para não persistirem na próxima abertura */
+        mainNav.querySelectorAll('.dropdown-panel').forEach(p => p.style.display = '');
+    }
+
     if (hamburger && mainNav) {
         hamburger.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
-            hamburger.setAttribute('aria-expanded', mainNav.classList.contains('active'));
+            const isOpen = mainNav.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', isOpen);
+            if (!isOpen) {
+                mainNav.querySelectorAll('.dropdown-panel').forEach(p => p.style.display = '');
+            }
         });
     }
 
@@ -47,17 +59,19 @@ document.addEventListener('DOMContentLoaded', function () {
         link.addEventListener('click', function (e) {
             if (window.innerWidth <= 768) {
                 e.preventDefault();
+                e.stopPropagation(); /* impede que o handler abaixo feche o nav */
                 const panel = this.nextElementSibling;
-                if (panel) panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+                if (panel) panel.style.display = panel.style.display === 'block' ? '' : 'block';
             }
         });
     });
 
-    /* ---- Fecha nav ao clicar num link interno ---- */
+    /* ---- Fecha nav ao clicar num link interno (não dispara no trigger do dropdown) ---- */
     document.querySelectorAll('.nav-list a').forEach(link => {
         link.addEventListener('click', () => {
-            if (window.innerWidth <= 768 && mainNav) {
-                mainNav.classList.remove('active');
+            if (window.innerWidth <= 768) {
+                const isDropdownTrigger = link.parentElement.classList.contains('nav-dropdown');
+                if (!isDropdownTrigger) closeNav();
             }
         });
     });
@@ -69,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (target) {
                 e.preventDefault();
                 target.scrollIntoView({ behavior: 'smooth' });
-                if (mainNav) mainNav.classList.remove('active');
+                closeNav();
             }
         });
     });
