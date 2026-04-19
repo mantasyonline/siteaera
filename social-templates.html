@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Templates para Redes Sociais — AERA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue-600: #1877F2;
+  --navy: #0A1628;
+  --navy-mid: #0F2244;
+  --green-500: #22C55E;
+  --white: #FFFFFF;
+  --gray-50: #F8FAFE;
+  --gray-200: #E2E8F0;
+  --gray-600: #475569;
+  --font: 'Inter', Arial, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); background: #F0F4FB; color: var(--navy); }
+.page { max-width: 1100px; margin: 0 auto; padding: 48px 24px 80px; }
+
+.page-title { text-align: center; margin-bottom: 48px; }
+.page-title h1 { font-size: 32px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+.page-title p { font-size: 16px; color: var(--gray-600); }
+
+.section-label {
+  font-size: 11px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--blue-600);
+  margin-bottom: 20px; padding: 0 4px;
+}
+
+.templates-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px,1fr)); gap: 24px; margin-bottom: 48px; }
+
+/* ─── TEMPLATE WRAPPER ─── */
+.tmpl-wrapper { }
+.tmpl-label { font-size: 12px; color: var(--gray-600); margin-bottom: 8px; font-weight: 600; }
+.tmpl-size  { font-size: 10px; color: #94A3B8; margin-bottom: 12px; }
+
+/* ─── POST QUADRADO (1:1) ─── */
+.post-square {
+  width: 320px; height: 320px; border-radius: 16px; overflow: hidden;
+  position: relative; display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 24px;
+  box-shadow: 0 8px 32px rgba(10,22,40,.18);
+}
+
+/* ─── POST STORY (9:16) ─── */
+.post-story {
+  width: 200px; height: 356px; border-radius: 20px; overflow: hidden;
+  position: relative; display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 20px;
+  box-shadow: 0 8px 32px rgba(10,22,40,.18);
+}
+
+/* ─── POST LANDSCAPE (16:9 / capa LinkedIn) ─── */
+.post-landscape {
+  width: 100%; max-width: 600px; height: 200px; border-radius: 16px; overflow: hidden;
+  position: relative; display: flex; align-items: center; padding: 32px;
+  box-shadow: 0 8px 32px rgba(10,22,40,.18);
+}
+
+/* Temas */
+.theme-dark    { background: linear-gradient(145deg, #0A1628 0%, #0F2244 100%); }
+.theme-blue    { background: linear-gradient(145deg, #1877F2 0%, #1462CC 100%); }
+.theme-green   { background: linear-gradient(145deg, #064E3B 0%, #065F46 100%); }
+.theme-light   { background: #F8FAFE; border: 1px solid var(--gray-200); }
+.theme-navy-gr { background: linear-gradient(135deg, #0A1628 60%, #1877F2 140%); }
+
+/* Elementos internos */
+.post-logo {
+  position: absolute; top: 20px; left: 20px;
+  display: flex; align-items: center; gap: 8px;
+}
+.post-logo-icon {
+  width: 32px; height: 32px; background: var(--blue-600);
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 14px; color: #fff;
+}
+.post-logo-text { font-weight: 800; font-size: 14px; }
+.post-logo-text.light-text { color: #fff; }
+.post-logo-text.dark-text  { color: var(--navy); }
+
+.post-tag {
+  display: inline-block; font-size: 10px; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 20px; margin-bottom: 10px;
+}
+.tag-blue  { background: rgba(24,119,242,.15); color: #60A5FA; }
+.tag-green { background: rgba(34,197,94,.15); color: #4ADE80; }
+.tag-white { background: rgba(255,255,255,.15); color: rgba(255,255,255,.9); }
+.tag-dark  { background: rgba(10,22,40,.08); color: var(--blue-600); }
+
+.post-title { font-weight: 800; line-height: 1.2; margin-bottom: 8px; }
+.post-title.lg { font-size: 22px; }
+.post-title.md { font-size: 18px; }
+.post-title.sm { font-size: 15px; }
+.text-white  { color: #fff; }
+.text-navy   { color: var(--navy); }
+.text-blue   { color: var(--blue-600); }
+
+.post-sub { font-size: 12px; line-height: 1.5; }
+.text-muted-light { color: rgba(255,255,255,.7); }
+.text-muted-dark  { color: var(--gray-600); }
+
+.post-divider { width: 32px; height: 3px; border-radius: 2px; margin: 10px 0; }
+.div-blue  { background: var(--blue-600); }
+.div-green { background: var(--green-500); }
+.div-white { background: rgba(255,255,255,.5); }
+
+.post-stat-row { display: flex; gap: 20px; margin-top: 12px; }
+.post-stat { }
+.post-stat .num { font-size: 20px; font-weight: 800; color: #fff; line-height: 1; }
+.post-stat .lbl { font-size: 10px; color: rgba(255,255,255,.6); margin-top: 2px; }
+
+/* Hashtags */
+.hashtags { margin-top: 16px; background: #fff; border-radius: 12px; border: 1px solid var(--gray-200); padding: 16px 20px; }
+.hashtags h4 { font-size: 12px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.hashtags p  { font-size: 12px; color: var(--blue-600); line-height: 1.8; }
+
+/* Legenda modelo */
+.caption-box { background: #fff; border: 1px solid var(--gray-200); border-radius: 12px; padding: 20px; margin-top: 12px; }
+.caption-box h4 { font-size: 12px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+.caption-box p  { font-size: 13px; color: var(--gray-600); line-height: 1.7; white-space: pre-line; }
+
+/* Nota */
+.tip-box { background: #EFF6FF; border-left: 3px solid var(--blue-600); border-radius: 8px; padding: 14px 16px; margin-top: 12px; }
+.tip-box p { font-size: 12px; color: #1E40AF; line-height: 1.6; }
+
+@media (max-width: 700px) {
+  .post-landscape { height: auto; min-height: 140px; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="page-title">
+    <h1>Templates para Redes Sociais</h1>
+    <p>AERA — Soluções Ambientais e Sustentáveis &nbsp;·&nbsp; Instagram, LinkedIn, WhatsApp</p>
+  </div>
+
+  <!-- ─── POSTS QUADRADOS ─── -->
+  <div class="section-label">Posts Quadrados — 1080×1080px (Instagram Feed)</div>
+  <div class="templates-row">
+
+    <!-- Post 1: Institucional escuro -->
+    <div class="tmpl-wrapper">
+      <div class="tmpl-label">Institucional — Fundo Escuro</div>
+      <div class="tmpl-size">1080×1080px · Instagram · LinkedIn</div>
+      <div class="post-square theme-dark">
+        <div class="post-logo">
+          <div class="post-logo-icon">A</div>
+          <span class="post-logo-text light-text">AERA</span>
+        </div>
+        <div>
+          <span class="post-tag tag-blue">Gestão Ambiental</span>
+          <div class="post-divider div-blue"></div>
+          <div class="post-title lg text-white">Sustentabilidade<br>que gera valor real.</div>
+          <div class="post-sub text-muted-light" style="margin-top:8px;">Desde 2009 transformando desafios ambientais em vantagens competitivas.</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.4);margin-top:16px;">aerasustentavel.com.br</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post 2: Dica / ESG -->
+    <div class="tmpl-wrapper">
+      <div class="tmpl-label">Dica / Conteúdo ESG — Verde</div>
+      <div class="tmpl-size">1080×1080px · Instagram · Feed</div>
+      <div class="post-square theme-green">
+        <div class="post-logo">
+          <div class="post-logo-icon" style="background:rgba(255,255,255,.2);">A</div>
+          <span class="post-logo-text light-text">AERA</span>
+        </div>
+        <div>
+          <span class="post-tag tag-green">ESG na Prática</span>
+          <div class="post-title lg text-white">Você sabe o que é<br>Escopo 1, 2 e 3?</div>
+          <div class="post-divider div-green"></div>
+          <div class="post-sub text-muted-light">As três categorias de emissões de GEE que toda empresa precisa monitorar para reportar sua pegada de carbono.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post 3: AERA APP -->
+    <div class="tmpl-wrapper">
+      <div class="tmpl-label">AERA APP — Azul</div>
+      <div class="tmpl-size">1080×1080px · Instagram · LinkedIn</div>
+      <div class="post-square theme-blue">
+        <div class="post-logo">
+          <div class="post-logo-icon" style="background:rgba(255,255,255,.25);">A</div>
+          <span class="post-logo-text light-text">AERA APP</span>
+        </div>
+        <div>
+          <span class="post-tag tag-white">Tecnologia Ambiental</span>
+          <div class="post-title lg text-white">Toda a sua gestão<br>ambiental em um<br>só lugar.</div>
+          <div class="post-stat-row">
+            <div class="post-stat"><div class="num">100%</div><div class="lbl">Conformidade</div></div>
+            <div class="post-stat"><div class="num">+10</div><div class="lbl">Módulos</div></div>
+            <div class="post-stat"><div class="num">24/7</div><div class="lbl">Disponível</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post 4: Fundo claro -->
+    <div class="tmpl-wrapper">
+      <div class="tmpl-label">Fundo Claro — Citação/Dado</div>
+      <div class="tmpl-size">1080×1080px · Instagram · Feed</div>
+      <div class="post-square theme-light">
+        <div class="post-logo">
+          <div class="post-logo-icon">A</div>
+          <span class="post-logo-text dark-text">AERA</span>
+        </div>
+        <div>
+          <span class="post-tag tag-dark">Licenciamento</span>
+          <div class="post-title lg text-navy">"Conformidade ambiental não é custo — é <span style="color:#1877F2;">vantagem competitiva.</span>"</div>
+          <div class="post-divider div-blue"></div>
+          <div class="post-sub text-muted-dark">Marcelo Lopes, Fundador da AERA</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─── STORIES ─── -->
+  <div class="section-label">Stories — 1080×1920px (Instagram / WhatsApp)</div>
+  <div style="display:flex;gap:24px;flex-wrap:wrap;margin-bottom:48px;">
+
+    <!-- Story 1: dark -->
+    <div class="tmpl-wrapper">
+      <div class="tmpl-label">Story Institucional</div>
+      <div class="tmpl-size">1080×1920px</div>
+      <div class="post-story theme-dark">
+        <div class="post-logo" style="top:16px;left:16px;">
+          <div class="post-logo-icon" style="width:28px;height:28px;font-size:12px;">A</div>
+          <span class="post-logo-text light-text" style="font-size:12px;">AERA</span>
+        </div>
+        <div>
+          <span class="post-tag tag-blue" style="font-size:9px;">Gestão Ambiental</span>
+          <div class="post-title md text-white">Transforme sua empresa hoje.</div>
+          <div class="post-divider div-blue"></div>
+          <div class="post-sub text-muted-light">Acesse o link na bio para conhecer o AERA APP.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Story 2: blue -->
+    <div class="tmpl-wrapper">
+      <div class="tmpl-label">Story Promoção / CTA</div>
+      <div class="tmpl-size">1080×1920px</div>
+      <div class="post-story theme-blue">
+        <div class="post-logo" style="top:16px;left:16px;">
+          <div class="post-logo-icon" style="width:28px;height:28px;font-size:12px;background:rgba(255,255,255,.25);">A</div>
+          <span class="post-logo-text light-text" style="font-size:12px;">AERA APP</span>
+        </div>
+        <div>
+          <div class="post-title md text-white" style="margin-bottom:12px;">Conheça nossa plataforma.</div>
+          <div style="background:rgba(255,255,255,.15);border-radius:10px;padding:12px;text-align:center;">
+            <div style="font-size:13px;font-weight:700;color:#fff;">Acesse agora →</div>
+            <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:4px;">aerasustentavel.com.br</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Story 3: green -->
+    <div class="tmpl-wrapper">
+      <div class="tmpl-label">Story ESG / Dica</div>
+      <div class="tmpl-size">1080×1920px</div>
+      <div class="post-story theme-green">
+        <div class="post-logo" style="top:16px;left:16px;">
+          <div class="post-logo-icon" style="width:28px;height:28px;font-size:12px;background:rgba(255,255,255,.2);">A</div>
+          <span class="post-logo-text light-text" style="font-size:12px;">AERA</span>
+        </div>
+        <div>
+          <span class="post-tag tag-green" style="font-size:9px;">Dica ESG</span>
+          <div class="post-title sm text-white">Sabia que empresas com boas práticas ESG têm menor custo de capital?</div>
+          <div class="post-divider div-green"></div>
+          <div class="post-sub text-muted-light">Fale com a AERA e descubra como implementar na sua empresa.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─── LANDSCAPE / LINKEDIN ─── -->
+  <div class="section-label">Capa LinkedIn / Banner — 1584×396px</div>
+  <div style="margin-bottom:48px;">
+    <div class="tmpl-label">Banner LinkedIn</div>
+    <div class="tmpl-size">1584×396px · LinkedIn Capa</div>
+    <div class="post-landscape theme-navy-gr" style="margin-bottom:16px;">
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1877F2;margin-bottom:10px;">AERA — Soluções Ambientais</div>
+        <div style="font-size:22px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:8px;">Gestão Ambiental<br>Inteligente para Empresas</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.6);">Licenciamento · ESG · AERA APP · Gestão de Resíduos</div>
+      </div>
+      <div style="flex-shrink:0;padding-left:32px;text-align:center;">
+        <div style="width:64px;height:64px;background:#1877F2;border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;">
+          <span style="font-weight:900;font-size:28px;color:#fff;">A</span>
+        </div>
+        <div style="font-size:11px;color:rgba(255,255,255,.5);">aerasustentavel.com.br</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── HASHTAGS E LEGENDAS ─── -->
+  <div class="section-label">Legendas e Hashtags Modelo</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:48px;">
+
+    <div>
+      <div class="caption-box">
+        <h4>Legenda — Post Institucional</h4>
+        <p>A AERA nasceu para transformar desafios ambientais em oportunidades reais para as empresas.
+
+Desde 2009, unimos conhecimento técnico profundo, tecnologia própria (AERA APP) e propósito genuíno para oferecer gestão ambiental completa.
+
+🌿 Licenciamento e Conformidade
+♻️ Gestão de Resíduos
+📊 Estratégias ESG
+💻 AERA APP — plataforma própria
+
+Conheça como podemos transformar a sua empresa.
+👉 Link na bio.
+
+#AERA #GestãoAmbiental #Sustentabilidade #ESG #MeioAmbiente #LicenciamentoAmbiental #GestãoDeResíduos</p>
+      </div>
+    </div>
+
+    <div>
+      <div class="caption-box">
+        <h4>Legenda — Post AERA APP</h4>
+        <p>Você sabia que a AERA tem uma plataforma própria de gestão ambiental? 💻
+
+O AERA APP foi desenvolvido internamente para reunir todos os módulos que sua empresa precisa:
+
+✅ Controle de resíduos com rastreabilidade
+✅ Monitoramento de conformidade legal
+✅ Relatórios ESG e sustentabilidade
+✅ Dashboard em tempo real
+
+Acesse e conheça. Link na bio.
+
+#AERAApp #TecnologiaAmbiental #Sustentabilidade #EcoTech #GestãoAmbiental #ESG #MeioAmbiente</p>
+      </div>
+    </div>
+
+    <div>
+      <div class="hashtags">
+        <h4>Pack de Hashtags — Gestão Ambiental</h4>
+        <p>#GestãoAmbiental #LicenciamentoAmbiental #MeioAmbiente #Sustentabilidade #ESG #GestãoDeResíduos #EconomiaCircular #AERAApp #AERA #ConsultoriaAmbiental #ResponsabilidadeAmbiental #DesenvolvimentoSustentável #AuditoriaAmbiental #ISO14001 #ImpactoAmbiental</p>
+      </div>
+    </div>
+
+    <div>
+      <div class="hashtags">
+        <h4>Pack de Hashtags — ESG e Negócios</h4>
+        <p>#ESG #GovernançaCorporativa #Sustentabilidade #Negócios #Empresas #InovacaoSustentavel #FinanciamentoVerde #CapitacaoSustentavel #MercadoDeCarbonosn #Compliance #RiscoAmbiental #RelatórioESG #GestãoEmpresarial #ImpostoCarbonn #AreaContaminada</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─── DICAS DE USO ─── -->
+  <div class="section-label">Instruções de Uso</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div class="tip-box">
+      <p><strong>Como usar estes templates:</strong><br>
+      1. Abra o Canva (canva.com/pt_br) ou Figma<br>
+      2. Crie documento com as dimensões indicadas<br>
+      3. Use as cores, fontes e layouts acima como referência<br>
+      4. Exporte em PNG/JPG para Instagram ou PDF para LinkedIn<br>
+      5. Sempre inclua o logo AERA no canto superior esquerdo</p>
+    </div>
+    <div class="tip-box">
+      <p><strong>Frequência recomendada de posts:</strong><br>
+      Instagram: 4–5x por semana<br>
+      Stories: diário (dicas, bastidores, clientes)<br>
+      LinkedIn: 3x por semana (conteúdo técnico)<br>
+      WhatsApp Status: 1–2x por semana<br><br>
+      <strong>Melhor horário:</strong> 8h–9h ou 18h–20h</p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

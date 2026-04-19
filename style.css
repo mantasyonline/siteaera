@@ -103,13 +103,20 @@ a { text-decoration:none; color:var(--color-primary); transition:all .2s ease; }
 .icon-chevron { font-size:.7rem; transition:transform .25s; }
 .dropdown-panel {
     display:none;
-    position:absolute; top:calc(100% + 8px); left:-12px;
+    position:absolute; top:100%; left:-12px;
     min-width:300px;
     background:var(--white);
     border:1px solid var(--color-border);
     border-radius:var(--radius-md);
     box-shadow:var(--shadow-xl);
-    padding:8px; z-index:200;
+    padding:8px; padding-top:16px; z-index:200;
+    margin-top:0;
+}
+/* ponte invisível para cobrir o gap entre o link e o painel */
+.nav-dropdown::after {
+    content:''; position:absolute;
+    top:100%; left:0; right:0; height:16px;
+    background:transparent;
 }
 .dropdown-panel a {
     display:flex; align-items:center; gap:12px;
