@@ -3,6 +3,8 @@
 function PostPage({ postId, onBack, dark = false }) {
   const palette = dark ? darkPal : lightPal;
   const post = POSTS.find(p => p.id === postId) || POSTS[0];
+  const contentBlocks = ARTICLES_CONTENT[postId] || ARTICLES_CONTENT['consumidor-clima'];
+
   const related = POSTS.filter(p => p.id !== post.id && p.category === post.category).slice(0, 3);
   const moreRelated = POSTS.filter(p => p.id !== post.id).slice(0, 3);
   const allRelated = related.length >= 2 ? related : moreRelated;
@@ -84,7 +86,7 @@ function PostPage({ postId, onBack, dark = false }) {
 
       {/* BODY */}
       <article style={{ maxWidth: 680, margin: '0 auto', padding: '0 32px 80px' }}>
-        {ARTICLE_BODY.map((block, i) => <Block key={i} block={block} palette={palette} />)}
+        {contentBlocks.map((block, i) => <Block key={i} block={block} palette={palette} />)}
 
         {/* Tags */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 48, paddingTop: 32, borderTop: `1px solid ${palette.border}` }}>

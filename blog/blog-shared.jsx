@@ -284,7 +284,8 @@ const POSTS = [
 ];
 
 // Article body — for the post page (the user's real post)
-const ARTICLE_BODY = [
+// 1. Renomeamos o artigo antigo para identificar que é sobre o Clima
+const ARTICLE_BODY_CLIMA = [
   { type: 'lead', text: 'Por muito tempo, sustentabilidade foi tratada como pauta de marketing. Algo que cabia no relatório anual, no posicionamento institucional, na campanha de fim de ano. Em 2026, essa lógica se inverteu — e o consumidor brasileiro virou protagonista da cobrança climática.' },
   { type: 'p', text: 'Pesquisas conduzidas no último trimestre indicam que mais de 70% dos consumidores brasileiros levam em conta a postura climática de uma marca antes de comprar. Entre o público de 25 a 44 anos — o coração da classe consumidora — o número passa de 80%. E não estamos falando apenas de embalagem reciclável: a pergunta é mais profunda. "Essa empresa está fazendo a coisa certa?"' },
   { type: 'h2', text: 'Da percepção à decisão de compra' },
@@ -309,7 +310,101 @@ const ARTICLE_BODY = [
   { type: 'p', text: 'Estratégia climática deixou de ser tema do departamento de sustentabilidade. É decisão de CEO, é pauta de conselho, é critério de compra. A pergunta não é mais se a sua empresa precisa se posicionar — é quando, e com que profundidade.' },
 ];
 
-const COMMENTS = [
+// 2. Adicionamos o novo artigo do MTR
+const ARTICLE_BODY_MTR = [
+  { type: 'lead', text: 'Em 2026, o controle de resíduos no Brasil não aceita mais planilhas isoladas. A consolidação do MTR Digital (Manifesto de Transporte de Resíduos) em âmbito nacional transformou a rastreabilidade em um processo de dados em tempo real, onde a falha de integração custa caro.' },
+  { type: 'p', text: 'Instituído originalmente pela Portaria MMA nº 280/2020 e integrado ao Sistema Nacional de Informações sobre a Gestão de Resíduos Sólidos (SINIR), o MTR Eletrônico tornou-se a espinha dorsal da fiscalização ambiental. O que antes era um controle fragmentado por estados, agora é uma malha de dados cruzados que o Ibama e os órgãos estaduais utilizam para malhas fiscais automáticas.' },
+  { type: 'h2', text: 'O fim da fragmentação estadual' },
+  { type: 'p', text: 'O maior gargalo histórico para empresas com operações interestaduais era a multiplicidade de sistemas (como o SIGOR em São Paulo ou o FEAM em Minas Gerais). Com a obrigatoriedade de espelhamento com o MTR Nacional (SINIR), o órgão federal passa a ter visibilidade total da cadeia: do gerador, passando pelo transportador, até a destinação final.' },
+  { type: 'p', text: 'Isso significa que divergências de peso, inconsistências de rotas ou o uso de destinadores com licenças vencidas geram alertas sistêmicos imediatos, configurando infrações que podem levar à suspensão das atividades.' },
+  { type: 'quote', text: 'A fiscalização ambiental deixou de ser reativa (baseada em denúncias ou vistorias anuais) para ser algorítmica. O dado errado no MTR hoje é a multa de amanhã.' },
+  { type: 'h2', text: 'Software e Integração: A única saída segura' },
+  { type: 'p', text: 'A complexidade atual exige que a gestão de resíduos seja tratada como um processo de software B2B especializado. A digitação manual de MTRs em portais do governo é um risco de compliance inaceitável para médias e grandes indústrias.' },
+  { type: 'p', text: 'Para adequar processos e evitar autuações, as empresas precisam focar em três pilares de automação:' },
+  { type: 'list', items: [
+    'Integração via API com o SINIR e sistemas estaduais: Emissão de MTRs diretamente do ERP ou CRM ambiental da empresa, eliminando o erro humano na transcrição de dados.',
+    'Controle automatizado de Licenças (LO) e CADRI: O sistema emissor deve bloquear automaticamente a geração de um MTR se a licença do destinador estiver vencida ou se o resíduo não constar no CADRI aprovado.',
+    'Indicadores Diretos em Tempo Real: Geração de dashboards e relatórios para auditorias (como ISO 14001), utilizando os dados do MTR para comprovar a destinação ambientalmente adequada.'
+  ] },
+  { type: 'h2', text: 'O próximo passo' },
+  { type: 'p', text: 'A adequação ao MTR Nacional não é apenas um projeto de TI, mas uma reestruturação de governança ambiental. Empresas que digitalizam esse controle reduzem passivos, otimizam a logística reversa e transformam a conformidade em vantagem competitiva.' },
+];
+// --- NOVOS ARTIGOS ---
+
+const ARTICLE_BODY_ISO = [
+  { type: 'lead', text: 'A certificação ISO 14001 muitas vezes é tratada como um troféu de parede ou um checklist burocrático para vencer licitações. No entanto, quando bem implementada, ela é o motor da eficiência operacional.' },
+  { type: 'p', text: 'O grande desafio das médias e grandes empresas é fazer a transição do papel para a cultura. O sistema de gestão ambiental (SGA) precisa estar enraizado no chão de fábrica e na diretoria, não apenas na sala do coordenador de meio ambiente às vésperas da auditoria.' },
+  { type: 'h2', text: 'O erro dos indicadores na auditoria' },
+  { type: 'p', text: 'Um ponto crítico de falha em auditorias de certificação é a definição equivocada de métricas nos Padrões de Desempenho Ambiental. É fundamental distinguir claramente entre indicadores diretos (como o volume absoluto de efluente tratado ou toneladas de CO2 emitidas) e indicadores indiretos (como o número de horas de treinamento ambiental ou campanhas de conscientização).' },
+  { type: 'quote', text: 'Métricas indiretas mostram o esforço; métricas diretas comprovam o resultado ambiental. Um SGA maduro exige os dois, mas nunca os confunde.' },
+  { type: 'h2', text: 'Três passos para reativar seu SGA' },
+  { type: 'list', items: [
+    'Integração de Normas: Se a sua empresa já possui a ISO 9001 (Qualidade) ou ISO 45001 (Saúde e Segurança), unifique os processos de auditoria interna e análise crítica pela direção.',
+    'Gestão de Risco Real: Avalie os aspectos e impactos ambientais não apenas sob a ótica da conformidade legal, mas como riscos de continuidade de negócio.',
+    'Engajamento da Liderança: A alta direção deve ser cobrada pelos indicadores de desempenho ambiental da mesma forma que é cobrada pelo EBITDA.'
+  ] }
 ];
 
-Object.assign(window, { BRAND, AerialPlaceholder, AERIAL_VARIANTS, TopoLines, AeraLogo, Icon, CATEGORIES, POSTS, ARTICLE_BODY, COMMENTS });
+const ARTICLE_BODY_GRI = [
+  { type: 'lead', text: 'A atual sopa de letrinhas da sustentabilidade corporativa confunde até conselheiros experientes. Diante da pressão de investidores, a pergunta que chega à mesa ambiental é: devemos reportar via GRI, SASB, CDP ou TCFD?' },
+  { type: 'p', text: 'A resposta curta é que esses frameworks não são excludentes, mas complementares. No entanto, escolher a estrutura errada como ponto de partida gera relatórios caros, exaustivos e que não conversam com o público-alvo da empresa.' },
+  { type: 'h2', text: 'Entendendo o ecossistema de reporte' },
+  { type: 'list', items: [
+    'GRI (Global Reporting Initiative): É o framework mais universal e abrangente. Foca na materialidade de impacto, ou seja, como a empresa impacta o meio ambiente e a sociedade. Excelente para stakeholders variados e ONGs.',
+    'SASB (Sustainability Accounting Standards Board): Foca na materialidade financeira. Mostra como as questões ESG impactam o balanço e a geração de valor da empresa. É o idioma preferido dos investidores.',
+    'GHG Protocol e CDP: Estruturas focadas primordialmente na quantificação técnica e divulgação de emissões de gases de efeito estufa e mudanças climáticas.'
+  ] },
+  { type: 'h2', text: 'Por onde começar?' },
+  { type: 'p', text: 'Se a sua empresa vai publicar seu primeiro Relatório de Sustentabilidade, a estrutura GRI aliada a um inventário padrão GHG Protocol forma a base mais sólida. A partir dessa maturidade de dados alcançada, a transição para relatórios de risco financeiro climático torna-se um passo natural, e não um salto no escuro.' }
+];
+
+const ARTICLE_BODY_TNFD = [
+  { type: 'lead', text: 'O mercado já entendeu que o carbono tem preço. O próximo choque regulatório e financeiro tem outro nome: biodiversidade. O TNFD (Taskforce on Nature-related Financial Disclosures) começa a ganhar tração global.' },
+  { type: 'p', text: 'Assim como o TCFD forçou as empresas a precificarem o risco climático, o TNFD exige que as corporações meçam sua dependência e impacto sobre o capital natural. Para o Brasil, uma potência em biodiversidade e agronegócio, essa não é uma agenda periférica.' },
+  { type: 'h2', text: 'Do risco físico ao risco regulatório' },
+  { type: 'p', text: 'Operações que dependem de polinização, disponibilidade hídrica local ou integridade do solo precisam mapear essas dependências. A degradação do entorno não é mais apenas um problema de licenciamento ambiental (risco regulatório), mas uma ameaça direta à cadeia de suprimentos (risco físico).' },
+  { type: 'p', text: 'As empresas brasileiras que anteciparem a adoção do TNFD não apenas protegerão suas operações, mas terão acesso privilegiado a linhas de financiamento (green bonds) atreladas à conservação.' }
+];
+
+const ARTICLE_BODY_CIRCULAR = [
+  { type: 'lead', text: 'Tratar a economia circular apenas como um sinônimo moderno para "coleta seletiva" ou "reciclagem" é um erro estratégico. A circularidade verdadeira começa na prancheta de engenharia, muito antes do descarte.' },
+  { type: 'p', text: 'Modelos avançados exigem que a empresa repense o design do produto, a escolha das matérias-primas e a logística de retorno. O resíduo deve ser tratado como um erro de design.' },
+  { type: 'h2', text: 'O modelo de Total Waste Management' },
+  { type: 'p', text: 'Para indústrias e grandes geradores (incluindo serviços de saúde), a transição passa pela adoção de contratos de Total Waste Management (Gerenciamento Total de Resíduos). Nesse modelo, o prestador de serviço não é pago para "levar o problema embora", mas sim para auditar a planta, otimizar a segregação na fonte e reinserir fluxos de materiais em novas cadeias produtivas.' },
+  { type: 'quote', text: 'A monetização do passivo ambiental só acontece quando deixamos de gerenciar lixo e passamos a gerenciar recursos secundários.' }
+];
+
+const ARTICLE_BODY_CARBONO = [
+  { type: 'lead', text: 'A aprovação do Sistema Brasileiro de Comércio de Emissões (SBCE) altera definitivamente a contabilidade das grandes operações no país. O carbono deixa de ser um indicador voluntário para se tornar um ativo (ou um passivo) regulado.' },
+  { type: 'p', text: 'O cronograma escalonado do SBCE dará tempo para adaptação, mas as empresas que emitem acima de 10 mil toneladas de CO2e/ano já precisam ter sistemas robustos de Monitoramento, Relato e Verificação (MRV).' },
+  { type: 'h2', text: 'O impacto na operação diária' },
+  { type: 'p', text: 'Para os setores regulados (como cimento, siderurgia e óleo e gás), o custo da emissão entrará no cálculo de viabilidade de qualquer novo projeto. Além disso, a compra de créditos de carbono no mercado voluntário exigirá diligência extrema para garantir a integridade do crédito e evitar acusações de greenwashing.' }
+];
+
+const ARTICLE_BODY_AGUA = [
+  { type: 'lead', text: 'O licenciamento ambiental de novos projetos industriais no Brasil esbarra cada vez mais em um gargalo crítico: a disponibilidade hídrica. Negligenciar a estratégia de captação e efluentes na fase de viabilidade é garantia de atraso.' },
+  { type: 'p', text: 'Mapeamos os três erros mais comuns que travam processos de outorga nos órgãos gestores estaduais e na ANA (Agência Nacional de Águas):' },
+  { type: 'numlist', items: [
+    'Dimensionamento Incorreto: Solicitar vazões baseadas na capacidade máxima teórica dos equipamentos, e não no balanço hídrico real da planta, inviabilizando a outorga em bacias com conflito de uso.',
+    'Desconexão com o Efluente: Projetar a captação sem atrelar a modelagem de dispersão e a capacidade de diluição do corpo receptor para o lançamento do efluente tratado.',
+    'Ausência de Alternativas: Não apresentar, no projeto básico, estudos de reuso interno ou captação de água de chuva para fins menos nobres (lavagem de piso, resfriamento).'
+  ] },
+  { type: 'p', text: 'A água não é um recurso infinito. A engenharia ambiental deve provar ao órgão regulador que a empresa sabe usar cada gota de forma eficiente.' }
+];
+
+// --- ATUALIZAÇÃO DO DICIONÁRIO ---
+// Substitua o dicionário antigo por este, que agora engloba todos os artigos.
+
+const ARTICLES_CONTENT = {
+  'consumidor-clima': ARTICLE_BODY_CLIMA,
+  'mtr-digital': ARTICLE_BODY_MTR,
+  'iso-14001': ARTICLE_BODY_ISO,
+  'reporte-gri': ARTICLE_BODY_GRI,
+  'biodiversidade': ARTICLE_BODY_TNFD,
+  'economia-circular': ARTICLE_BODY_CIRCULAR,
+  'creditos-carbono': ARTICLE_BODY_CARBONO,
+  'agua-industrial': ARTICLE_BODY_AGUA
+};
+
+// Exporte o ARTICLES_CONTENT (esta deve ser a última linha do arquivo blog-shared.jsx)
+Object.assign(window, { BRAND, AerialPlaceholder, AERIAL_VARIANTS, TopoLines, AeraLogo, Icon, CATEGORIES, POSTS, ARTICLES_CONTENT, COMMENTS });
