@@ -191,6 +191,18 @@ const CATEGORIES = [
 
 // Sample posts — first one is the real article from the user
 const POSTS = [
+    {
+    id: 'iso-14001-2026',
+    title: 'ISO 14001:2026: O que muda na nova versão recém-publicada',
+    excerpt: 'Publicada em 15 de abril de 2026, a nova versão da principal norma de gestão ambiental traz um novo requisito para gestão de mudanças e estende o rigor operacional para toda a cadeia de fornecedores.',
+    category: 'certificacoes',
+    author: 'Equipe AERA',
+    authorRole: 'Especialistas em Certificações',
+    date: '28 Abr 2026',
+    readTime: '7 min',
+    image: 'sky',
+    tags: ['ISO 14001', 'Atualização 2026', 'SGA', 'Auditoria'],
+  },
   {
     id: 'consumidor-clima',
     title: 'O jogo virou: Por que o consumidor brasileiro está de olho na sua estratégia climática',
@@ -391,11 +403,30 @@ const ARTICLE_BODY_AGUA = [
   ] },
   { type: 'p', text: 'A água não é um recurso infinito. A engenharia ambiental deve provar ao órgão regulador que a empresa sabe usar cada gota de forma eficiente.' }
 ];
+const ARTICLE_BODY_ISO_2026 = [
+  { type: 'lead', text: 'Publicada oficialmente no dia 15 de abril de 2026, a nova versão da ISO 14001 encerra anos de revisão técnica. A boa notícia? Quem já possui um sistema maduro não precisará recomeçar do zero. A má notícia para quem tratava a norma como um checklist burocrático? O cerco sobre o ciclo de vida e a cadeia de valor acabou de ficar muito mais rigoroso.' },
+  { type: 'p', text: 'Substituindo a edição de 2015, a ISO 14001:2026 mantém a Estrutura Harmonizada (Anexo SL), mas eleva a gestão ambiental a um patamar de gestão de risco inegociável. As organizações certificadas terão um período de transição de três anos (até maio de 2029) para adequarem seus Sistemas de Gestão Ambiental (SGA).' },
+  { type: 'h2', text: 'As 3 principais mudanças da versão 2026' },
+  { type: 'p', text: 'A atualização não é apenas editorial. A norma agora reflete as fronteiras planetárias de forma muito mais explícita. Preste atenção nestes três pilares:' },
+  { type: 'numlist', items: [
+    'Novo Requisito 6.3 - Planejamento de Mudanças: Uma lacuna histórica foi preenchida. A partir de agora, a norma exige um processo estruturado para prever, responder e gerenciar mudanças organizacionais e técnicas no SGA (um alinhamento direto com o que já existia na ISO 9001).',
+    'Expansão do Controle Operacional (Seção 8.1): O foco ultrapassa os limites físicos da planta. O conceito de "gerenciamento de externalidades" foi redefinido, cobrando que as organizações estendam o rigor e o controle ambiental para os produtos, serviços e processos fornecidos externamente (fornecedores e parceiros logísticos).',
+    'Fronteiras Planetárias e Clima: O alinhamento com a agenda global agora é textual. A análise de contexto e a identificação de aspectos ambientais significativos devem considerar explicitamente questões como mudanças climáticas, biodiversidade, água e escassez de recursos.'
+  ] },
+  { type: 'h2', text: 'A armadilha na Avaliação de Desempenho' },
+  { type: 'p', text: 'Com a inclusão de temas complexos cobrindo toda a cadeia de valor, a Avaliação de Desempenho (Seção 9) se tornará o principal alvo de não-conformidades durante as auditorias de transição.' },
+  { type: 'p', text: 'Aqui, a diferenciação técnica entre indicadores no processo de auditoria separa sistemas de gestão maduros de sistemas frágeis. É fundamental que a empresa distinga com clareza o que são indicadores diretos e indiretos na hora de comprovar os Padrões de Desempenho Ambiental.' },
+  { type: 'p', text: 'O envio de cartilhas ou a realização de auditorias documentais em fornecedores representam esforço (indicadores indiretos). No entanto, para comprovar o atendimento à nova Seção 8.1, o auditor buscará a redução real do impacto no ciclo de vida — como a redução mensurável de emissões ou de geração de resíduos na cadeia logística contratada (indicadores diretos).' },
+  { type: 'quote', text: 'A ISO 14001:2026 deixa claro: a empresa é corresponsável pelo impacto daqueles que operam em seu nome.' },
+  { type: 'h2', text: 'O plano de ação imediato' },
+  { type: 'p', text: 'O prazo de transição até 2029 não deve ser motivo para inércia. O primeiro passo estratégico é realizar uma Análise de Gaps (Gap Analysis) confrontando o seu SGA atual com as novas exigências de ciclo de vida e planejamento de mudanças. Revisar o controle de parceiros e garantir que seus indicadores de fato reflitam mitigação ambiental são os passaportes para uma transição sem sustos.' }
+];
 
 // --- ATUALIZAÇÃO DO DICIONÁRIO ---
 // Substitua o dicionário antigo por este, que agora engloba todos os artigos.
 
 const ARTICLES_CONTENT = {
+  'iso-14001-2026': ARTICLE_BODY_ISO_2026,
   'consumidor-clima': ARTICLE_BODY_CLIMA,
   'mtr-digital': ARTICLE_BODY_MTR,
   'iso-14001': ARTICLE_BODY_ISO,
@@ -405,6 +436,8 @@ const ARTICLES_CONTENT = {
   'creditos-carbono': ARTICLE_BODY_CARBONO,
   'agua-industrial': ARTICLE_BODY_AGUA
 };
+
+const COMMENTS = [];
 
 // Exporte o ARTICLES_CONTENT (esta deve ser a última linha do arquivo blog-shared.jsx)
 Object.assign(window, { BRAND, AerialPlaceholder, AERIAL_VARIANTS, TopoLines, AeraLogo, Icon, CATEGORIES, POSTS, ARTICLES_CONTENT, COMMENTS });
