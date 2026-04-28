@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AERA · Blog — Vista de Cima</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #F8FAFE; }
+  body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+  ::selection { background: #1877F230; }
+  button, input, textarea { font-family: inherit; }
+  a { color: inherit; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="blog-shared.jsx"></script>
+<script type="text/babel" src="blog-home-cinema.jsx"></script>
+<script type="text/babel" src="blog-home-editorial.jsx"></script>
+<script type="text/babel" src="blog-post.jsx"></script>
+<script type="text/babel" src="blog-search.jsx"></script>
+
+<script type="text/babel">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "darkMode": false,
+  "homeVariant": "cinema",
+  "showCoordinates": true,
+  "accentTone": "blue"
+}/*EDITMODE-END*/;
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  const [view, setView] = React.useState({ name: 'canvas' }); // canvas | home-cinema | home-editorial | post | search
+  const [postId, setPostId] = React.useState('consumidor-clima');
+
+  // Expose openPost globally for related-articles cross-link
+  React.useEffect(() => {
+    window.openPost = (id) => { setPostId(id); setView({ name: 'post' }); window.scrollTo(0, 0); };
+  }, []);
+
+  const openPost = (id) => { setPostId(id); setView({ name: 'post' }); window.scrollTo(0, 0); };
+  const openSearch = () => setView({ name: 'search' });
+  const back = () => setView({ name: 'canvas' });
+
+  if (view.name === 'home-cinema') return <FullView><HomeCinema dark={t.darkMode} onOpenPost={openPost} onOpenSearch={openSearch} /><BackChip onBack={back} /></FullView>;
+  if (view.name === 'home-editorial') return <FullView><HomeEditorial dark={t.darkMode} onOpenPost={openPost} onOpenSearch={openSearch} /><BackChip onBack={back} /></FullView>;
+  if (view.name === 'post') return <FullView><PostPage postId={postId} dark={t.darkMode} onBack={() => setView({ name: 'canvas' })} /><BackChip onBack={back} /></FullView>;
+  if (view.name === 'search') return <FullView><SearchPage dark={t.darkMode} onClose={() => setView({ name: 'canvas' })} onOpenPost={openPost} /></FullView>;
+
+  return (
+    <>
+      <DesignCanvas>
+        <DCSection id="homes" title="Home do Blog" subtitle="Duas direções: cinematográfica e editorial. Clique para abrir em tela cheia.">
+          <DCArtboard id="cinema" label="V1 · Horizonte Cinematográfico" width={1280} height={2400}>
+            <div style={{ width: '100%', height: '100%', overflow: 'hidden', cursor: 'pointer' }} onClick={() => setView({ name: 'home-cinema' })}>
+              <HomeCinema dark={t.darkMode} onOpenPost={openPost} onOpenSearch={openSearch} />
+            </div>
+          </DCArtboard>
+          <DCArtboard id="editorial" label="V2 · Editorial Atmosférico" width={1280} height={2400}>
+            <div style={{ width: '100%', height: '100%', overflow: 'hidden', cursor: 'pointer' }} onClick={() => setView({ name: 'home-editorial' })}>
+              <HomeEditorial dark={t.darkMode} onOpenPost={openPost} onOpenSearch={openSearch} />
+            </div>
+          </DCArtboard>
+        </DCSection>
+
+        <DCSection id="post" title="Página de Post" subtitle='Artigo completo com sistema de comentários — "O jogo virou".'>
+          <DCArtboard id="article" label="Artigo · O jogo virou" width={1280} height={2600}>
+            <div style={{ width: '100%', height: '100%', overflow: 'hidden', cursor: 'pointer' }} onClick={() => { setPostId('consumidor-clima'); setView({ name: 'post' }); }}>
+              <PostPage postId="consumidor-clima" dark={t.darkMode} onBack={() => {}} />
+            </div>
+          </DCArtboard>
+        </DCSection>
+
+        <DCSection id="search" title="Busca" subtitle="Tela cheia, com filtros por categoria e trending searches.">
+          <DCArtboard id="search-screen" label="Tela de busca" width={1280} height={900}>
+            <div style={{ width: '100%', height: '100%', overflow: 'hidden', position: 'relative', cursor: 'pointer' }} onClick={() => setView({ name: 'search' })}>
+              <SearchPage dark={t.darkMode} onClose={() => {}} onOpenPost={() => {}} embedded />
+            </div>
+          </DCArtboard>
+        </DCSection>
+
+        <DCPostIt top={140} left={20} rotate={-3}>
+          Clique em qualquer artboard para abrir o protótipo em tela cheia. Use o painel Tweaks para alternar Dark Mode.
+        </DCPostIt>
+      </DesignCanvas>
+
+      <TweaksPanel>
+        <TweakSection label="Tema" />
+        <TweakToggle label="Dark mode" value={t.darkMode} onChange={(v) => setTweak('darkMode', v)} />
+        <TweakSection label="Apresentação" />
+        <TweakRadio label="Variante da Home"
+          value={t.homeVariant}
+          options={[{value: 'cinema', label: 'Cinema'}, {value: 'editorial', label: 'Editorial'}]}
+          onChange={(v) => { setTweak('homeVariant', v); setView({ name: v === 'cinema' ? 'home-cinema' : 'home-editorial' }); }} />
+        <TweakButton label="Abrir Home V1" onClick={() => setView({ name: 'home-cinema' })} />
+        <TweakButton label="Abrir Home V2" onClick={() => setView({ name: 'home-editorial' })} />
+        <TweakButton label="Abrir Artigo" onClick={() => { setPostId('consumidor-clima'); setView({ name: 'post' }); }} />
+        <TweakButton label="Abrir Busca" onClick={() => setView({ name: 'search' })} />
+        <TweakButton label="Voltar ao Canvas" onClick={() => setView({ name: 'canvas' })} />
+      </TweaksPanel>
+    </>
+  );
+}
+
+function FullView({ children }) {
+  return <div style={{ minHeight: '100vh' }}>{children}</div>;
+}
+
+function BackChip({ onBack }) {
+  return (
+    <button onClick={onBack} style={{ position: 'fixed', top: 16, left: 16, zIndex: 999,
+      padding: '10px 16px', background: 'rgba(10,22,40,0.92)', color: '#fff', border: '1px solid rgba(255,255,255,0.15)',
+      borderRadius: 999, fontSize: 12, fontWeight: 600, fontFamily: 'Inter, sans-serif', cursor: 'pointer',
+      backdropFilter: 'blur(8px)', boxShadow: '0 4px 20px rgba(0,0,0,0.2)', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+      ← Canvas
+    </button>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

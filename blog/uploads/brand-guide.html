@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia de Identidade Visual — AERA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue-600: #1877F2;
+  --blue-700: #1462CC;
+  --blue-900: #0A3A7A;
+  --navy:     #0A1628;
+  --green-500: #22C55E;
+  --white: #FFFFFF;
+  --gray-50: #F8FAFE;
+  --gray-100: #F0F4FB;
+  --gray-200: #E2E8F0;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  --gray-900: #0F172A;
+  --font: 'Inter', Arial, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); background: var(--gray-50); color: var(--gray-900); }
+.page { max-width: 900px; margin: 0 auto; padding: 48px 24px 80px; }
+
+/* Header do guia */
+.guide-header {
+  background: var(--navy); color: #fff; border-radius: 20px;
+  padding: 48px 48px 40px; margin-bottom: 48px;
+  display: flex; align-items: center; gap: 28px;
+}
+.guide-logo {
+  width: 64px; height: 64px; background: var(--blue-600);
+  border-radius: 16px; display: flex; align-items: center;
+  justify-content: center; flex-shrink: 0;
+}
+.guide-logo span { font-size: 28px; font-weight: 900; color: #fff; letter-spacing: -.5px; }
+.guide-header h1 { font-size: 28px; font-weight: 800; margin-bottom: 6px; }
+.guide-header p { color: #94A3B8; font-size: 15px; }
+
+/* Seções */
+.section { margin-bottom: 48px; }
+.section-title {
+  font-size: 11px; font-weight: 700; color: var(--blue-600);
+  text-transform: uppercase; letter-spacing: .1em;
+  margin-bottom: 20px; padding-bottom: 10px;
+  border-bottom: 2px solid var(--gray-200);
+}
+.section-heading { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 16px; }
+
+/* Paleta de cores */
+.color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; }
+.color-swatch { border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+.color-block { height: 80px; }
+.color-info { background: #fff; padding: 10px 12px; }
+.color-name { font-size: 12px; font-weight: 700; color: var(--gray-900); }
+.color-hex { font-size: 11px; color: var(--gray-600); font-family: monospace; margin-top: 2px; }
+.color-use { font-size: 10px; color: var(--gray-600); margin-top: 4px; }
+
+/* Tipografia */
+.type-samples { display: flex; flex-direction: column; gap: 24px; }
+.type-sample { background: #fff; border: 1px solid var(--gray-200); border-radius: 12px; padding: 20px 24px; }
+.type-label { font-size: 10px; font-weight: 700; color: var(--gray-600); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
+.type-meta { font-size: 11px; color: var(--gray-600); margin-top: 6px; font-family: monospace; }
+
+/* Botões */
+.btn-grid { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding: 24px; background: #fff; border-radius: 12px; border: 1px solid var(--gray-200); }
+.btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font); font-weight: 600; border-radius: 10px; cursor: pointer; border: none; font-size: 14px; padding: 10px 20px; }
+.btn--primary { background: var(--blue-600); color: #fff; }
+.btn--outline { background: transparent; color: var(--blue-600); border: 2px solid var(--blue-600); }
+.btn--dark    { background: var(--navy); color: #fff; }
+.btn--green   { background: var(--green-500); color: #fff; }
+.btn--ghost   { background: var(--gray-100); color: var(--gray-700); }
+.btn--lg { padding: 14px 28px; font-size: 15px; border-radius: 12px; }
+
+/* Logo variations */
+.logo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+.logo-card { border-radius: 12px; padding: 28px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+.logo-card.light  { background: #fff; border: 1px solid var(--gray-200); }
+.logo-card.dark   { background: var(--navy); }
+.logo-card.blue   { background: var(--blue-600); }
+.logo-card.gray   { background: var(--gray-100); }
+.logo-icon-box { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.logo-text-wrap .brand { font-weight: 900; font-size: 18px; letter-spacing: -.01em; line-height: 1.1; }
+.logo-text-wrap .sub   { font-size: 11px; font-weight: 500; line-height: 1.3; }
+
+/* Ícones / padrão visual */
+.icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 12px; }
+.icon-card { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 16px 8px; text-align: center; }
+.icon-box { width: 40px; height: 40px; background: var(--gray-100); border-radius: 10px; margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; color: var(--blue-600); font-size: 16px; }
+.icon-label { font-size: 11px; color: var(--gray-700); font-weight: 500; }
+
+/* Mensagem da marca */
+.messaging-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.msg-card { background: #fff; border: 1px solid var(--gray-200); border-radius: 12px; padding: 20px; }
+.msg-card h3 { font-size: 13px; font-weight: 700; color: var(--blue-600); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 10px; }
+.msg-card p { font-size: 13px; color: var(--gray-700); line-height: 1.65; }
+.msg-card ul { list-style: none; padding: 0; }
+.msg-card ul li { font-size: 13px; color: var(--gray-700); padding: 4px 0; }
+.msg-card ul li::before { content: '→ '; color: var(--blue-600); font-weight: 700; }
+
+/* Padrão de uso / regras */
+.do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px; }
+.do-box, .dont-box { border-radius: 12px; padding: 20px; }
+.do-box   { background: #F0FDF4; border: 1px solid #BBF7D0; }
+.dont-box { background: #FFF1F2; border: 1px solid #FECDD3; }
+.do-box h4   { font-size: 12px; font-weight: 700; color: #166534; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; }
+.dont-box h4 { font-size: 12px; font-weight: 700; color: #9F1239; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; }
+.do-box ul, .dont-box ul { list-style: none; padding: 0; }
+.do-box ul li   { font-size: 12px; color: #14532D; padding: 3px 0; }
+.do-box ul li::before   { content: '✓ '; font-weight: 700; }
+.dont-box ul li { font-size: 12px; color: #881337; padding: 3px 0; }
+.dont-box ul li::before { content: '✗ '; font-weight: 700; }
+
+@media (max-width: 600px) {
+  .guide-header { flex-direction: column; padding: 32px 24px; }
+  .messaging-grid, .do-dont { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="guide-header">
+    <div class="guide-logo"><span>A</span></div>
+    <div>
+      <h1>Guia de Identidade Visual</h1>
+      <p>AERA — Soluções Ambientais e Sustentáveis &nbsp;·&nbsp; Versão 2.0 &nbsp;·&nbsp; 2026</p>
+    </div>
+  </div>
+
+  <!-- CORES -->
+  <div class="section">
+    <div class="section-title">01 — Paleta de Cores</div>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="color-block" style="background:#1877F2;"></div>
+        <div class="color-info">
+          <div class="color-name">Azul Principal</div>
+          <div class="color-hex">#1877F2</div>
+          <div class="color-use">CTAs, links, destaques</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-block" style="background:#1462CC;"></div>
+        <div class="color-info">
+          <div class="color-name">Azul Escuro</div>
+          <div class="color-hex">#1462CC</div>
+          <div class="color-use">Hover, variações</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-block" style="background:#0A1628;"></div>
+        <div class="color-info">
+          <div class="color-name">Navy (Marinho)</div>
+          <div class="color-hex">#0A1628</div>
+          <div class="color-use">Header, fundos escuros</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-block" style="background:#22C55E;"></div>
+        <div class="color-info">
+          <div class="color-name">Verde Acento</div>
+          <div class="color-hex">#22C55E</div>
+          <div class="color-use">Sustentabilidade, badges</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-block" style="background:#F8FAFE;"></div>
+        <div class="color-info">
+          <div class="color-name">Fundo Claro</div>
+          <div class="color-hex">#F8FAFE</div>
+          <div class="color-use">Background pages</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-block" style="background:#475569;"></div>
+        <div class="color-info">
+          <div class="color-name">Cinza Texto</div>
+          <div class="color-hex">#475569</div>
+          <div class="color-use">Texto secundário</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-block" style="background:#0F172A;"></div>
+        <div class="color-info">
+          <div class="color-name">Cinza Escuro</div>
+          <div class="color-hex">#0F172A</div>
+          <div class="color-use">Texto principal</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-block" style="background:#FFFFFF; border-bottom:1px solid #E2E8F0;"></div>
+        <div class="color-info">
+          <div class="color-name">Branco</div>
+          <div class="color-hex">#FFFFFF</div>
+          <div class="color-use">Cards, fundos</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIPOGRAFIA -->
+  <div class="section">
+    <div class="section-title">02 — Tipografia</div>
+    <p style="font-size:13px;color:#475569;margin-bottom:20px;">Fonte única: <strong>Inter</strong> (Google Fonts). Hierarquia definida por peso e tamanho.</p>
+    <div class="type-samples">
+      <div class="type-sample">
+        <div class="type-label">H1 — Título Principal</div>
+        <div style="font-size:48px;font-weight:800;line-height:1.15;color:#0A1628;">Gestão Ambiental<br>Inteligente</div>
+        <div class="type-meta">Inter 800 · 48px / 56px · #0A1628</div>
+      </div>
+      <div class="type-sample">
+        <div class="type-label">H2 — Título de Seção</div>
+        <div style="font-size:36px;font-weight:700;line-height:1.2;color:#0A1628;">Nossa Solução para Empresas</div>
+        <div class="type-meta">Inter 700 · 36px / 44px · #0A1628</div>
+      </div>
+      <div class="type-sample">
+        <div class="type-label">H3 — Subtítulo / Card</div>
+        <div style="font-size:22px;font-weight:700;line-height:1.3;color:#0A1628;">Licenciamento Ambiental</div>
+        <div class="type-meta">Inter 700 · 22px / 28px · #0A1628</div>
+      </div>
+      <div class="type-sample">
+        <div class="type-label">Lead / Destaque</div>
+        <div style="font-size:18px;font-weight:400;line-height:1.65;color:#334155;">A AERA nasceu do propósito de transformar desafios ambientais em oportunidades sustentáveis para as empresas.</div>
+        <div class="type-meta">Inter 400 · 18px · #334155</div>
+      </div>
+      <div class="type-sample">
+        <div class="type-label">Corpo de Texto</div>
+        <div style="font-size:15px;line-height:1.75;color:#475569;">Nossa equipe combina conhecimento técnico profundo com tecnologia própria para oferecer soluções completas de gestão ambiental, ESG e sustentabilidade.</div>
+        <div class="type-meta">Inter 400 · 15px / 16px · #475569</div>
+      </div>
+      <div class="type-sample">
+        <div class="type-label">Label / Tag</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1877F2;">Soluções Ambientais</div>
+        <div class="type-meta">Inter 700 · 11px · uppercase · #1877F2</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGO -->
+  <div class="section">
+    <div class="section-title">03 — Logotipo e Variações</div>
+    <p style="font-size:13px;color:#475569;margin-bottom:20px;">Use sempre com espaçamento mínimo ao redor. Nunca distorça ou altere as cores.</p>
+    <div class="logo-grid">
+      <!-- Fundo branco -->
+      <div class="logo-card light">
+        <div class="logo-icon-box" style="background:#1877F2;">
+          <img src="aera_icon.png" alt="AERA" style="width:24px;height:24px;object-fit:contain;" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=\'font-weight:900;font-size:18px;color:#fff;\'>A</span>'">
+        </div>
+        <div class="logo-text-wrap">
+          <div class="brand" style="color:#1877F2;">AERA</div>
+          <div class="sub" style="color:#475569;">Soluções Ambientais</div>
+        </div>
+      </div>
+      <!-- Fundo escuro -->
+      <div class="logo-card dark">
+        <div class="logo-icon-box" style="background:#1877F2;">
+          <span style="font-weight:900;font-size:18px;color:#fff;">A</span>
+        </div>
+        <div class="logo-text-wrap">
+          <div class="brand" style="color:#fff;">AERA</div>
+          <div class="sub" style="color:#94A3B8;">Soluções Ambientais</div>
+        </div>
+      </div>
+      <!-- Fundo azul -->
+      <div class="logo-card blue">
+        <div class="logo-icon-box" style="background:rgba(255,255,255,.2);">
+          <span style="font-weight:900;font-size:18px;color:#fff;">A</span>
+        </div>
+        <div class="logo-text-wrap">
+          <div class="brand" style="color:#fff;">AERA</div>
+          <div class="sub" style="color:rgba(255,255,255,.75);">Soluções Ambientais</div>
+        </div>
+      </div>
+      <!-- Fundo cinza -->
+      <div class="logo-card gray">
+        <div class="logo-icon-box" style="background:#1877F2;">
+          <span style="font-weight:900;font-size:18px;color:#fff;">A</span>
+        </div>
+        <div class="logo-text-wrap">
+          <div class="brand" style="color:#1877F2;">AERA</div>
+          <div class="sub" style="color:#475569;">Soluções Ambientais</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTÕES -->
+  <div class="section">
+    <div class="section-title">04 — Botões</div>
+    <div class="btn-grid">
+      <button class="btn btn--primary">Acessar AERA APP</button>
+      <button class="btn btn--outline">Saiba Mais</button>
+      <button class="btn btn--dark">Fale Conosco</button>
+      <button class="btn btn--green">Solicitar Proposta</button>
+      <button class="btn btn--ghost">Ver Soluções</button>
+      <button class="btn btn--primary btn--lg">Começar Agora →</button>
+    </div>
+    <p style="font-size:12px;color:#94A3B8;margin-top:12px;">Border-radius: 10px (padrão) / 12px (large). Font-weight: 600. Padding horizontal: 20px (sm) / 28px (lg).</p>
+  </div>
+
+  <!-- MENSAGEM DA MARCA -->
+  <div class="section">
+    <div class="section-title">05 — Mensagem da Marca</div>
+    <div class="messaging-grid">
+      <div class="msg-card">
+        <h3>Missão</h3>
+        <p>Transformar desafios ambientais em oportunidades sustentáveis, unindo conhecimento técnico, tecnologia própria e propósito genuíno.</p>
+      </div>
+      <div class="msg-card">
+        <h3>Visão</h3>
+        <p>Ser a referência em gestão ambiental inteligente para empresas que querem operar com responsabilidade e visão de futuro.</p>
+      </div>
+      <div class="msg-card">
+        <h3>Taglines aprovadas</h3>
+        <ul>
+          <li>Gestão Ambiental Inteligente</li>
+          <li>Sustentabilidade que gera valor</li>
+          <li>Tecnologia + Propósito Ambiental</li>
+          <li>Do desafio à oportunidade</li>
+        </ul>
+      </div>
+      <div class="msg-card">
+        <h3>Tom de Voz</h3>
+        <ul>
+          <li>Técnico, mas acessível</li>
+          <li>Confiante e propositivo</li>
+          <li>Focado em resultados reais</li>
+          <li>Sem jargão excessivo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- DO / DON'T -->
+  <div class="section">
+    <div class="section-title">06 — Uso Correto da Marca</div>
+    <div class="do-dont">
+      <div class="do-box">
+        <h4>✓ Faça</h4>
+        <ul>
+          <li>Use Inter em todos os materiais</li>
+          <li>Mantenha #1877F2 como cor principal</li>
+          <li>Use espaçamento generoso</li>
+          <li>Prefira fotos reais e natureza</li>
+          <li>Combine azul + verde para sustentabilidade</li>
+          <li>Use fundos claros para legibilidade</li>
+          <li>Sempre inclua o nome "AERA" junto ao ícone</li>
+        </ul>
+      </div>
+      <div class="dont-box">
+        <h4>✗ Não Faça</h4>
+        <ul>
+          <li>Não use outras fontes sem aprovação</li>
+          <li>Não altere as cores da paleta</li>
+          <li>Não distorça proporções do logo</li>
+          <li>Não use fundos escuros com texto cinza</li>
+          <li>Não mencione "AERA Resíduos" separadamente</li>
+          <li>Não use gradientes saturados</li>
+          <li>Não coloque logo sobre fotos sem overlay</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PADRÃO VISUAL -->
+  <div class="section">
+    <div class="section-title">07 — Padrão Visual — Cards e Seções</div>
+    <p style="font-size:13px;color:#475569;margin-bottom:20px;">Componentes padrão para materiais de comunicação.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <!-- Card de solução -->
+      <div style="background:#fff;border:1px solid #E2E8F0;border-radius:16px;padding:24px;">
+        <div style="width:48px;height:48px;background:#F0F4FB;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
+          <span style="color:#1877F2;font-size:20px;">♻</span>
+        </div>
+        <h3 style="font-size:16px;font-weight:700;color:#0A1628;margin-bottom:8px;">Gestão de Resíduos</h3>
+        <p style="font-size:13px;color:#475569;line-height:1.6;">Controle total do ciclo de vida dos resíduos da sua empresa, com rastreabilidade e conformidade legal.</p>
+      </div>
+      <!-- Card diferencial -->
+      <div style="background:linear-gradient(135deg,#0A1628 0%,#0F2244 100%);border-radius:16px;padding:24px;color:#fff;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1877F2;margin-bottom:12px;">AERA APP</div>
+        <h3 style="font-size:16px;font-weight:700;margin-bottom:8px;">Plataforma própria de gestão ambiental</h3>
+        <p style="font-size:13px;color:#94A3B8;line-height:1.6;">Desenvolvida internamente para atender as reais necessidades das empresas brasileiras.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTATOS -->
+  <div style="background:#0A1628;border-radius:20px;padding:40px;color:#fff;text-align:center;">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1877F2;margin-bottom:12px;">Contato</div>
+    <h2 style="font-size:24px;font-weight:800;margin-bottom:8px;">AERA — Soluções Ambientais e Sustentáveis</h2>
+    <p style="color:#94A3B8;font-size:14px;margin-bottom:24px;">comercial@aerasustentavel.com.br &nbsp;·&nbsp; (11) 98649-0720 &nbsp;·&nbsp; @aerasustentavel</p>
+    <p style="color:#475569;font-size:12px;">Este guia é de uso interno e destina-se à padronização de materiais de comunicação da AERA.</p>
+  </div>
+
+</div>
+</body>
+</html>
