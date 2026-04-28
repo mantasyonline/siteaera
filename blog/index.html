@@ -14,6 +14,24 @@
   ::selection { background: #1877F230; }
   button, input, textarea { font-family: inherit; }
   a { color: inherit; }
+  @media (max-width: 768px) {
+  /* Força a quebra dos grids laterais para uma coluna só */
+  div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; gap: 24px !important; }
+
+  /* Ajusta o padding lateral das seções para caber na tela */
+  div[style*="padding: 0 48px"], section, header { padding-left: 20px !important; padding-right: 20px !important; }
+
+  /* Diminui os títulos gigantes */
+  h1 { font-size: 40px !important; line-height: 1.1 !important; padding: 0 !important; }
+  h2 { font-size: 32px !important; }
+
+  /* Ajusta a barra de navegação superior */
+  nav > div { padding: 0 16px !important; flex-wrap: wrap; justify-content: space-between; }
+  nav button, nav a { font-size: 11px !important; padding: 6px 10px !important; }
+
+  /* Oculta os itens do menu no topo para economizar espaço no mobile */
+  nav > div > div > a { display: none !important; }
+}
 </style>
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>

@@ -144,16 +144,21 @@ function TopoLines({ color = BRAND.blue, opacity = 0.08, style }) {
 
 // AERA brand mark (logo)
 function AeraLogo({ color = BRAND.blue, textColor, sub = true, size = 'md' }) {
-  const s = size === 'sm' ? { box: 28, font: 13, sub: 9, gap: 8 } : size === 'lg' ? { box: 44, font: 22, sub: 12, gap: 12 } : { box: 34, font: 16, sub: 10, gap: 10 };
+  const s = size === 'sm' ? { box: 32, font: 15, sub: 10, gap: 10 } : size === 'lg' ? { box: 48, font: 24, sub: 13, gap: 14 } : { box: 38, font: 18, sub: 11, gap: 12 };
+
   return (
     <div style={{ display: 'inline-flex', alignItems: 'center', gap: s.gap }}>
-      <div style={{ width: s.box, height: s.box, background: color, borderRadius: s.box * 0.26,
-        display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-        <span style={{ color: '#fff', fontWeight: 900, fontSize: s.box * 0.54, letterSpacing: '-0.02em' }}>A</span>
+      {/* Símbolo da Asa (Puxando o arquivo logo2.png) */}
+      <div style={{ width: s.box, height: s.box, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <img src="./logo2.png" alt="Logo AERA" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
       </div>
+
+      {/* Nome Completo da Empresa */}
       <div style={{ lineHeight: 1.1 }}>
         <div style={{ fontWeight: 900, fontSize: s.font, letterSpacing: '-0.01em', color: textColor || color }}>AERA</div>
-        {sub && <div style={{ fontSize: s.sub, fontWeight: 500, color: textColor ? `${textColor}99` : BRAND.textMuted, marginTop: 1 }}>Soluções Ambientais</div>}
+        {sub && <div style={{ fontSize: s.sub, fontWeight: 500, color: textColor ? `${textColor}99` : BRAND.textMuted, marginTop: 1 }}>
+          Soluções Ambientais e Sustentáveis
+        </div>}
       </div>
     </div>
   );
@@ -204,8 +209,7 @@ const POSTS = [
     title: 'MTR Digital: o que muda com a obrigatoriedade nacional em 2026',
     excerpt: 'O Manifesto de Transporte de Resíduos eletrônico unifica o controle entre estados. Veja como adequar processos, integrar sistemas e evitar autuações.',
     category: 'residuos',
-    author: 'Marina Vasconcelos',
-    authorRole: 'Especialista em Resíduos',
+    author: 'Equipe AERA',
     date: '18 Abr 2026',
     readTime: '6 min',
     image: 'forest',
@@ -216,8 +220,7 @@ const POSTS = [
     title: 'ISO 14001 na prática: do checklist à cultura ambiental',
     excerpt: 'Certificação não é troféu de parede. Como pequenas e médias empresas estão transformando o sistema de gestão em vantagem operacional.',
     category: 'certificacoes',
-    author: 'Rafael Tomé',
-    authorRole: 'Auditor Líder',
+    author: 'Equipe AERA',
     date: '14 Abr 2026',
     readTime: '11 min',
     image: 'mist',
@@ -228,8 +231,7 @@ const POSTS = [
     title: 'Relato de sustentabilidade: GRI, SASB ou CDP — qual escolher?',
     excerpt: 'Um guia técnico-prático para diretorias que precisam reportar e não querem se perder no alfabeto das normas.',
     category: 'certificacoes',
-    author: 'Carolina Lemos',
-    authorRole: 'Diretora Técnica',
+    author: 'Equipe AERA',
     date: '10 Abr 2026',
     readTime: '14 min',
     image: 'ocean',
@@ -241,7 +243,6 @@ const POSTS = [
     excerpt: 'Após o TCFD para clima, o framework de natureza começa a ganhar tração. Empresas brasileiras saem na frente?',
     category: 'meio-ambiente',
     author: 'Equipe AERA',
-    authorRole: 'Editorial',
     date: '07 Abr 2026',
     readTime: '7 min',
     image: 'forest',
@@ -252,8 +253,7 @@ const POSTS = [
     title: 'Economia circular não é reciclagem: como redesenhar produtos para o ciclo fechado',
     excerpt: 'Da coleta seletiva ao design regenerativo: três casos brasileiros que mostram o caminho.',
     category: 'sustentabilidade',
-    author: 'Pedro Aragão',
-    authorRole: 'Consultor Sênior',
+    author: 'Equipe AERA',
     date: '03 Abr 2026',
     readTime: '9 min',
     image: 'dawn',
@@ -264,8 +264,7 @@ const POSTS = [
     title: 'Mercado regulado de carbono no Brasil: o que muda para sua operação',
     excerpt: 'A Lei do SBCE entra em vigor com cronograma escalonado. Setores cobertos, MRV, e o impacto no balanço de 2027.',
     category: 'esg',
-    author: 'Carolina Lemos',
-    authorRole: 'Diretora Técnica',
+    author: 'Equipe AERA',
     date: '28 Mar 2026',
     readTime: '12 min',
     image: 'road',
@@ -276,8 +275,7 @@ const POSTS = [
     title: 'Outorga de água: três erros que travam projetos industriais',
     excerpt: 'Disponibilidade hídrica é o novo gargalo de novos empreendimentos. Como antecipar e dimensionar corretamente.',
     category: 'meio-ambiente',
-    author: 'Marina Vasconcelos',
-    authorRole: 'Especialista em Resíduos',
+    author: 'Equipe AERA',
     date: '24 Mar 2026',
     readTime: '5 min',
     image: 'mist',
@@ -312,12 +310,6 @@ const ARTICLE_BODY = [
 ];
 
 const COMMENTS = [
-  { id: 1, author: 'Juliana Prado', role: 'Diretora de ESG', avatar: 'JP', date: '23 Abr 2026', body: 'Excelente síntese. O ponto sobre "silêncio = risco" é exatamente o que vejo no dia a dia das compras corporativas.', likes: 12 },
-  { id: 2, author: 'Marcos Andrade', role: 'CFO, indústria de bens de consumo', avatar: 'MA', date: '23 Abr 2026', body: 'Concordo no geral, mas senti falta de uma discussão sobre o custo da transição para PMEs. Não é só vontade — é capital de giro.', likes: 8,
-    replies: [
-      { id: 21, author: 'Equipe AERA', role: 'Editorial', avatar: 'AE', date: '23 Abr 2026', body: 'Ótimo ponto, Marcos. Vamos abordar especificamente o tema de financiamento da transição num próximo post — fica registrado!', likes: 4, isAuthor: true },
-    ] },
-  { id: 3, author: 'Beatriz Camargo', role: 'Gestora de Sustentabilidade', avatar: 'BC', date: '24 Abr 2026', body: 'O dado dos 70% bate com o que a gente mediu internamente. A geração mais nova é implacável nessa cobrança.', likes: 5 },
 ];
 
 Object.assign(window, { BRAND, AerialPlaceholder, AERIAL_VARIANTS, TopoLines, AeraLogo, Icon, CATEGORIES, POSTS, ARTICLE_BODY, COMMENTS });
