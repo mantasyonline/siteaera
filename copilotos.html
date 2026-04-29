@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AERA Copilotos Ambientais | Plataforma de IA</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body { background-color: #FCFDFD; }
+        .bg-grid { background-image: radial-gradient(#E2E8F0 1px, transparent 1px); background-size: 40px 40px; }
+
+        .app-nav { display: flex; align-items: center; justify-content: space-between; padding: 24px 48px; max-width: 1280px; margin: 0 auto; }
+        .app-nav .links { display: flex; gap: 32px; align-items: center; font-weight: 500; font-size: 0.9rem; color: var(--gray-700); }
+        .app-nav .links a { color: inherit; }
+
+        .hero-app { text-align: center; padding: 80px 24px; max-width: 900px; margin: 0 auto; }
+        .badge-novo { display: inline-block; background: #EFF6FF; color: var(--blue-600); padding: 6px 16px; border-radius: 50px; font-size: 0.85rem; font-weight: 700; margin-bottom: 32px; border: 1px solid #DBEAFE; }
+        .badge-novo span { font-weight: 800; margin-right: 8px; }
+
+        .hero-app h1 { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.04em; color: var(--gray-900); margin-bottom: 24px; }
+        .text-gradient { background: linear-gradient(90deg, var(--blue-600) 0%, var(--green-500) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-app p { font-size: 1.25rem; color: var(--gray-600); line-height: 1.6; max-width: 760px; margin: 0 auto 40px; }
+
+        .stats-bar { display: flex; justify-content: center; gap: 40px; margin-top: 60px; font-size: 0.9rem; color: var(--gray-500); font-weight: 500; }
+        .stats-bar strong { color: var(--gray-900); font-weight: 800; font-size: 1rem; }
+
+        /* DASHBOARD DARK (IGUAL AO PRINT 1) */
+        .dashboard-dark {
+            max-width: 1100px; margin: 0 auto 100px;
+            background: linear-gradient(180deg, #0A1628 0%, #060D18 100%);
+            border-radius: 20px; padding: 24px;
+            box-shadow: 0 30px 60px rgba(10,22,40,0.15), 0 0 0 1px rgba(255,255,255,0.05) inset;
+            color: #fff; text-align: left;
+            position: relative; overflow: hidden;
+        }
+        .dashboard-dark::before {
+            content: ''; position: absolute; top: 0; left: 20%; right: 20%; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(24,119,242,0.4), transparent);
+        }
+
+        .dash-header {
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 16px; margin-bottom: 24px;
+        }
+        .dash-status { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: #94A3B8; font-weight: 500; }
+        .dot-blink { width: 8px; height: 8px; background: #22C55E; border-radius: 50%; box-shadow: 0 0 10px #22C55E; animation: blink 2s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+        .dash-controls { display: flex; gap: 8px; }
+        .dash-controls span { width: 10px; height: 10px; border-radius: 50%; }
+        .dash-controls .red { background: #EF4444; }
+        .dash-controls .yellow { background: #F59E0B; }
+        .dash-controls .green { background: #22C55E; }
+
+        .dash-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .dash-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px; padding: 20px;
+            display: flex; flex-direction: column;
+        }
+        .dash-card-header { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 16px; }
+        .dash-icon {
+            width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+        }
+        .icon-blue { background: rgba(59,130,246,0.1); color: #60A5FA; border: 1px solid rgba(59,130,246,0.2); }
+        .icon-green { background: rgba(34,197,94,0.1); color: #4ADE80; border: 1px solid rgba(34,197,94,0.2); }
+        .icon-purple { background: rgba(168,85,247,0.1); color: #C084FC; border: 1px solid rgba(168,85,247,0.2); }
+
+        .dash-title h4 { font-size: 1rem; font-weight: 700; color: #F8FAFC; margin-bottom: 4px; }
+        .dash-title .tag { font-size: 0.65rem; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
+
+        .dash-bubble {
+            background: rgba(255,255,255,0.04); border-radius: 8px; padding: 16px;
+            font-size: 0.85rem; color: #CBD5E1; line-height: 1.6; margin-bottom: 16px; flex-grow: 1;
+        }
+
+        .dash-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #64748B; font-weight: 500; }
+        .dash-footer-left { display: flex; align-items: center; gap: 6px; }
+        .dash-action { color: #64748B; cursor: pointer; transition: color 0.2s; }
+        .dash-action:hover { color: #F8FAFC; }
+
+        .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto 100px; padding: 0 24px; }
+        .benefit-col h3 { font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; color: var(--gray-900); }
+        .benefit-col p { font-size: 1.05rem; color: var(--gray-600); line-height: 1.6; }
+
+        .dark-section { background: var(--gray-900); color: white; padding: 100px 24px; }
+        .manifesto-box { max-width: 800px; margin: 0 auto; text-align: left; }
+        .manifesto-box h2 { font-size: 3rem; font-weight: 800; line-height: 1.1; margin-bottom: 32px; letter-spacing: -0.02em; }
+        .manifesto-box p { font-size: 1.25rem; color: var(--gray-300); line-height: 1.7; margin-bottom: 24px; font-weight: 400; }
+
+        @media (max-width: 768px) {
+            .app-nav { flex-direction: column; gap: 16px; padding: 16px; }
+            .app-nav .links { display: none; }
+            .stats-bar { flex-direction: column; gap: 16px; }
+            .benefits-grid { grid-template-columns: 1fr; }
+            .dash-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body class="bg-grid">
+
+    <header class="app-nav">
+        <a href="index.html" class="header-logo" style="text-decoration: none;">
+            <img src="logo2.png" alt="AERA">
+            <div class="logo-text">
+                <b class="logo-brand">AERA</b>
+                <span class="logo-sub">Soluções Ambientais e Sustentáveis</span>
+            </div>
+        </a>
+        <div class="links">
+            <a href="#copilotos">Copilotos</a>
+            <a href="#manifesto">Manifesto</a>
+            <a href="#plataforma">Plataforma</a>
+            <a href="login.html">Entrar</a>
+            <a href="#" data-app-link class="btn btn--primary btn--sm" style="border-radius: 8px;">Acessar plataforma &rarr;</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-app">
+            <div class="badge-novo"><span>Novo</span> A primeira plataforma de Copilotos Ambientais do Brasil</div>
+            <h1>Contrate um time de <br><span class="text-gradient">especialistas ambientais</span><br>que nunca dorme.</h1>
+            <p>Não é mais uma planilha. A <strong>AERA</strong> é uma plataforma de IA que opera como seu analista ambiental sênior — gerando MTRs, lendo licenças, montando relatórios GHG e cuidando da conformidade <em>antes</em> de você lembrar.</p>
+
+            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                <a href="#copilotos" class="btn btn--primary btn--lg" style="border-radius: 12px;">Conhecer os Copilotos &rarr;</a>
+                <a href="https://wa.me/5511986490720" class="btn btn--white btn--lg" style="border-radius: 12px; border: 1px solid var(--gray-200); box-shadow: var(--shadow-sm);">Falar com vendas</a>
+            </div>
+
+            <div class="stats-bar">
+                <span><strong>+14h</strong> De campo por semana</span>
+                <span class="hide-on-mobile">•</span>
+                <span><strong>3.2k+</strong> MTRs/mês automatizados</span>
+                <span class="hide-on-mobile">•</span>
+                <span><strong>100%</strong> Rastreabilidade auditada</span>
+            </div>
+        </section>
+
+        <section id="copilotos" style="padding: 0 24px;">
+            <div class="dashboard-dark">
+                <div class="dash-header">
+                    <div class="dash-status">
+                        <span class="dot-blink"></span> 3 copilotos online · processando 47 tarefas
+                    </div>
+                    <div class="dash-controls">
+                        <span class="red"></span><span class="yellow"></span><span class="green"></span>
+                    </div>
+                </div>
+
+                <div class="dash-grid">
+                    <div class="dash-card">
+                        <div class="dash-card-header">
+                            <div class="dash-icon icon-blue"><i class="fas fa-truck"></i></div>
+                            <div class="dash-title">
+                                <h4>Copiloto Operacional</h4>
+                                <span class="tag">AERA RESÍDUOS</span>
+                            </div>
+                        </div>
+                        <div class="dash-bubble">
+                            Caminhão saiu da Filial SP às 06:42. Próxima coleta: 14h em Campinas. CADRI a 73% — emiti MTR #20451 automaticamente.
+                        </div>
+                        <div class="dash-footer">
+                            <div class="dash-footer-left"><i class="fas fa-bolt"></i> proativo · há 12s</div>
+                            <div class="dash-action">&#x21A9; aprovar</div>
+                        </div>
+                    </div>
+
+                    <div class="dash-card">
+                        <div class="dash-card-header">
+                            <div class="dash-icon icon-green"><i class="fas fa-shield-alt"></i></div>
+                            <div class="dash-title">
+                                <h4>Copiloto Conformidade</h4>
+                                <span class="tag">MÓDULO SGI</span>
+                            </div>
+                        </div>
+                        <div class="dash-bubble">
+                            LO #00821 vence em 47 dias. Já gerei o pedido de renovação seguindo o checklist da CETESB. Anexei evidências da ISO 14001.
+                        </div>
+                        <div class="dash-footer">
+                            <div class="dash-footer-left"><i class="fas fa-bolt"></i> proativo · há 12s</div>
+                            <div class="dash-action">&#x21A9; aprovar</div>
+                        </div>
+                    </div>
+
+                    <div class="dash-card">
+                        <div class="dash-card-header">
+                            <div class="dash-icon icon-purple"><i class="fas fa-leaf"></i></div>
+                            <div class="dash-title">
+                                <h4>Copiloto ESG</h4>
+                                <span class="tag">SUSTENTABILIDADE</span>
+                            </div>
+                        </div>
+                        <div class="dash-bubble">
+                            Fechei o Escopo 1 do GHG: 1.247 tCO₂e. Inventário cruzado com NF-e e contas de combustível. Relatório GRI 305 pronto para revisão.
+                        </div>
+                        <div class="dash-footer">
+                            <div class="dash-footer-left"><i class="fas fa-bolt"></i> proativo · há 12s</div>
+                            <div class="dash-action">&#x21A9; aprovar</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section style="text-align: center; margin-bottom: 60px;">
+            <div style="font-size: 1rem; font-weight: 700; color: var(--blue-600); margin-bottom: 16px;">Por que existimos</div>
+            <h2 style="font-size: 2.5rem; font-weight: 800; color: var(--gray-900);">Damos ao seu time o que nenhum software dava:<br>tempo e confiança.</h2>
+        </section>
+
+        <section class="benefits-grid">
+            <div class="benefit-col">
+                <h3>Tempo de campo</h3>
+                <p>Libere o time para o que importa. Os copilotos cobrem MTRs, leitura de licenças e relatórios. Seu analista vai a campo — vistorias, treinamentos e ações que robô nenhum faz.</p>
+            </div>
+            <div class="benefit-col">
+                <h3>Confiabilidade</h3>
+                <p>Decisões com lastro técnico. Cada número, prazo e documento que chega na sua mesa já vem checado contra a regulamentação vigente, com fonte e histórico ao lado.</p>
+            </div>
+            <div class="benefit-col">
+                <h3>Auditoria</h3>
+                <p>Evidências automáticas. Tudo que a IA produz vem com rastreabilidade — fonte, data, regulamento aplicado e responsável humano que aprovou.</p>
+            </div>
+        </section>
+
+        <section id="manifesto" class="dark-section">
+            <div class="manifesto-box">
+                <div style="font-size: 1rem; font-weight: 700; color: var(--green-500); margin-bottom: 24px; text-transform: uppercase; letter-spacing: 2px;">Manifesto AERA</div>
+                <h2>A IA não é um menu de chat.<br>É a infra-estrutura do produto.</h2>
+                <p>Sistemas tradicionais te dão telas, formulários e — talvez — um botão de "Perguntar à IA". A AERA inverte isso: a IA está em todo lugar, opera por baixo dos panos, executa tarefas <strong>antes de você pedir</strong> e só te chama quando precisa de uma decisão humana.</p>
+                <p>Foi pensada para times ambientais que vivem em paralelo entre planilhas, e-mails da CETESB e prazos de licença. O analista ganha três seniores digitais ao lado — cada um com seu domínio, suas evidências e seus alertas — e volta a ter tempo para o que <strong>só ele faz: ir a campo.</strong></p>
+            </div>
+        </section>
+
+        <section id="plataforma" style="padding: 100px 24px; background: white; border-bottom: 1px solid var(--gray-200);">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <h2 style="font-size: 2.5rem; font-weight: 800; color: var(--gray-900); margin-bottom: 48px;">Plataforma<br><span style="color: var(--gray-500); font-weight: 500;">Construída para times técnicos sérios.</span></h2>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px;">
+                    <div>
+                        <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; color: var(--gray-900);">Conexões diretas</h4>
+                        <p style="color: var(--gray-600); line-height: 1.6;">MTR-MG/SP/Geral, INEA, IBAMA, CETESB e SISNAMA.</p>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; color: var(--gray-900);">Segurança Enterprise</h4>
+                        <p style="color: var(--gray-600); line-height: 1.6;">ISO 27001, LGPD, criptografia at-rest e SSO/SAML.</p>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; color: var(--gray-900);">Multi-unidade</h4>
+                        <p style="color: var(--gray-600); line-height: 1.6;">Filiais, plantas e fornecedores em uma vista só.</p>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; color: var(--gray-900);">Auditoria total</h4>
+                        <p style="color: var(--gray-600); line-height: 1.6;">Cada ação da IA logada, atribuível, reversível.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section style="padding: 100px 24px; text-align: center; background: #F8FAFC;">
+            <h2 style="font-size: 3rem; font-weight: 900; color: var(--gray-900); margin-bottom: 16px;">Onboarding em 24h</h2>
+            <p style="font-size: 1.25rem; color: var(--gray-600); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">Conecte o CNPJ. Os copilotos se apresentam sozinhos. Em segundos eles puxam licenças vigentes, histórico de MTRs e classes de resíduo. Você só revisa.</p>
+            <div style="display: flex; gap: 16px; justify-content: center;">
+                <a href="https://wa.me/5511986490720" class="btn btn--primary btn--xl" style="border-radius: 12px;">Iniciar onboarding</a>
+                <a href="https://wa.me/5511986490720" class="btn btn--white btn--xl" style="border-radius: 12px;">Agendar demo</a>
+            </div>
+        </section>
+    </main>
+
+    <footer style="padding: 40px 24px; text-align: center; border-top: 1px solid var(--gray-200); color: var(--gray-500); font-size: 0.9rem;">
+        <div style="display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <b style="color: var(--gray-900);">AERA</b> Copilotos Ambientais
+        </div>
+        <p>&copy; 2026 AERA Soluções Ambientais e Sustentáveis · comercial@aerasustentavel.com.br</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

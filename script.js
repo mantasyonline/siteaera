@@ -1,18 +1,18 @@
 /* ============================================================
-   AERA APP — script.js
+   AERA — script.js
    ============================================================
-   CONFIGURAÇÃO DO LINK DO AERA APP
-   Insira abaixo a URL de acesso ao AERA APP quando disponível.
+   CONFIGURAÇÃO DO LINK DA PLATAFORMA (COPILOTOS)
+   Insira abaixo a URL de acesso à Plataforma quando disponível.
    Todos os botões e links da página serão atualizados automaticamente.
    ============================================================ */
-const AERA_APP_URL = '#'; // ← CONFIGURAR: cole aqui a URL do AERA APP quando estiver disponível
+const AERA_APP_URL = '#'; // ← CONFIGURAR: cole aqui a URL da Plataforma quando estiver disponível
 
-/* URL da página de login local (prévia do app) — usada enquanto AERA_APP_URL não está configurado */
+/* URL da página de login local (prévia) — usada enquanto AERA_APP_URL não está configurado */
 const AERA_APP_LOGIN_PREVIEW = 'login.html';
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    /* ---- Injeta a URL do AERA APP em todos os botões/links marcados ---- */
+    /* ---- Injeta a URL da Plataforma em todos os botões/links marcados ---- */
     document.querySelectorAll('[data-app-link]').forEach(el => {
         if (AERA_APP_URL && AERA_APP_URL !== '#') {
             el.href = AERA_APP_URL;
@@ -40,7 +40,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!mainNav) return;
         mainNav.classList.remove('active');
         hamburger && hamburger.setAttribute('aria-expanded', 'false');
-        /* limpa todos os painéis abertos para não persistirem na próxima abertura */
         mainNav.querySelectorAll('.dropdown-panel').forEach(p => p.style.display = '');
     }
 
@@ -59,14 +58,14 @@ document.addEventListener('DOMContentLoaded', function () {
         link.addEventListener('click', function (e) {
             if (window.innerWidth <= 768) {
                 e.preventDefault();
-                e.stopPropagation(); /* impede que o handler abaixo feche o nav */
+                e.stopPropagation();
                 const panel = this.nextElementSibling;
                 if (panel) panel.style.display = panel.style.display === 'block' ? '' : 'block';
             }
         });
     });
 
-    /* ---- Fecha nav ao clicar num link interno (não dispara no trigger do dropdown) ---- */
+    /* ---- Fecha nav ao clicar num link interno ---- */
     document.querySelectorAll('.nav-list a').forEach(link => {
         link.addEventListener('click', () => {
             if (window.innerWidth <= 768) {
@@ -87,20 +86,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
-
-    /* ---- Vídeo AERA APP (página aera-app.html) ---- */
-    const appVideo      = document.getElementById('app-video');
-    const customPlayBtn = document.getElementById('custom-play-btn');
-    const videoHero     = document.getElementById('video-hero');
-    if (appVideo && customPlayBtn && videoHero) {
-        customPlayBtn.addEventListener('click', () => appVideo.play());
-        appVideo.addEventListener('play',  () => videoHero.classList.add('is-playing'));
-        appVideo.addEventListener('pause', () => videoHero.classList.remove('is-playing'));
-        appVideo.addEventListener('ended', () => {
-            videoHero.classList.remove('is-playing');
-            appVideo.currentTime = 0;
-        });
-    }
 
     /* ---- Modal de contato ---- */
     const modal       = document.getElementById('contact-modal');
