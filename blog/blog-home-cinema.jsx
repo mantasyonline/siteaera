@@ -2,8 +2,8 @@
 
 function HomeCinema({ onOpenPost, onOpenSearch, initialCat = 'todos', onCatChange }) {
   const [activeCat, setActiveCat] = React.useState(initialCat);
+  const isMobile = useIsMobile();
 
-  // Sincroniza quando o pai muda a categoria (ex: vindo de um link de filtro)
   React.useEffect(() => { setActiveCat(initialCat); }, [initialCat]);
 
   const handleCatChange = (cat) => {
@@ -15,80 +15,89 @@ function HomeCinema({ onOpenPost, onOpenSearch, initialCat = 'todos', onCatChang
   const rest = POSTS.filter(p => !p.featured && (activeCat === 'todos' || p.category === activeCat));
   const [secondary, ...grid] = rest;
 
+  const px = isMobile ? '16px' : '48px';
+
   return (
     <div style={{ background: lightPal.bg, color: lightPal.text, fontFamily: "'Inter', sans-serif", minHeight: '100%' }}>
       <Nav palette={lightPal} onOpenSearch={onOpenSearch} onFilterCat={handleCatChange} />
 
-      {/* HERO — full-bleed aerial */}
-      <section style={{ position: 'relative', height: 720, overflow: 'hidden' }}>
+      {/* HERO */}
+      <section style={{ position: 'relative', height: isMobile ? 520 : 720, overflow: 'hidden' }}>
         <AerialPlaceholder variant="sky" />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(10,22,40,0.15) 0%, rgba(10,22,40,0.05) 40%, rgba(10,22,40,0.7) 100%)' }} />
         <div style={{ position: 'absolute', inset: 0, opacity: 0.4 }}>
           <TopoLines color="#ffffff" opacity={0.12} />
         </div>
-        <div style={{ position: 'absolute', top: 100, right: 48, color: 'rgba(255,255,255,0.55)',
-          fontFamily: 'ui-monospace, "SF Mono", Menlo, monospace', fontSize: 11, letterSpacing: '0.08em', textAlign: 'right', lineHeight: 1.7 }}>
-          <div>—— BLOG · ED. 042</div>
-          <div>22.04.2026  ·  SP −23.55°</div>
-          <div>ALT 10.500 m  ·  ATM 264 ppm CO₂</div>
-        </div>
+        {!isMobile && (
+          <div style={{ position: 'absolute', top: 100, right: 48, color: 'rgba(255,255,255,0.55)',
+            fontFamily: 'ui-monospace, "SF Mono", Menlo, monospace', fontSize: 11, letterSpacing: '0.08em', textAlign: 'right', lineHeight: 1.7 }}>
+            <div>—— BLOG · ED. 042</div>
+            <div>22.04.2026  ·  SP −23.55°</div>
+            <div>ALT 10.500 m  ·  ATM 264 ppm CO₂</div>
+          </div>
+        )}
 
-        <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: '0 48px 64px', maxWidth: 1280, margin: '0 auto' }}>
+        <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0,
+          padding: isMobile ? `0 ${px} 36px` : `0 ${px} 64px` }}>
           <div style={{ maxWidth: 880 }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '6px 12px',
               background: 'rgba(255,255,255,0.12)', backdropFilter: 'blur(12px)',
               border: '1px solid rgba(255,255,255,0.25)', borderRadius: 999,
-              fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#fff', marginBottom: 32 }}>
+              fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase',
+              color: '#fff', marginBottom: isMobile ? 16 : 32 }}>
               <span style={{ width: 6, height: 6, borderRadius: 3, background: BRAND.green, boxShadow: `0 0 8px ${BRAND.green}` }} />
               Em destaque · ESG
             </div>
             {featured && <>
               <h1 onClick={() => onOpenPost(featured.id)}
-                style={{ fontSize: 72, fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.025em', color: '#fff',
-                  marginBottom: 24, cursor: 'pointer', textWrap: 'balance' }}>
+                style={{ fontSize: isMobile ? 34 : 72, fontWeight: 800,
+                  lineHeight: isMobile ? 1.1 : 1.05, letterSpacing: '-0.025em', color: '#fff',
+                  marginBottom: isMobile ? 14 : 24, cursor: 'pointer' }}>
                 {featured.title}
               </h1>
-              <p style={{ fontSize: 19, lineHeight: 1.6, color: 'rgba(255,255,255,0.82)', maxWidth: 680, marginBottom: 32, fontWeight: 400 }}>
-                {featured.excerpt}
-              </p>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 24, color: 'rgba(255,255,255,0.7)', fontSize: 13 }}>
-                <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <span style={{ width: 28, height: 28, borderRadius: 14, background: BRAND.blue, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700 }}>AE</span>
-                  {featured.author}
-                </span>
-                <span>·</span>
-                <span>{featured.date}</span>
-                <span>·</span>
-                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon.clock /> {featured.readTime}</span>
+              {!isMobile && (
+                <p style={{ fontSize: 19, lineHeight: 1.6, color: 'rgba(255,255,255,0.82)', maxWidth: 680, marginBottom: 32, fontWeight: 400 }}>
+                  {featured.excerpt}
+                </p>
+              )}
+              <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: isMobile ? 10 : 24,
+                color: 'rgba(255,255,255,0.7)', fontSize: 13 }}>
+                {!isMobile && <>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <span style={{ width: 28, height: 28, borderRadius: 14, background: BRAND.blue, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700 }}>AE</span>
+                    {featured.author}
+                  </span>
+                  <span>·</span>
+                  <span>{featured.date}</span>
+                  <span>·</span>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon.clock /> {featured.readTime}</span>
+                </>}
                 <button onClick={() => onOpenPost(featured.id)}
-                  style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 10, padding: '14px 24px',
-                    background: BRAND.blue, border: 'none', color: '#fff', fontSize: 14, fontWeight: 600,
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: 10,
+                    padding: isMobile ? '12px 20px' : '14px 24px',
+                    background: BRAND.blue, border: 'none', color: '#fff',
+                    fontSize: isMobile ? 13 : 14, fontWeight: 600,
                     borderRadius: 12, cursor: 'pointer', fontFamily: 'inherit' }}>
-                  Ler artigo completo <Icon.arrow />
+                  Ler artigo <Icon.arrow />
                 </button>
               </div>
             </>}
           </div>
         </div>
-
-        <div style={{ position: 'absolute', bottom: 24, left: '50%', transform: 'translateX(-50%)',
-          color: 'rgba(255,255,255,0.5)', fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase',
-          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-          <span>Continuar</span>
-          <div style={{ width: 1, height: 28, background: 'rgba(255,255,255,0.4)' }} />
-        </div>
       </section>
 
       {/* CATEGORY STRIP */}
-      <section id="category-strip" style={{ borderBottom: `1px solid ${lightPal.border}`, position: 'sticky', top: 64, background: `${lightPal.bg}EE`, backdropFilter: 'blur(12px)', zIndex: 20 }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 48px', display: 'flex', alignItems: 'center', gap: 28, height: 56, overflowX: 'auto' }}>
-          <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: lightPal.muted, flexShrink: 0 }}>Editorias</span>
+      <section id="category-strip" style={{ borderBottom: `1px solid ${lightPal.border}`, position: 'sticky', top: 56, background: `${lightPal.bg}EE`, backdropFilter: 'blur(12px)', zIndex: 20 }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: `0 ${px}`,
+          display: 'flex', alignItems: 'center', gap: isMobile ? 16 : 28,
+          height: 48, overflowX: 'auto', scrollbarWidth: 'none' }}>
+          {!isMobile && <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: lightPal.muted, flexShrink: 0 }}>Editorias</span>}
           {[{ id: 'todos', name: 'Todos' }, ...CATEGORIES].map(c => (
             <button key={c.id} onClick={() => handleCatChange(c.id)}
               style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit',
-                fontSize: 14, fontWeight: activeCat === c.id ? 600 : 500,
+                fontSize: isMobile ? 13 : 14, fontWeight: activeCat === c.id ? 600 : 500,
                 color: activeCat === c.id ? lightPal.text : lightPal.muted,
-                position: 'relative', padding: '20px 0', flexShrink: 0,
+                position: 'relative', padding: '16px 0', flexShrink: 0,
                 borderBottom: activeCat === c.id ? `2px solid ${BRAND.blue}` : '2px solid transparent',
                 marginBottom: -1 }}>
               {c.name}
@@ -98,18 +107,19 @@ function HomeCinema({ onOpenPost, onOpenSearch, initialCat = 'todos', onCatChang
       </section>
 
       {/* SECONDARY FEATURE + GRID */}
-      <section style={{ maxWidth: 1280, margin: '0 auto', padding: '64px 48px' }}>
+      <section style={{ maxWidth: 1280, margin: '0 auto', padding: isMobile ? '32px 16px' : '64px 48px' }}>
         {secondary && (
           <div onClick={() => onOpenPost(secondary.id)}
-            style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 56, marginBottom: 80, cursor: 'pointer', alignItems: 'center' }}>
+            style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1.2fr 1fr',
+              gap: isMobile ? 24 : 56, marginBottom: isMobile ? 48 : 80, cursor: 'pointer', alignItems: 'center' }}>
             <div style={{ aspectRatio: '4 / 3', borderRadius: 4, overflow: 'hidden', position: 'relative' }}>
               <AerialPlaceholder variant={secondary.image} label={`${secondary.category} · cobertura aérea`} />
             </div>
             <div>
               <CategoryTag cat={secondary.category} />
-              <h2 style={{ fontSize: 44, fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em',
-                color: lightPal.text, margin: '20px 0 20px', textWrap: 'balance' }}>{secondary.title}</h2>
-              <p style={{ fontSize: 17, lineHeight: 1.65, color: lightPal.textMuted, marginBottom: 28 }}>{secondary.excerpt}</p>
+              <h2 style={{ fontSize: isMobile ? 26 : 44, fontWeight: 700, lineHeight: 1.15, letterSpacing: '-0.02em',
+                color: lightPal.text, margin: '14px 0', textWrap: 'balance' }}>{secondary.title}</h2>
+              {!isMobile && <p style={{ fontSize: 17, lineHeight: 1.65, color: lightPal.textMuted, marginBottom: 28 }}>{secondary.excerpt}</p>}
               <Meta post={secondary} palette={lightPal} />
             </div>
           </div>
@@ -128,24 +138,25 @@ function HomeCinema({ onOpenPost, onOpenSearch, initialCat = 'todos', onCatChang
         )}
 
         {grid.length > 0 && <>
-          <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 36, paddingBottom: 20, borderBottom: `1px solid ${lightPal.border}` }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between',
+            marginBottom: 28, paddingBottom: 16, borderBottom: `1px solid ${lightPal.border}` }}>
             <div>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BRAND.blue, marginBottom: 8 }}>Mais recentes</div>
-              <h3 style={{ fontSize: 32, fontWeight: 700, color: lightPal.text, letterSpacing: '-0.02em' }}>O horizonte da gestão ambiental</h3>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BRAND.blue, marginBottom: 6 }}>Mais recentes</div>
+              <h3 style={{ fontSize: isMobile ? 22 : 32, fontWeight: 700, color: lightPal.text, letterSpacing: '-0.02em' }}>O horizonte da gestão ambiental</h3>
             </div>
-            <span style={{ fontSize: 13, color: lightPal.muted, fontFamily: 'ui-monospace, monospace' }}>{grid.length.toString().padStart(2, '0')} artigos</span>
+            <span style={{ fontSize: 13, color: lightPal.muted, fontFamily: 'ui-monospace, monospace' }}>{grid.length.toString().padStart(2, '0')}</span>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 40, rowGap: 56 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: isMobile ? 32 : 40, rowGap: isMobile ? 32 : 56 }}>
             {grid.map((p, i) => (
-              <PostCard key={p.id} post={p} palette={lightPal} onClick={() => onOpenPost(p.id)} variant={i === 0 ? 'tall' : 'default'} />
+              <PostCard key={p.id} post={p} palette={lightPal} onClick={() => onOpenPost(p.id)} variant={i === 0 && !isMobile ? 'tall' : 'default'} />
             ))}
           </div>
         </>}
       </section>
 
-      <NewsletterBand palette={lightPal} />
-      <Footer palette={lightPal} onFilterCat={handleCatChange} />
+      <NewsletterBand palette={lightPal} isMobile={isMobile} />
+      <Footer palette={lightPal} onFilterCat={handleCatChange} isMobile={isMobile} />
     </div>
   );
 }
@@ -154,6 +165,7 @@ function HomeCinema({ onOpenPost, onOpenSearch, initialCat = 'todos', onCatChang
 
 function Nav({ palette, onOpenSearch, onFilterCat, variant = 'cinema' }) {
   const onDark = variant === 'cinema';
+  const isMobile = useIsMobile();
   const NAV_CATS = [
     { label: 'Sustentabilidade', id: 'sustentabilidade' },
     { label: 'ESG',              id: 'esg' },
@@ -163,7 +175,6 @@ function Nav({ palette, onOpenSearch, onFilterCat, variant = 'cinema' }) {
 
   const handleNavCat = (id) => {
     onFilterCat && onFilterCat(id);
-    // Scroll suave até a strip de categorias
     const el = document.getElementById('category-strip');
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
@@ -173,36 +184,41 @@ function Nav({ palette, onOpenSearch, onFilterCat, variant = 'cinema' }) {
       background: onDark ? 'rgba(10,22,40,0.85)' : `${palette.bg}EE`,
       backdropFilter: 'blur(20px)',
       borderBottom: `1px solid ${onDark ? 'rgba(255,255,255,0.08)' : palette.border}`,
-      height: 64, display: 'flex', alignItems: 'center' }}>
-      <div style={{ maxWidth: 1280, width: '100%', margin: '0 auto', padding: '0 48px', display: 'flex', alignItems: 'center', gap: 40 }}>
+      height: 56, display: 'flex', alignItems: 'center' }}>
+      <div style={{ maxWidth: 1280, width: '100%', margin: '0 auto',
+        padding: isMobile ? '0 16px' : '0 32px',
+        display: 'flex', alignItems: 'center', gap: isMobile ? 10 : 32 }}>
         {/* Logo com link para o site principal */}
         <AeraLogo color={BRAND.blue} textColor={onDark ? '#fff' : BRAND.navy} sub={false} size="sm" homeUrl="../" />
-        <span style={{ fontSize: 11, padding: '3px 8px', borderRadius: 4,
+        <span style={{ fontSize: 10, padding: '2px 7px', borderRadius: 4, flexShrink: 0,
           background: onDark ? 'rgba(255,255,255,0.1)' : BRAND.bgAlt,
           color: onDark ? 'rgba(255,255,255,0.7)' : BRAND.textMuted,
           fontWeight: 600, letterSpacing: '0.05em' }}>BLOG</span>
-        <div style={{ display: 'flex', gap: 28, marginLeft: 'auto', alignItems: 'center' }}>
-          {NAV_CATS.map(({ label, id }) => (
+        <div style={{ display: 'flex', gap: isMobile ? 8 : 20, marginLeft: 'auto', alignItems: 'center' }}>
+          {!isMobile && NAV_CATS.map(({ label, id }) => (
             <button key={id} onClick={() => handleNavCat(id)}
               style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit',
                 fontSize: 13, fontWeight: 500, color: onDark ? 'rgba(255,255,255,0.85)' : palette.text }}>
               {label}
             </button>
           ))}
-          <button onClick={onOpenSearch} style={{ display: 'inline-flex', alignItems: 'center', gap: 8,
-            padding: '8px 12px', background: onDark ? 'rgba(255,255,255,0.1)' : BRAND.bgAlt,
+          <button onClick={onOpenSearch} style={{ display: 'inline-flex', alignItems: 'center', gap: 6,
+            padding: isMobile ? '7px 10px' : '8px 12px',
+            background: onDark ? 'rgba(255,255,255,0.1)' : BRAND.bgAlt,
             border: `1px solid ${onDark ? 'rgba(255,255,255,0.15)' : palette.border}`,
             color: onDark ? 'rgba(255,255,255,0.7)' : palette.muted,
             borderRadius: 8, cursor: 'pointer', fontFamily: 'inherit', fontSize: 12 }}>
-            <Icon.search /> Buscar
-            <kbd style={{ marginLeft: 8, fontSize: 10, padding: '2px 5px', background: onDark ? 'rgba(255,255,255,0.1)' : '#fff', borderRadius: 3, fontFamily: 'ui-monospace, monospace' }}>⌘K</kbd>
+            <Icon.search /> {!isMobile && 'Buscar'}
+            {!isMobile && <kbd style={{ marginLeft: 6, fontSize: 10, padding: '2px 5px', background: onDark ? 'rgba(255,255,255,0.1)' : '#fff', borderRadius: 3, fontFamily: 'ui-monospace, monospace' }}>⌘K</kbd>}
           </button>
-          <a href="../aera-app.html"
-            style={{ padding: '9px 18px', background: BRAND.blue, color: '#fff', border: 'none',
-              borderRadius: 8, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit',
-              textDecoration: 'none', display: 'inline-block' }}>
-            Acessar AERA APP
-          </a>
+          {!isMobile && (
+            <a href="../aera-app.html"
+              style={{ padding: '8px 16px', background: BRAND.blue, color: '#fff', border: 'none',
+                borderRadius: 8, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit',
+                textDecoration: 'none', display: 'inline-block', whiteSpace: 'nowrap' }}>
+              Acessar AERA APP
+            </a>
+          )}
         </div>
       </div>
     </nav>
@@ -271,7 +287,7 @@ function PostCard({ post, palette, onClick, variant = 'default' }) {
   );
 }
 
-function NewsletterBand({ palette }) {
+function NewsletterBand({ palette, isMobile }) {
   const [email, setEmail] = React.useState('');
   const [submitted, setSubmitted] = React.useState(false);
   return (
@@ -280,12 +296,15 @@ function NewsletterBand({ palette }) {
         <AerialPlaceholder variant="dawn" />
       </div>
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(10,22,40,0.8) 0%, rgba(10,22,40,0.95) 100%)' }} />
-      <div style={{ position: 'relative', maxWidth: 1280, margin: '0 auto', padding: '96px 48px', display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 80, alignItems: 'center' }}>
+      <div style={{ position: 'relative', maxWidth: 1280, margin: '0 auto',
+        padding: isMobile ? '48px 16px' : '96px 48px',
+        display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1.2fr 1fr',
+        gap: isMobile ? 32 : 80, alignItems: 'center' }}>
         <div>
           <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BRAND.green, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
             <Icon.plane /> Newsletter
           </div>
-          <h2 style={{ fontSize: 48, fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.025em', marginBottom: 20, textWrap: 'balance' }}>
+          <h2 style={{ fontSize: isMobile ? 30 : 48, fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.025em', marginBottom: 20, textWrap: 'balance' }}>
             Vista aérea da gestão ambiental, no seu inbox
           </h2>
           <p style={{ fontSize: 17, lineHeight: 1.6, color: 'rgba(255,255,255,0.75)', maxWidth: 480 }}>
@@ -329,7 +348,7 @@ function NewsletterBand({ palette }) {
   );
 }
 
-function Footer({ palette, onFilterCat }) {
+function Footer({ palette, onFilterCat, isMobile }) {
   const COLS = [
     { t: 'Editorias', items: [
       { label: 'Sustentabilidade', action: () => onFilterCat && onFilterCat('sustentabilidade') },
@@ -352,8 +371,8 @@ function Footer({ palette, onFilterCat }) {
   ];
 
   return (
-    <footer style={{ background: palette.bgAlt, borderTop: `1px solid ${palette.border}`, padding: '56px 48px 32px' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto', display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 48, marginBottom: 48 }}>
+    <footer style={{ background: palette.bgAlt, borderTop: `1px solid ${palette.border}`, padding: isMobile ? '40px 16px 24px' : '56px 48px 32px' }}>
+      <div style={{ maxWidth: 1280, margin: '0 auto', display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '2fr 1fr 1fr 1fr', gap: isMobile ? 32 : 48, marginBottom: 48 }}>
         <div>
           <AeraLogo color={BRAND.blue} textColor={palette.text} size="md" homeUrl="../" />
           <p style={{ fontSize: 13, lineHeight: 1.7, color: palette.muted, marginTop: 16, maxWidth: 320 }}>
@@ -381,7 +400,8 @@ function Footer({ palette, onFilterCat }) {
         ))}
       </div>
       <div style={{ maxWidth: 1280, margin: '0 auto', paddingTop: 28, borderTop: `1px solid ${palette.border}`,
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 12, color: palette.muted }}>
+        display: 'flex', flexDirection: isMobile ? 'column' : 'row', justifyContent: 'space-between',
+        alignItems: isMobile ? 'flex-start' : 'center', gap: isMobile ? 6 : 0, fontSize: 12, color: palette.muted }}>
         <span>© 2026 AERA — Soluções Ambientais e Sustentáveis</span>
         <span style={{ fontFamily: 'ui-monospace, monospace' }}>comercial@aerasustentavel.com.br · @aerasustentavel</span>
       </div>

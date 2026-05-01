@@ -1,5 +1,16 @@
 // Shared utilities for AERA blog: placeholders, icons, brand tokens, sample data
 
+// Hook: detecta mobile (≤768px) e reage ao resize
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = React.useState(window.innerWidth <= breakpoint);
+  React.useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth <= breakpoint);
+    window.addEventListener('resize', handler, { passive: true });
+    return () => window.removeEventListener('resize', handler);
+  }, [breakpoint]);
+  return isMobile;
+}
+
 const BRAND = {
   blue: '#1877F2',
   blueDark: '#1462CC',
@@ -462,7 +473,7 @@ const ARTICLES_CONTENT = {
 const COMMENTS = [];
 
 Object.assign(window, {
-  BRAND, Storage, sharePost,
+  BRAND, Storage, sharePost, useIsMobile,
   AerialPlaceholder, AERIAL_VARIANTS, TopoLines, AeraLogo, Icon,
   CATEGORIES, POSTS, ARTICLES_CONTENT, COMMENTS,
 });
