@@ -1,7 +1,7 @@
-// Post page — full article with comments
+// Post page — full article with comments, like/save persistentes e compartilhamento real
 
-function PostPage({ postId, onBack, dark = false }) {
-  const palette = dark ? darkPal : lightPal;
+function PostPage({ postId, onBack, onOpenSearch }) {
+  const palette = lightPal;
   const post = POSTS.find(p => p.id === postId) || POSTS[0];
   const contentBlocks = ARTICLES_CONTENT[postId] || ARTICLES_CONTENT['consumidor-clima'];
 
@@ -27,23 +27,24 @@ function PostPage({ postId, onBack, dark = false }) {
 
   return (
     <div ref={articleRef} style={{ background: palette.bg, color: palette.text, fontFamily: "'Inter', sans-serif", minHeight: '100%' }}>
-      {/* Reading progress bar */}
+      {/* Barra de progresso de leitura */}
       <div style={{ position: 'fixed', top: 0, left: 0, right: 0, height: 3, background: 'transparent', zIndex: 100 }}>
         <div style={{ height: '100%', width: `${progress * 100}%`, background: BRAND.blue, transition: 'width .1s' }} />
       </div>
 
-      <Nav palette={palette} variant="post" onOpenSearch={() => {}} />
+      {/* Nav adaptada para a página de artigo */}
+      <PostNav palette={palette} onOpenSearch={onOpenSearch} onBack={onBack} />
 
-      {/* Back nav */}
+      {/* Botão voltar */}
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '32px 32px 0' }}>
-        <button onClick={onBack} style={{ display: 'inline-flex', alignItems: 'center', gap: 8,
+        <button onClick={() => onBack()} style={{ display: 'inline-flex', alignItems: 'center', gap: 8,
           background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit',
           fontSize: 13, color: palette.muted, padding: 0 }}>
           <Icon.arrow style={{ transform: 'rotate(180deg)' }} /> Voltar ao blog
         </button>
       </div>
 
-      {/* HERO */}
+      {/* Cabeçalho do artigo */}
       <header style={{ maxWidth: 760, margin: '0 auto', padding: '32px 32px 48px' }}>
         <div style={{ marginBottom: 24 }}>
           <CategoryTag cat={post.category} />
@@ -62,13 +63,15 @@ function PostPage({ postId, onBack, dark = false }) {
           </span>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 14, fontWeight: 600, color: palette.text }}>{post.author}</div>
-            <div style={{ fontSize: 12, color: palette.muted }}>{post.authorRole} · {post.date} · <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}><Icon.clock /> {post.readTime} de leitura</span></div>
+            <div style={{ fontSize: 12, color: palette.muted }}>
+              {post.authorRole} · {post.date} · <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}><Icon.clock /> {post.readTime} de leitura</span>
+            </div>
           </div>
-          <ActionBtns palette={palette} />
+          <ActionBtns palette={palette} post={post} />
         </div>
       </header>
 
-      {/* HERO IMAGE */}
+      {/* Imagem hero */}
       <figure style={{ maxWidth: 1100, margin: '0 auto 48px', padding: '0 32px' }}>
         <div style={{ aspectRatio: '16 / 8', borderRadius: 6, overflow: 'hidden', position: 'relative' }}>
           <AerialPlaceholder variant={post.image} label="Cobertura aérea · Brasil · 22.04.26" />
@@ -80,11 +83,11 @@ function PostPage({ postId, onBack, dark = false }) {
           </div>
         </div>
         <figcaption style={{ fontSize: 12, color: palette.muted, marginTop: 12, textAlign: 'center', fontStyle: 'italic' }}>
-          A cobrança climática deixou de ser pauta de marketing — virou critério de compra.
+          Vista aérea como metáfora da perspectiva estratégica sobre sustentabilidade.
         </figcaption>
       </figure>
 
-      {/* BODY */}
+      {/* Corpo do artigo */}
       <article style={{ maxWidth: 680, margin: '0 auto', padding: '0 32px 80px' }}>
         {contentBlocks.map((block, i) => <Block key={i} block={block} palette={palette} />)}
 
@@ -99,7 +102,7 @@ function PostPage({ postId, onBack, dark = false }) {
           ))}
         </div>
 
-        {/* Author card */}
+        {/* Card do autor */}
         <div style={{ display: 'flex', gap: 20, padding: 28, marginTop: 32,
           background: palette.bgAlt, border: `1px solid ${palette.border}`, borderRadius: 12 }}>
           <span style={{ width: 56, height: 56, borderRadius: 28, background: BRAND.blue, color: '#fff',
@@ -109,7 +112,7 @@ function PostPage({ postId, onBack, dark = false }) {
           <div>
             <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: BRAND.blue, marginBottom: 6 }}>Sobre o autor</div>
             <div style={{ fontSize: 16, fontWeight: 700, color: palette.text }}>{post.author}</div>
-            <div style={{ fontSize: 13, color: palette.muted, marginBottom: 10 }}>{post.authorRole} · AERA</div>
+            <div style={{ fontSize: 13, color: palette.muted, marginBottom: 10 }}>{post.authorRole || 'Especialistas'} · AERA</div>
             <p style={{ fontSize: 13, lineHeight: 1.65, color: palette.textMuted }}>
               Equipe técnica da AERA, especializada em soluções ambientais para empresas brasileiras. Combinando conhecimento técnico, tecnologia própria e propósito genuíno.
             </p>
@@ -117,10 +120,10 @@ function PostPage({ postId, onBack, dark = false }) {
         </div>
       </article>
 
-      {/* COMMENTS */}
-      <Comments palette={palette} />
+      {/* Comentários */}
+      <Comments palette={palette} postId={post.id} />
 
-      {/* RELATED */}
+      {/* Artigos relacionados */}
       <section style={{ borderTop: `1px solid ${palette.border}`, padding: '64px 32px', background: palette.bgAlt }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BRAND.blue, marginBottom: 12 }}>Continue lendo</div>
@@ -129,26 +132,59 @@ function PostPage({ postId, onBack, dark = false }) {
           </h3>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32 }}>
             {allRelated.map(p => (
-              <PostCard key={p.id} post={p} palette={palette} onClick={() => { onBack(); setTimeout(() => window.openPost && window.openPost(p.id), 0); }} />
+              <PostCard key={p.id} post={p} palette={palette}
+                onClick={() => { onBack(); setTimeout(() => window.openPost && window.openPost(p.id), 0); }} />
             ))}
           </div>
         </div>
       </section>
 
       <NewsletterBand palette={palette} />
-      <Footer palette={palette} />
+      <Footer palette={palette} onFilterCat={(cat) => onBack(cat)} />
     </div>
   );
 }
 
+// Nav simplificada para página de artigo
+function PostNav({ palette, onOpenSearch, onBack }) {
+  return (
+    <nav style={{ position: 'sticky', top: 3, zIndex: 50,
+      background: `${palette.bg}EE`, backdropFilter: 'blur(20px)',
+      borderBottom: `1px solid ${palette.border}`,
+      height: 64, display: 'flex', alignItems: 'center' }}>
+      <div style={{ maxWidth: 1280, width: '100%', margin: '0 auto', padding: '0 48px', display: 'flex', alignItems: 'center', gap: 40 }}>
+        <AeraLogo color={BRAND.blue} textColor={BRAND.navy} sub={false} size="sm" homeUrl="../" />
+        <button onClick={() => onBack()} style={{ fontSize: 11, padding: '3px 8px', borderRadius: 4,
+          background: BRAND.bgAlt, color: BRAND.textMuted,
+          fontWeight: 600, letterSpacing: '0.05em', border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}>
+          ← BLOG
+        </button>
+        <div style={{ marginLeft: 'auto', display: 'flex', gap: 12, alignItems: 'center' }}>
+          <button onClick={onOpenSearch} style={{ display: 'inline-flex', alignItems: 'center', gap: 8,
+            padding: '8px 12px', background: BRAND.bgAlt, border: `1px solid ${palette.border}`,
+            color: palette.muted, borderRadius: 8, cursor: 'pointer', fontFamily: 'inherit', fontSize: 12 }}>
+            <Icon.search /> Buscar
+            <kbd style={{ marginLeft: 8, fontSize: 10, padding: '2px 5px', background: '#fff', borderRadius: 3, fontFamily: 'ui-monospace, monospace' }}>⌘K</kbd>
+          </button>
+          <a href="../aera-app.html" style={{ padding: '9px 18px', background: BRAND.blue, color: '#fff',
+            borderRadius: 8, fontSize: 13, fontWeight: 600, textDecoration: 'none', display: 'inline-block' }}>
+            Acessar AERA APP
+          </a>
+        </div>
+      </div>
+    </nav>
+  );
+}
+
 function Block({ block, palette }) {
-  const T = (props) => <p style={{ fontSize: 18, lineHeight: 1.75, color: palette.text, marginBottom: 24 }} {...props} />;
   if (block.type === 'lead') return (
     <p style={{ fontSize: 22, lineHeight: 1.55, color: palette.text, marginBottom: 32, fontWeight: 500, letterSpacing: '-0.005em' }}>
       {block.text}
     </p>
   );
-  if (block.type === 'p') return <T>{block.text}</T>;
+  if (block.type === 'p') return (
+    <p style={{ fontSize: 18, lineHeight: 1.75, color: palette.text, marginBottom: 24 }}>{block.text}</p>
+  );
   if (block.type === 'h2') return (
     <h2 style={{ fontSize: 30, fontWeight: 700, lineHeight: 1.2, letterSpacing: '-0.015em',
       color: palette.text, marginTop: 48, marginBottom: 20, textWrap: 'balance' }}>{block.text}</h2>
@@ -172,8 +208,7 @@ function Block({ block, palette }) {
   if (block.type === 'numlist') return (
     <ol style={{ marginBottom: 28, paddingLeft: 0, listStyle: 'none', counterReset: 'item' }}>
       {block.items.map((it, i) => (
-        <li key={i} style={{ fontSize: 17, lineHeight: 1.65, color: palette.text, marginBottom: 16,
-          paddingLeft: 48, position: 'relative' }}>
+        <li key={i} style={{ fontSize: 17, lineHeight: 1.65, color: palette.text, marginBottom: 16, paddingLeft: 48, position: 'relative' }}>
           <span style={{ position: 'absolute', left: 0, top: 0, width: 32, height: 32,
             background: BRAND.blue, color: '#fff', borderRadius: 16,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -188,41 +223,77 @@ function Block({ block, palette }) {
   return null;
 }
 
-function ActionBtns({ palette }) {
-  const [bookmarked, setBookmarked] = React.useState(false);
-  const [liked, setLiked] = React.useState(false);
+// Botões de ação: like, salvar e compartilhar — persistência via localStorage
+function ActionBtns({ palette, post }) {
+  const [liked, setLiked] = React.useState(() => Storage.isLiked(post.id));
+  const [saved, setSaved] = React.useState(() => Storage.isSaved(post.id));
+
+  const handleLike = () => {
+    const next = Storage.toggleLike(post.id);
+    setLiked(next);
+    window.showToast && window.showToast(next ? 'Artigo curtido!' : 'Curtida removida.');
+  };
+
+  const handleSave = () => {
+    const next = Storage.toggleSave(post.id);
+    setSaved(next);
+    window.showToast && window.showToast(next ? 'Artigo salvo!' : 'Removido dos salvos.');
+  };
+
+  const handleShare = () => sharePost(post);
+
   return (
     <div style={{ display: 'flex', gap: 6 }}>
-      <IconBtn palette={palette} active={liked} onClick={() => setLiked(!liked)}><Icon.heart /></IconBtn>
-      <IconBtn palette={palette} active={bookmarked} onClick={() => setBookmarked(!bookmarked)}><Icon.bookmark /></IconBtn>
-      <IconBtn palette={palette}><Icon.share /></IconBtn>
+      <IconBtn palette={palette} active={liked} onClick={handleLike} title={liked ? 'Remover curtida' : 'Curtir artigo'}>
+        <Icon.heart style={{ fill: liked ? 'currentColor' : 'none' }} />
+      </IconBtn>
+      <IconBtn palette={palette} active={saved} onClick={handleSave} title={saved ? 'Remover dos salvos' : 'Salvar artigo'}>
+        <Icon.bookmark style={{ fill: saved ? 'currentColor' : 'none' }} />
+      </IconBtn>
+      <IconBtn palette={palette} active={false} onClick={handleShare} title="Compartilhar artigo">
+        <Icon.share />
+      </IconBtn>
     </div>
   );
 }
-function IconBtn({ palette, active, onClick, children }) {
+
+function IconBtn({ palette, active, onClick, title, children }) {
+  const [hover, setHover] = React.useState(false);
   return (
-    <button onClick={onClick} style={{ width: 36, height: 36, borderRadius: 8,
-      border: `1px solid ${palette.border}`, background: active ? BRAND.blue : 'transparent',
-      color: active ? '#fff' : palette.muted, cursor: 'pointer',
-      display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'inherit' }}>
+    <button onClick={onClick} title={title}
+      onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
+      style={{ width: 36, height: 36, borderRadius: 8,
+        border: `1px solid ${active ? BRAND.blue : palette.border}`,
+        background: active ? BRAND.blue : hover ? palette.bgAlt : 'transparent',
+        color: active ? '#fff' : hover ? palette.text : palette.muted,
+        cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+        fontFamily: 'inherit', transition: 'all .15s' }}>
       {children}
     </button>
   );
 }
 
-function Comments({ palette }) {
-  const [list, setList] = React.useState(COMMENTS);
+// Seção de comentários com threading e persistência em memória por sessão
+function Comments({ palette, postId }) {
+  const [list, setList] = React.useState([]);
   const [val, setVal] = React.useState('');
+
   const submit = (e) => {
     e.preventDefault();
     if (!val.trim()) return;
-    setList([...list, { id: Date.now(), author: 'Você', role: 'Leitor', avatar: 'V', date: 'agora', body: val, likes: 0 }]);
+    setList(prev => [
+      { id: Date.now(), author: 'Você', role: 'Leitor', avatar: 'V',
+        date: 'agora', body: val.trim(), likes: 0, replies: [] },
+      ...prev,
+    ]);
     setVal('');
+    window.showToast && window.showToast('Comentário publicado!');
   };
+
   return (
     <section style={{ maxWidth: 760, margin: '0 auto', padding: '0 32px 64px' }}>
       <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BRAND.blue, marginBottom: 12 }}>
-        Discussão · {list.length} comentários
+        Discussão · {list.length} {list.length === 1 ? 'comentário' : 'comentários'}
       </div>
       <h3 style={{ fontSize: 24, fontWeight: 700, color: palette.text, letterSpacing: '-0.01em', marginBottom: 24 }}>
         Conversa com leitores
@@ -242,7 +313,8 @@ function Comments({ palette }) {
             Comentando como <strong style={{ color: palette.text }}>convidado</strong>. Seja respeitoso e relevante.
           </span>
           <button type="submit" disabled={!val.trim()}
-            style={{ padding: '8px 18px', background: val.trim() ? BRAND.blue : palette.border,
+            style={{ padding: '8px 18px',
+              background: val.trim() ? BRAND.blue : palette.border,
               border: 'none', color: '#fff', borderRadius: 6, fontSize: 13, fontWeight: 600,
               cursor: val.trim() ? 'pointer' : 'default', fontFamily: 'inherit' }}>
             Publicar
@@ -250,16 +322,50 @@ function Comments({ palette }) {
         </div>
       </form>
 
-      {/* List */}
+      {list.length === 0 && (
+        <div style={{ padding: '32px 0', textAlign: 'center', color: palette.muted, fontSize: 14 }}>
+          Seja o primeiro a comentar neste artigo.
+        </div>
+      )}
+
       <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
-        {list.map(c => <CommentNode key={c.id} c={c} palette={palette} />)}
+        {list.map(c => (
+          <CommentNode key={c.id} c={c} palette={palette}
+            onReply={(id, text) => {
+              setList(prev => prev.map(cm =>
+                cm.id === id
+                  ? { ...cm, replies: [...(cm.replies || []), { id: Date.now(), author: 'Você', role: 'Leitor', avatar: 'V', date: 'agora', body: text, likes: 0 }] }
+                  : cm
+              ));
+            }}
+          />
+        ))}
       </div>
     </section>
   );
 }
-function CommentNode({ c, palette, depth = 0 }) {
+
+function CommentNode({ c, palette, depth = 0, onReply }) {
   const [liked, setLiked] = React.useState(false);
+  const [localLikes, setLocalLikes] = React.useState(c.likes);
   const [showReply, setShowReply] = React.useState(false);
+  const [replyVal, setReplyVal] = React.useState('');
+
+  const handleLike = () => {
+    if (!liked) setLocalLikes(n => n + 1);
+    else setLocalLikes(n => n - 1);
+    setLiked(!liked);
+  };
+
+  const submitReply = (e) => {
+    e.preventDefault();
+    if (!replyVal.trim()) return;
+    onReply && onReply(c.id, replyVal.trim());
+    setReplyVal('');
+    setShowReply(false);
+    window.showToast && window.showToast('Resposta publicada!');
+  };
+
   return (
     <div style={{ marginLeft: depth * 36 }}>
       <div style={{ display: 'flex', gap: 12 }}>
@@ -281,35 +387,44 @@ function CommentNode({ c, palette, depth = 0 }) {
           </div>
           <p style={{ fontSize: 14, lineHeight: 1.6, color: palette.text, marginBottom: 10 }}>{c.body}</p>
           <div style={{ display: 'flex', gap: 16, fontSize: 12, color: palette.muted }}>
-            <button onClick={() => setLiked(!liked)} style={{ background: 'none', border: 'none', cursor: 'pointer',
+            <button onClick={handleLike} style={{ background: 'none', border: 'none', cursor: 'pointer',
               display: 'inline-flex', alignItems: 'center', gap: 5,
               color: liked ? BRAND.blue : palette.muted, padding: 0, fontFamily: 'inherit', fontSize: 12 }}>
-              <Icon.heart /> {c.likes + (liked ? 1 : 0)}
+              <Icon.heart style={{ fill: liked ? 'currentColor' : 'none' }} /> {localLikes}
             </button>
-            <button onClick={() => setShowReply(!showReply)} style={{ background: 'none', border: 'none', cursor: 'pointer',
-              color: palette.muted, padding: 0, fontFamily: 'inherit', fontSize: 12,
-              display: 'inline-flex', alignItems: 'center', gap: 5 }}>
-              <Icon.comment /> Responder
-            </button>
+            {depth === 0 && (
+              <button onClick={() => setShowReply(!showReply)} style={{ background: 'none', border: 'none', cursor: 'pointer',
+                color: palette.muted, padding: 0, fontFamily: 'inherit', fontSize: 12,
+                display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+                <Icon.comment /> Responder
+              </button>
+            )}
           </div>
           {showReply && (
-            <div style={{ marginTop: 10, padding: 12, background: palette.bgAlt, border: `1px solid ${palette.border}`, borderRadius: 8 }}>
-              <textarea placeholder={`Responder a ${c.author}...`} rows={2}
+            <form onSubmit={submitReply} style={{ marginTop: 10, padding: 12, background: palette.bgAlt, border: `1px solid ${palette.border}`, borderRadius: 8 }}>
+              <textarea value={replyVal} onChange={e => setReplyVal(e.target.value)}
+                placeholder={`Responder a ${c.author}...`} rows={2}
                 style={{ width: '100%', border: 'none', background: 'transparent', resize: 'vertical',
                   outline: 'none', fontFamily: 'inherit', fontSize: 13, color: palette.text }} />
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 8 }}>
-                <button onClick={() => setShowReply(false)} style={{ padding: '6px 14px', background: 'transparent',
+                <button type="button" onClick={() => setShowReply(false)} style={{ padding: '6px 14px', background: 'transparent',
                   border: `1px solid ${palette.border}`, color: palette.text, borderRadius: 6, fontSize: 12, cursor: 'pointer', fontFamily: 'inherit' }}>Cancelar</button>
-                <button style={{ padding: '6px 14px', background: BRAND.blue, border: 'none',
-                  color: '#fff', borderRadius: 6, fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>Enviar</button>
+                <button type="submit" disabled={!replyVal.trim()} style={{ padding: '6px 14px',
+                  background: replyVal.trim() ? BRAND.blue : palette.border, border: 'none',
+                  color: '#fff', borderRadius: 6, fontSize: 12, fontWeight: 600,
+                  cursor: replyVal.trim() ? 'pointer' : 'default', fontFamily: 'inherit' }}>Enviar</button>
               </div>
-            </div>
+            </form>
           )}
         </div>
       </div>
-      {c.replies && c.replies.map(r => <div key={r.id} style={{ marginTop: 20 }}><CommentNode c={r} palette={palette} depth={depth + 1} /></div>)}
+      {c.replies && c.replies.map(r => (
+        <div key={r.id} style={{ marginTop: 20 }}>
+          <CommentNode c={r} palette={palette} depth={depth + 1} />
+        </div>
+      ))}
     </div>
   );
 }
 
-Object.assign(window, { PostPage, Block, ActionBtns, IconBtn, Comments, CommentNode });
+Object.assign(window, { PostPage, PostNav, Block, ActionBtns, IconBtn, Comments, CommentNode });

@@ -1,29 +1,31 @@
 // Home v1 — Vista Aérea Cinematográfica
-// Edge-to-edge hero with horizon, asymmetric magazine grid, atmospheric.
 
-function HomeCinema({ onOpenPost, onOpenSearch, dark = false }) {
-  const [activeCat, setActiveCat] = React.useState('todos');
-  const palette = dark ? darkPal : lightPal;
+function HomeCinema({ onOpenPost, onOpenSearch, initialCat = 'todos', onCatChange }) {
+  const [activeCat, setActiveCat] = React.useState(initialCat);
+
+  // Sincroniza quando o pai muda a categoria (ex: vindo de um link de filtro)
+  React.useEffect(() => { setActiveCat(initialCat); }, [initialCat]);
+
+  const handleCatChange = (cat) => {
+    setActiveCat(cat);
+    onCatChange && onCatChange(cat);
+  };
 
   const featured = POSTS.find(p => p.featured);
   const rest = POSTS.filter(p => !p.featured && (activeCat === 'todos' || p.category === activeCat));
   const [secondary, ...grid] = rest;
 
   return (
-    <div style={{ background: palette.bg, color: palette.text, fontFamily: "'Inter', sans-serif", minHeight: '100%' }}>
-      {/* NAV */}
-      <Nav palette={palette} onOpenSearch={onOpenSearch} variant="cinema" />
+    <div style={{ background: lightPal.bg, color: lightPal.text, fontFamily: "'Inter', sans-serif", minHeight: '100%' }}>
+      <Nav palette={lightPal} onOpenSearch={onOpenSearch} onFilterCat={handleCatChange} />
 
       {/* HERO — full-bleed aerial */}
       <section style={{ position: 'relative', height: 720, overflow: 'hidden' }}>
-        <AerialPlaceholder variant={dark ? 'night' : 'sky'} />
-        {/* Overlay gradient for text legibility */}
+        <AerialPlaceholder variant="sky" />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(10,22,40,0.15) 0%, rgba(10,22,40,0.05) 40%, rgba(10,22,40,0.7) 100%)' }} />
-        {/* Topographic overlay */}
         <div style={{ position: 'absolute', inset: 0, opacity: 0.4 }}>
           <TopoLines color="#ffffff" opacity={0.12} />
         </div>
-        {/* Coordinates / data overlay top-right */}
         <div style={{ position: 'absolute', top: 100, right: 48, color: 'rgba(255,255,255,0.55)',
           fontFamily: 'ui-monospace, "SF Mono", Menlo, monospace', fontSize: 11, letterSpacing: '0.08em', textAlign: 'right', lineHeight: 1.7 }}>
           <div>—— BLOG · ED. 042</div>
@@ -31,7 +33,6 @@ function HomeCinema({ onOpenPost, onOpenSearch, dark = false }) {
           <div>ALT 10.500 m  ·  ATM 264 ppm CO₂</div>
         </div>
 
-        {/* Hero content */}
         <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: '0 48px 64px', maxWidth: 1280, margin: '0 auto' }}>
           <div style={{ maxWidth: 880 }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '6px 12px',
@@ -41,34 +42,35 @@ function HomeCinema({ onOpenPost, onOpenSearch, dark = false }) {
               <span style={{ width: 6, height: 6, borderRadius: 3, background: BRAND.green, boxShadow: `0 0 8px ${BRAND.green}` }} />
               Em destaque · ESG
             </div>
-            <h1 onClick={() => onOpenPost(featured.id)}
-              style={{ fontSize: 72, fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.025em', color: '#fff',
-                marginBottom: 24, cursor: 'pointer', textWrap: 'balance' }}>
-              {featured.title}
-            </h1>
-            <p style={{ fontSize: 19, lineHeight: 1.6, color: 'rgba(255,255,255,0.82)', maxWidth: 680, marginBottom: 32, fontWeight: 400 }}>
-              {featured.excerpt}
-            </p>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 24, color: 'rgba(255,255,255,0.7)', fontSize: 13 }}>
-              <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span style={{ width: 28, height: 28, borderRadius: 14, background: BRAND.blue, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700 }}>AE</span>
-                {featured.author}
-              </span>
-              <span>·</span>
-              <span>{featured.date}</span>
-              <span>·</span>
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon.clock /> {featured.readTime}</span>
-              <button onClick={() => onOpenPost(featured.id)}
-                style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 10, padding: '14px 24px',
-                  background: BRAND.blue, border: 'none', color: '#fff', fontSize: 14, fontWeight: 600,
-                  borderRadius: 12, cursor: 'pointer', fontFamily: 'inherit' }}>
-                Ler artigo completo <Icon.arrow />
-              </button>
-            </div>
+            {featured && <>
+              <h1 onClick={() => onOpenPost(featured.id)}
+                style={{ fontSize: 72, fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.025em', color: '#fff',
+                  marginBottom: 24, cursor: 'pointer', textWrap: 'balance' }}>
+                {featured.title}
+              </h1>
+              <p style={{ fontSize: 19, lineHeight: 1.6, color: 'rgba(255,255,255,0.82)', maxWidth: 680, marginBottom: 32, fontWeight: 400 }}>
+                {featured.excerpt}
+              </p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 24, color: 'rgba(255,255,255,0.7)', fontSize: 13 }}>
+                <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <span style={{ width: 28, height: 28, borderRadius: 14, background: BRAND.blue, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700 }}>AE</span>
+                  {featured.author}
+                </span>
+                <span>·</span>
+                <span>{featured.date}</span>
+                <span>·</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon.clock /> {featured.readTime}</span>
+                <button onClick={() => onOpenPost(featured.id)}
+                  style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 10, padding: '14px 24px',
+                    background: BRAND.blue, border: 'none', color: '#fff', fontSize: 14, fontWeight: 600,
+                    borderRadius: 12, cursor: 'pointer', fontFamily: 'inherit' }}>
+                  Ler artigo completo <Icon.arrow />
+                </button>
+              </div>
+            </>}
           </div>
         </div>
 
-        {/* Scroll indicator */}
         <div style={{ position: 'absolute', bottom: 24, left: '50%', transform: 'translateX(-50%)',
           color: 'rgba(255,255,255,0.5)', fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase',
           display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
@@ -78,14 +80,14 @@ function HomeCinema({ onOpenPost, onOpenSearch, dark = false }) {
       </section>
 
       {/* CATEGORY STRIP */}
-      <section style={{ borderBottom: `1px solid ${palette.border}`, position: 'sticky', top: 64, background: `${palette.bg}EE`, backdropFilter: 'blur(12px)', zIndex: 20 }}>
+      <section id="category-strip" style={{ borderBottom: `1px solid ${lightPal.border}`, position: 'sticky', top: 64, background: `${lightPal.bg}EE`, backdropFilter: 'blur(12px)', zIndex: 20 }}>
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 48px', display: 'flex', alignItems: 'center', gap: 28, height: 56, overflowX: 'auto' }}>
-          <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: palette.muted, flexShrink: 0 }}>Editorias</span>
+          <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: lightPal.muted, flexShrink: 0 }}>Editorias</span>
           {[{ id: 'todos', name: 'Todos' }, ...CATEGORIES].map(c => (
-            <button key={c.id} onClick={() => setActiveCat(c.id)}
+            <button key={c.id} onClick={() => handleCatChange(c.id)}
               style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit',
                 fontSize: 14, fontWeight: activeCat === c.id ? 600 : 500,
-                color: activeCat === c.id ? palette.text : palette.muted,
+                color: activeCat === c.id ? lightPal.text : lightPal.muted,
                 position: 'relative', padding: '20px 0', flexShrink: 0,
                 borderBottom: activeCat === c.id ? `2px solid ${BRAND.blue}` : '2px solid transparent',
                 marginBottom: -1 }}>
@@ -106,42 +108,66 @@ function HomeCinema({ onOpenPost, onOpenSearch, dark = false }) {
             <div>
               <CategoryTag cat={secondary.category} />
               <h2 style={{ fontSize: 44, fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em',
-                color: palette.text, margin: '20px 0 20px', textWrap: 'balance' }}>{secondary.title}</h2>
-              <p style={{ fontSize: 17, lineHeight: 1.65, color: palette.textMuted, marginBottom: 28 }}>{secondary.excerpt}</p>
-              <Meta post={secondary} palette={palette} />
+                color: lightPal.text, margin: '20px 0 20px', textWrap: 'balance' }}>{secondary.title}</h2>
+              <p style={{ fontSize: 17, lineHeight: 1.65, color: lightPal.textMuted, marginBottom: 28 }}>{secondary.excerpt}</p>
+              <Meta post={secondary} palette={lightPal} />
             </div>
           </div>
         )}
 
-        {/* Grid heading */}
-        <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 36, paddingBottom: 20, borderBottom: `1px solid ${palette.border}` }}>
-          <div>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BRAND.blue, marginBottom: 8 }}>Mais recentes</div>
-            <h3 style={{ fontSize: 32, fontWeight: 700, color: palette.text, letterSpacing: '-0.02em' }}>O horizonte da gestão ambiental</h3>
+        {rest.length === 0 && (
+          <div style={{ padding: '80px 0', textAlign: 'center', color: lightPal.muted }}>
+            <div style={{ fontSize: 40, opacity: 0.25, marginBottom: 16 }}>∅</div>
+            <p style={{ fontSize: 15 }}>Nenhum artigo nesta categoria ainda.</p>
+            <button onClick={() => handleCatChange('todos')}
+              style={{ marginTop: 16, padding: '10px 20px', background: BRAND.blue, color: '#fff',
+                border: 'none', borderRadius: 8, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>
+              Ver todos os artigos
+            </button>
           </div>
-          <span style={{ fontSize: 13, color: palette.muted, fontFamily: 'ui-monospace, monospace' }}>{grid.length.toString().padStart(2, '0')} artigos</span>
-        </div>
+        )}
 
-        {/* Magazine grid: 3 columns, varying card sizes */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 40, rowGap: 56 }}>
-          {grid.map((p, i) => (
-            <PostCard key={p.id} post={p} palette={palette} onClick={() => onOpenPost(p.id)} variant={i === 0 ? 'tall' : 'default'} />
-          ))}
-        </div>
+        {grid.length > 0 && <>
+          <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 36, paddingBottom: 20, borderBottom: `1px solid ${lightPal.border}` }}>
+            <div>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BRAND.blue, marginBottom: 8 }}>Mais recentes</div>
+              <h3 style={{ fontSize: 32, fontWeight: 700, color: lightPal.text, letterSpacing: '-0.02em' }}>O horizonte da gestão ambiental</h3>
+            </div>
+            <span style={{ fontSize: 13, color: lightPal.muted, fontFamily: 'ui-monospace, monospace' }}>{grid.length.toString().padStart(2, '0')} artigos</span>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 40, rowGap: 56 }}>
+            {grid.map((p, i) => (
+              <PostCard key={p.id} post={p} palette={lightPal} onClick={() => onOpenPost(p.id)} variant={i === 0 ? 'tall' : 'default'} />
+            ))}
+          </div>
+        </>}
       </section>
 
-      {/* NEWSLETTER BAND */}
-      <NewsletterBand palette={palette} />
-
-      <Footer palette={palette} />
+      <NewsletterBand palette={lightPal} />
+      <Footer palette={lightPal} onFilterCat={handleCatChange} />
     </div>
   );
 }
 
-// ─────────── shared sub-components ───────────
+// ─────────── sub-components ───────────
 
-function Nav({ palette, onOpenSearch, variant = 'cinema' }) {
+function Nav({ palette, onOpenSearch, onFilterCat, variant = 'cinema' }) {
   const onDark = variant === 'cinema';
+  const NAV_CATS = [
+    { label: 'Sustentabilidade', id: 'sustentabilidade' },
+    { label: 'ESG',              id: 'esg' },
+    { label: 'Resíduos',         id: 'residuos' },
+    { label: 'Certificações',    id: 'certificacoes' },
+  ];
+
+  const handleNavCat = (id) => {
+    onFilterCat && onFilterCat(id);
+    // Scroll suave até a strip de categorias
+    const el = document.getElementById('category-strip');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <nav style={{ position: 'sticky', top: 0, zIndex: 50,
       background: onDark ? 'rgba(10,22,40,0.85)' : `${palette.bg}EE`,
@@ -149,14 +175,19 @@ function Nav({ palette, onOpenSearch, variant = 'cinema' }) {
       borderBottom: `1px solid ${onDark ? 'rgba(255,255,255,0.08)' : palette.border}`,
       height: 64, display: 'flex', alignItems: 'center' }}>
       <div style={{ maxWidth: 1280, width: '100%', margin: '0 auto', padding: '0 48px', display: 'flex', alignItems: 'center', gap: 40 }}>
-        <AeraLogo color={BRAND.blue} textColor={onDark ? '#fff' : BRAND.navy} sub={false} size="sm" />
+        {/* Logo com link para o site principal */}
+        <AeraLogo color={BRAND.blue} textColor={onDark ? '#fff' : BRAND.navy} sub={false} size="sm" homeUrl="../" />
         <span style={{ fontSize: 11, padding: '3px 8px', borderRadius: 4,
           background: onDark ? 'rgba(255,255,255,0.1)' : BRAND.bgAlt,
           color: onDark ? 'rgba(255,255,255,0.7)' : BRAND.textMuted,
           fontWeight: 600, letterSpacing: '0.05em' }}>BLOG</span>
         <div style={{ display: 'flex', gap: 28, marginLeft: 'auto', alignItems: 'center' }}>
-          {['Sustentabilidade', 'ESG', 'Resíduos', 'Certificações'].map(l => (
-            <a key={l} style={{ fontSize: 13, fontWeight: 500, color: onDark ? 'rgba(255,255,255,0.85)' : palette.text, textDecoration: 'none', cursor: 'pointer' }}>{l}</a>
+          {NAV_CATS.map(({ label, id }) => (
+            <button key={id} onClick={() => handleNavCat(id)}
+              style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit',
+                fontSize: 13, fontWeight: 500, color: onDark ? 'rgba(255,255,255,0.85)' : palette.text }}>
+              {label}
+            </button>
           ))}
           <button onClick={onOpenSearch} style={{ display: 'inline-flex', alignItems: 'center', gap: 8,
             padding: '8px 12px', background: onDark ? 'rgba(255,255,255,0.1)' : BRAND.bgAlt,
@@ -166,10 +197,12 @@ function Nav({ palette, onOpenSearch, variant = 'cinema' }) {
             <Icon.search /> Buscar
             <kbd style={{ marginLeft: 8, fontSize: 10, padding: '2px 5px', background: onDark ? 'rgba(255,255,255,0.1)' : '#fff', borderRadius: 3, fontFamily: 'ui-monospace, monospace' }}>⌘K</kbd>
           </button>
-          <button style={{ padding: '9px 18px', background: BRAND.blue, color: '#fff', border: 'none',
-            borderRadius: 8, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>
+          <a href="../aera-app.html"
+            style={{ padding: '9px 18px', background: BRAND.blue, color: '#fff', border: 'none',
+              borderRadius: 8, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit',
+              textDecoration: 'none', display: 'inline-block' }}>
             Acessar AERA APP
-          </button>
+          </a>
         </div>
       </div>
     </nav>
@@ -296,25 +329,53 @@ function NewsletterBand({ palette }) {
   );
 }
 
-function Footer({ palette }) {
+function Footer({ palette, onFilterCat }) {
+  const COLS = [
+    { t: 'Editorias', items: [
+      { label: 'Sustentabilidade', action: () => onFilterCat && onFilterCat('sustentabilidade') },
+      { label: 'ESG',              action: () => onFilterCat && onFilterCat('esg') },
+      { label: 'Resíduos',         action: () => onFilterCat && onFilterCat('residuos') },
+      { label: 'Certificações',    action: () => onFilterCat && onFilterCat('certificacoes') },
+    ]},
+    { t: 'AERA', items: [
+      { label: 'Sobre nós',   href: '../nossa-historia.html' },
+      { label: 'AERA APP',   href: '../aera-app.html' },
+      { label: 'Copilotos',  href: '../copilotos.html' },
+      { label: 'Contato',    href: '../index.html#contato' },
+    ]},
+    { t: 'Recursos', items: [
+      { label: 'Newsletter', action: () => document.querySelector('[placeholder="voce@empresa.com.br"]')?.focus() },
+      { label: 'ESG',        action: () => onFilterCat && onFilterCat('esg') },
+      { label: 'Certificações', action: () => onFilterCat && onFilterCat('certificacoes') },
+      { label: 'Imprensa',   href: 'mailto:comercial@aerasustentavel.com.br' },
+    ]},
+  ];
+
   return (
     <footer style={{ background: palette.bgAlt, borderTop: `1px solid ${palette.border}`, padding: '56px 48px 32px' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto', display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 48, marginBottom: 48 }}>
         <div>
-          <AeraLogo color={BRAND.blue} textColor={palette.text} size="md" />
+          <AeraLogo color={BRAND.blue} textColor={palette.text} size="md" homeUrl="../" />
           <p style={{ fontSize: 13, lineHeight: 1.7, color: palette.muted, marginTop: 16, maxWidth: 320 }}>
             Soluções Ambientais e Sustentáveis. Tecnologia + Propósito ambiental para empresas que querem operar com responsabilidade.
           </p>
         </div>
-        {[
-          { t: 'Editorias', l: ['Sustentabilidade', 'ESG', 'Resíduos', 'Certificações'] },
-          { t: 'AERA', l: ['Sobre nós', 'AERA APP', 'Casos', 'Contato'] },
-          { t: 'Recursos', l: ['Newsletter', 'Whitepapers', 'Eventos', 'Imprensa'] },
-        ].map(col => (
+        {COLS.map(col => (
           <div key={col.t}>
             <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: BRAND.blue, marginBottom: 14 }}>{col.t}</div>
-            {col.l.map(item => (
-              <a key={item} style={{ display: 'block', fontSize: 13, color: palette.textMuted, marginBottom: 10, cursor: 'pointer', textDecoration: 'none' }}>{item}</a>
+            {col.items.map(item => (
+              item.href
+                ? <a key={item.label} href={item.href}
+                    style={{ display: 'block', fontSize: 13, color: palette.textMuted, marginBottom: 10, cursor: 'pointer', textDecoration: 'none' }}
+                    onMouseEnter={e => e.target.style.color = BRAND.blue} onMouseLeave={e => e.target.style.color = palette.textMuted}>
+                    {item.label}
+                  </a>
+                : <button key={item.label} onClick={item.action}
+                    style={{ display: 'block', fontSize: 13, color: palette.textMuted, marginBottom: 10, cursor: 'pointer',
+                      background: 'none', border: 'none', padding: 0, fontFamily: 'inherit', textAlign: 'left' }}
+                    onMouseEnter={e => e.target.style.color = BRAND.blue} onMouseLeave={e => e.target.style.color = palette.textMuted}>
+                    {item.label}
+                  </button>
             ))}
           </div>
         ))}

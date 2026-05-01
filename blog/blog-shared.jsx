@@ -15,8 +15,43 @@ const BRAND = {
   white: '#FFFFFF',
 };
 
+// ─── localStorage: likes e saves persistentes ───────────────────────────────
+const Storage = {
+  getLikes: () => { try { return JSON.parse(localStorage.getItem('aera-blog-likes') || '{}'); } catch { return {}; } },
+  getSaves: () => { try { return JSON.parse(localStorage.getItem('aera-blog-saves') || '{}'); } catch { return {}; } },
+  isLiked: (id) => !!Storage.getLikes()[id],
+  isSaved: (id) => !!Storage.getSaves()[id],
+  toggleLike: (id) => {
+    const d = Storage.getLikes();
+    d[id] = !d[id];
+    localStorage.setItem('aera-blog-likes', JSON.stringify(d));
+    return !!d[id];
+  },
+  toggleSave: (id) => {
+    const d = Storage.getSaves();
+    d[id] = !d[id];
+    localStorage.setItem('aera-blog-saves', JSON.stringify(d));
+    return !!d[id];
+  },
+};
+
+// ─── Compartilhar: Web Share API com fallback para clipboard ─────────────────
+async function sharePost(post) {
+  const url = window.location.href;
+  const title = post.title;
+  const text = post.excerpt;
+  if (navigator.share) {
+    try { await navigator.share({ title, text, url }); return; } catch (e) { /* usuário cancelou */ }
+  }
+  try {
+    await navigator.clipboard.writeText(url);
+    window.showToast && window.showToast('Link copiado para a área de transferência!');
+  } catch {
+    window.showToast && window.showToast('Não foi possível copiar o link.');
+  }
+}
+
 // Aerial-view SVG placeholder — generative gradient + subtle topographic feel
-// Variants pick palette + composition that evokes flying/landscape/aerial
 function AerialPlaceholder({ variant = 'sky', label, style, children }) {
   const v = AERIAL_VARIANTS[variant] || AERIAL_VARIANTS.sky;
   const id = React.useId();
@@ -40,15 +75,12 @@ function AerialPlaceholder({ variant = 'sky', label, style, children }) {
         </defs>
         <rect width="800" height="600" fill={`url(#g-${id})`} />
         <rect width="800" height="600" fill={`url(#s-${id})`} />
-        {/* horizon strip */}
         <rect x="0" y={v.horizonY} width="800" height={600 - v.horizonY} fill={`url(#h-${id})`} />
-        {/* topographic / contour curves below horizon */}
         {v.contours.map((y, i) => (
           <path key={i}
             d={`M0 ${y} Q 200 ${y - 8 - i * 2} 400 ${y} T 800 ${y}`}
             stroke={v.lineColor} strokeWidth="0.7" fill="none" opacity={0.35 - i * 0.04} />
         ))}
-        {/* faint clouds / haze above horizon */}
         {v.clouds.map((c, i) => (
           <ellipse key={i} cx={c.x} cy={c.y} rx={c.rx} ry={c.ry} fill="#fff" opacity={c.o} />
         ))}
@@ -67,7 +99,6 @@ function AerialPlaceholder({ variant = 'sky', label, style, children }) {
 }
 
 const AERIAL_VARIANTS = {
-  // Dawn over forest — warm horizon, cool sky
   dawn: {
     stops: [{ o: '0%', c: '#1B3A6B' }, { o: '50%', c: '#3E6FA8' }, { o: '78%', c: '#7BA8D6' }, { o: '100%', c: '#0A2540' }],
     horizon: '#0A2540', horizonY: 360, sun: 0.55,
@@ -75,7 +106,6 @@ const AERIAL_VARIANTS = {
     clouds: [{ x: 150, y: 180, rx: 90, ry: 12, o: 0.12 }, { x: 600, y: 220, rx: 120, ry: 10, o: 0.18 }, { x: 320, y: 140, rx: 70, ry: 8, o: 0.1 }],
     lineColor: '#7BA8D6',
   },
-  // Bright open sky — high altitude
   sky: {
     stops: [{ o: '0%', c: '#1462CC' }, { o: '40%', c: '#1877F2' }, { o: '75%', c: '#5BA3F5' }, { o: '100%', c: '#A8C9F0' }],
     horizon: '#0A1628', horizonY: 480, sun: 0.4,
@@ -83,7 +113,6 @@ const AERIAL_VARIANTS = {
     clouds: [{ x: 200, y: 200, rx: 120, ry: 14, o: 0.25 }, { x: 550, y: 280, rx: 160, ry: 12, o: 0.32 }, { x: 700, y: 150, rx: 80, ry: 9, o: 0.18 }],
     lineColor: '#1462CC',
   },
-  // Aerial forest / canopy — green
   forest: {
     stops: [{ o: '0%', c: '#0A2A1E' }, { o: '40%', c: '#14503A' }, { o: '70%', c: '#1F7A52' }, { o: '100%', c: '#22C55E' }],
     horizon: '#0A1628', horizonY: 200, sun: 0.25,
@@ -91,7 +120,6 @@ const AERIAL_VARIANTS = {
     clouds: [],
     lineColor: '#22C55E',
   },
-  // Ocean / coast from above
   ocean: {
     stops: [{ o: '0%', c: '#0A1628' }, { o: '35%', c: '#0F2D52' }, { o: '70%', c: '#1462CC' }, { o: '100%', c: '#5BA3F5' }],
     horizon: '#0A1628', horizonY: 220, sun: 0.5,
@@ -99,7 +127,6 @@ const AERIAL_VARIANTS = {
     clouds: [{ x: 100, y: 80, rx: 60, ry: 6, o: 0.15 }, { x: 450, y: 120, rx: 90, ry: 8, o: 0.2 }],
     lineColor: '#5BA3F5',
   },
-  // Highway / road through landscape
   road: {
     stops: [{ o: '0%', c: '#1462CC' }, { o: '40%', c: '#5BA3F5' }, { o: '65%', c: '#C7B894' }, { o: '100%', c: '#3D2E1A' }],
     horizon: '#1A2540', horizonY: 280, sun: 0.4,
@@ -107,7 +134,6 @@ const AERIAL_VARIANTS = {
     clouds: [{ x: 200, y: 100, rx: 100, ry: 10, o: 0.2 }, { x: 580, y: 160, rx: 120, ry: 9, o: 0.18 }],
     lineColor: '#FFFFFF',
   },
-  // Mist / fog mountains
   mist: {
     stops: [{ o: '0%', c: '#D8E3F2' }, { o: '50%', c: '#A8C9F0' }, { o: '100%', c: '#5BA3F5' }],
     horizon: '#0F2D52', horizonY: 350, sun: 0.7,
@@ -115,7 +141,6 @@ const AERIAL_VARIANTS = {
     clouds: [{ x: 150, y: 250, rx: 130, ry: 16, o: 0.4 }, { x: 600, y: 280, rx: 180, ry: 18, o: 0.45 }],
     lineColor: '#0F2D52',
   },
-  // Night / twilight aerial
   night: {
     stops: [{ o: '0%', c: '#050A14' }, { o: '50%', c: '#0A1628' }, { o: '100%', c: '#1462CC' }],
     horizon: '#000', horizonY: 420, sun: 0.3,
@@ -125,7 +150,6 @@ const AERIAL_VARIANTS = {
   },
 };
 
-// Topographic decoration — abstract contour lines
 function TopoLines({ color = BRAND.blue, opacity = 0.08, style }) {
   return (
     <svg viewBox="0 0 400 300" preserveAspectRatio="none"
@@ -142,18 +166,15 @@ function TopoLines({ color = BRAND.blue, opacity = 0.08, style }) {
   );
 }
 
-// AERA brand mark (logo)
-function AeraLogo({ color = BRAND.blue, textColor, sub = true, size = 'md' }) {
+// Logo AERA — quando homeUrl for passado, vira link clicável para o site principal
+function AeraLogo({ color = BRAND.blue, textColor, sub = true, size = 'md', homeUrl }) {
   const s = size === 'sm' ? { box: 32, font: 15, sub: 10, gap: 10 } : size === 'lg' ? { box: 48, font: 24, sub: 13, gap: 14 } : { box: 38, font: 18, sub: 11, gap: 12 };
 
-  return (
+  const inner = (
     <div style={{ display: 'inline-flex', alignItems: 'center', gap: s.gap }}>
-      {/* Símbolo da Asa (Puxando o arquivo logo2.png) */}
       <div style={{ width: s.box, height: s.box, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <img src="./logo2.png" alt="Logo AERA" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
       </div>
-
-      {/* Nome Completo da Empresa */}
       <div style={{ lineHeight: 1.1 }}>
         <div style={{ fontWeight: 900, fontSize: s.font, letterSpacing: '-0.01em', color: textColor || color }}>AERA</div>
         {sub && <div style={{ fontSize: s.sub, fontWeight: 500, color: textColor ? `${textColor}99` : BRAND.textMuted, marginTop: 1 }}>
@@ -162,36 +183,43 @@ function AeraLogo({ color = BRAND.blue, textColor, sub = true, size = 'md' }) {
       </div>
     </div>
   );
+
+  if (homeUrl) {
+    return (
+      <a href={homeUrl} title="Voltar ao site AERA" style={{ textDecoration: 'none', display: 'inline-flex' }}>
+        {inner}
+      </a>
+    );
+  }
+  return inner;
 }
 
-// Minimal stroke icons
 const Icon = {
-  search: (p = {}) => <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" {...p}><circle cx="7" cy="7" r="5"/><path d="M11 11l3 3"/></svg>,
-  arrow: (p = {}) => <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M2 7h10M8 3l4 4-4 4"/></svg>,
-  arrowDown: (p = {}) => <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" {...p}><path d="M3 5l3 3 3-3"/></svg>,
-  clock: (p = {}) => <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.4" {...p}><circle cx="6" cy="6" r="4.5"/><path d="M6 3.5V6l1.5 1" strokeLinecap="round"/></svg>,
+  search:   (p = {}) => <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" {...p}><circle cx="7" cy="7" r="5"/><path d="M11 11l3 3"/></svg>,
+  arrow:    (p = {}) => <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M2 7h10M8 3l4 4-4 4"/></svg>,
+  arrowDown:(p = {}) => <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" {...p}><path d="M3 5l3 3 3-3"/></svg>,
+  clock:    (p = {}) => <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.4" {...p}><circle cx="6" cy="6" r="4.5"/><path d="M6 3.5V6l1.5 1" strokeLinecap="round"/></svg>,
   bookmark: (p = {}) => <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" {...p}><path d="M3 2h8v10l-4-2.5L3 12V2z"/></svg>,
-  share: (p = {}) => <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" {...p}><circle cx="3.5" cy="7" r="1.5"/><circle cx="10.5" cy="3.5" r="1.5"/><circle cx="10.5" cy="10.5" r="1.5"/><path d="M5 6.3l4-2M5 7.7l4 2"/></svg>,
-  menu: (p = {}) => <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" {...p}><path d="M3 5h12M3 9h12M3 13h12"/></svg>,
-  close: (p = {}) => <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" {...p}><path d="M3 3l8 8M11 3l-8 8"/></svg>,
-  heart: (p = {}) => <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" {...p}><path d="M7 12s-4.5-2.7-4.5-6a2.5 2.5 0 0 1 4.5-1.5A2.5 2.5 0 0 1 11.5 6c0 3.3-4.5 6-4.5 6z"/></svg>,
-  comment: (p = {}) => <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" {...p}><path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H6l-3 2V4z"/></svg>,
-  check: (p = {}) => <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M2.5 6.5l2.5 2.5L10 3.5"/></svg>,
-  plane: (p = {}) => <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" {...p}><path d="M2 8l11-5-3 11-2.5-4.5L2 8z"/></svg>,
+  share:    (p = {}) => <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" {...p}><circle cx="3.5" cy="7" r="1.5"/><circle cx="10.5" cy="3.5" r="1.5"/><circle cx="10.5" cy="10.5" r="1.5"/><path d="M5 6.3l4-2M5 7.7l4 2"/></svg>,
+  menu:     (p = {}) => <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" {...p}><path d="M3 5h12M3 9h12M3 13h12"/></svg>,
+  close:    (p = {}) => <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" {...p}><path d="M3 3l8 8M11 3l-8 8"/></svg>,
+  heart:    (p = {}) => <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" {...p}><path d="M7 12s-4.5-2.7-4.5-6a2.5 2.5 0 0 1 4.5-1.5A2.5 2.5 0 0 1 11.5 6c0 3.3-4.5 6-4.5 6z"/></svg>,
+  comment:  (p = {}) => <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" {...p}><path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H6l-3 2V4z"/></svg>,
+  check:    (p = {}) => <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M2.5 6.5l2.5 2.5L10 3.5"/></svg>,
+  plane:    (p = {}) => <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" {...p}><path d="M2 8l11-5-3 11-2.5-4.5L2 8z"/></svg>,
+  filter:   (p = {}) => <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" {...p}><path d="M2 4h10M4 7h6M6 10h2"/></svg>,
 };
 
-// Categories
 const CATEGORIES = [
   { id: 'sustentabilidade', name: 'Sustentabilidade', color: BRAND.green },
-  { id: 'meio-ambiente', name: 'Meio Ambiente', color: '#0EA5A4' },
-  { id: 'esg', name: 'ESG', color: BRAND.blue },
-  { id: 'certificacoes', name: 'Certificações', color: '#7C3AED' },
-  { id: 'residuos', name: 'Gestão de Resíduos', color: '#F59E0B' },
+  { id: 'meio-ambiente',    name: 'Meio Ambiente',    color: '#0EA5A4' },
+  { id: 'esg',              name: 'ESG',              color: BRAND.blue },
+  { id: 'certificacoes',    name: 'Certificações',    color: '#7C3AED' },
+  { id: 'residuos',         name: 'Gestão de Resíduos', color: '#F59E0B' },
 ];
 
-// Sample posts — first one is the real article from the user
 const POSTS = [
-    {
+  {
     id: 'iso-14001-2026',
     title: 'ISO 14001:2026: O que muda na nova versão recém-publicada',
     excerpt: 'Publicada em 15 de abril de 2026, a nova versão da principal norma de gestão ambiental traz um novo requisito para gestão de mudanças e estende o rigor operacional para toda a cadeia de fornecedores.',
@@ -295,8 +323,6 @@ const POSTS = [
   },
 ];
 
-// Article body — for the post page (the user's real post)
-// 1. Renomeamos o artigo antigo para identificar que é sobre o Clima
 const ARTICLE_BODY_CLIMA = [
   { type: 'lead', text: 'Por muito tempo, sustentabilidade foi tratada como pauta de marketing. Algo que cabia no relatório anual, no posicionamento institucional, na campanha de fim de ano. Em 2026, essa lógica se inverteu — e o consumidor brasileiro virou protagonista da cobrança climática.' },
   { type: 'p', text: 'Pesquisas conduzidas no último trimestre indicam que mais de 70% dos consumidores brasileiros levam em conta a postura climática de uma marca antes de comprar. Entre o público de 25 a 44 anos — o coração da classe consumidora — o número passa de 80%. E não estamos falando apenas de embalagem reciclável: a pergunta é mais profunda. "Essa empresa está fazendo a coisa certa?"' },
@@ -322,7 +348,6 @@ const ARTICLE_BODY_CLIMA = [
   { type: 'p', text: 'Estratégia climática deixou de ser tema do departamento de sustentabilidade. É decisão de CEO, é pauta de conselho, é critério de compra. A pergunta não é mais se a sua empresa precisa se posicionar — é quando, e com que profundidade.' },
 ];
 
-// 2. Adicionamos o novo artigo do MTR
 const ARTICLE_BODY_MTR = [
   { type: 'lead', text: 'Em 2026, o controle de resíduos no Brasil não aceita mais planilhas isoladas. A consolidação do MTR Digital (Manifesto de Transporte de Resíduos) em âmbito nacional transformou a rastreabilidade em um processo de dados em tempo real, onde a falha de integração custa caro.' },
   { type: 'p', text: 'Instituído originalmente pela Portaria MMA nº 280/2020 e integrado ao Sistema Nacional de Informações sobre a Gestão de Resíduos Sólidos (SINIR), o MTR Eletrônico tornou-se a espinha dorsal da fiscalização ambiental. O que antes era um controle fragmentado por estados, agora é uma malha de dados cruzados que o Ibama e os órgãos estaduais utilizam para malhas fiscais automáticas.' },
@@ -341,7 +366,6 @@ const ARTICLE_BODY_MTR = [
   { type: 'h2', text: 'O próximo passo' },
   { type: 'p', text: 'A adequação ao MTR Nacional não é apenas um projeto de TI, mas uma reestruturação de governança ambiental. Empresas que digitalizam esse controle reduzem passivos, otimizam a logística reversa e transformam a conformidade em vantagem competitiva.' },
 ];
-// --- NOVOS ARTIGOS ---
 
 const ARTICLE_BODY_ISO = [
   { type: 'lead', text: 'A certificação ISO 14001 muitas vezes é tratada como um troféu de parede ou um checklist burocrático para vencer licitações. No entanto, quando bem implementada, ela é o motor da eficiência operacional.' },
@@ -403,6 +427,7 @@ const ARTICLE_BODY_AGUA = [
   ] },
   { type: 'p', text: 'A água não é um recurso infinito. A engenharia ambiental deve provar ao órgão regulador que a empresa sabe usar cada gota de forma eficiente.' }
 ];
+
 const ARTICLE_BODY_ISO_2026 = [
   { type: 'lead', text: 'Publicada oficialmente no dia 15 de abril de 2026, a nova versão da ISO 14001 encerra anos de revisão técnica. A boa notícia? Quem já possui um sistema maduro não precisará recomeçar do zero. A má notícia para quem tratava a norma como um checklist burocrático? O cerco sobre o ciclo de vida e a cadeia de valor acabou de ficar muito mais rigoroso.' },
   { type: 'p', text: 'Substituindo a edição de 2015, a ISO 14001:2026 mantém a Estrutura Harmonizada (Anexo SL), mas eleva a gestão ambiental a um patamar de gestão de risco inegociável. As organizações certificadas terão um período de transição de três anos (até maio de 2029) para adequarem seus Sistemas de Gestão Ambiental (SGA).' },
@@ -415,29 +440,29 @@ const ARTICLE_BODY_ISO_2026 = [
   ] },
   { type: 'h2', text: 'A armadilha na Avaliação de Desempenho' },
   { type: 'p', text: 'Com a inclusão de temas complexos cobrindo toda a cadeia de valor, a Avaliação de Desempenho (Seção 9) se tornará o principal alvo de não-conformidades durante as auditorias de transição.' },
-  { type: 'p', text: 'Aqui, a diferenciação técnica entre indicadores no processo de auditoria separa sistemas de gestão maduros de sistemas frágeis. É fundamental que a empresa distinga com clareza o que são indicadores diretos e indiretos na hora de comprovar os Padrões de Desempenho Ambiental.' },
+  { type: 'p', text: 'Aqui, a diferenciação técnica entre indicadores no processo de auditoria separa sistemas de gestão maduros de sistemas frágeis. É fundamental que a empresa distinja com clareza o que são indicadores diretos e indiretos na hora de comprovar os Padrões de Desempenho Ambiental.' },
   { type: 'p', text: 'O envio de cartilhas ou a realização de auditorias documentais em fornecedores representam esforço (indicadores indiretos). No entanto, para comprovar o atendimento à nova Seção 8.1, o auditor buscará a redução real do impacto no ciclo de vida — como a redução mensurável de emissões ou de geração de resíduos na cadeia logística contratada (indicadores diretos).' },
   { type: 'quote', text: 'A ISO 14001:2026 deixa claro: a empresa é corresponsável pelo impacto daqueles que operam em seu nome.' },
   { type: 'h2', text: 'O plano de ação imediato' },
   { type: 'p', text: 'O prazo de transição até 2029 não deve ser motivo para inércia. O primeiro passo estratégico é realizar uma Análise de Gaps (Gap Analysis) confrontando o seu SGA atual com as novas exigências de ciclo de vida e planejamento de mudanças. Revisar o controle de parceiros e garantir que seus indicadores de fato reflitam mitigação ambiental são os passaportes para uma transição sem sustos.' }
 ];
 
-// --- ATUALIZAÇÃO DO DICIONÁRIO ---
-// Substitua o dicionário antigo por este, que agora engloba todos os artigos.
-
 const ARTICLES_CONTENT = {
-  'iso-14001-2026': ARTICLE_BODY_ISO_2026,
+  'iso-14001-2026':  ARTICLE_BODY_ISO_2026,
   'consumidor-clima': ARTICLE_BODY_CLIMA,
-  'mtr-digital': ARTICLE_BODY_MTR,
-  'iso-14001': ARTICLE_BODY_ISO,
-  'reporte-gri': ARTICLE_BODY_GRI,
-  'biodiversidade': ARTICLE_BODY_TNFD,
+  'mtr-digital':     ARTICLE_BODY_MTR,
+  'iso-14001':       ARTICLE_BODY_ISO,
+  'reporte-gri':     ARTICLE_BODY_GRI,
+  'biodiversidade':  ARTICLE_BODY_TNFD,
   'economia-circular': ARTICLE_BODY_CIRCULAR,
   'creditos-carbono': ARTICLE_BODY_CARBONO,
-  'agua-industrial': ARTICLE_BODY_AGUA
+  'agua-industrial': ARTICLE_BODY_AGUA,
 };
 
 const COMMENTS = [];
 
-// Exporte o ARTICLES_CONTENT (esta deve ser a última linha do arquivo blog-shared.jsx)
-Object.assign(window, { BRAND, AerialPlaceholder, AERIAL_VARIANTS, TopoLines, AeraLogo, Icon, CATEGORIES, POSTS, ARTICLES_CONTENT, COMMENTS });
+Object.assign(window, {
+  BRAND, Storage, sharePost,
+  AerialPlaceholder, AERIAL_VARIANTS, TopoLines, AeraLogo, Icon,
+  CATEGORIES, POSTS, ARTICLES_CONTENT, COMMENTS,
+});

@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AERA · Blog — Vista de Cima</title>
+<meta name="description" content="Blog da AERA — cobertura editorial sobre sustentabilidade, ESG, certificações e gestão ambiental no Brasil.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -14,60 +15,101 @@
   ::selection { background: #1877F230; }
   button, input, textarea { font-family: inherit; }
   a { color: inherit; }
+
+  /* Toast notification */
+  #toast {
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: #0A1628; color: #fff; padding: 12px 20px; border-radius: 10px;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+    display: flex; align-items: center; gap: 8px; z-index: 9999;
+    transition: transform .3s cubic-bezier(.2,.8,.3,1), opacity .3s;
+    opacity: 0; pointer-events: none; white-space: nowrap;
+  }
+  #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
   @media (max-width: 768px) {
-  /* Força a quebra dos grids laterais para uma coluna só */
-  div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; gap: 24px !important; }
-
-  /* Ajusta o padding lateral das seções para caber na tela */
-  div[style*="padding: 0 48px"], section, header { padding-left: 20px !important; padding-right: 20px !important; }
-
-  /* Diminui os títulos gigantes */
-  h1 { font-size: 40px !important; line-height: 1.1 !important; padding: 0 !important; }
-  h2 { font-size: 32px !important; }
-
-  /* Ajusta a barra de navegação superior */
-  nav > div { padding: 0 16px !important; flex-wrap: wrap; justify-content: space-between; }
-  nav button, nav a { font-size: 11px !important; padding: 6px 10px !important; }
-
-  /* Oculta os itens do menu no topo para economizar espaço no mobile */
-  nav > div > div > a { display: none !important; }
-}
+    div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; gap: 24px !important; }
+    div[style*="padding: 0 48px"], section, header { padding-left: 20px !important; padding-right: 20px !important; }
+    h1 { font-size: 40px !important; line-height: 1.1 !important; padding: 0 !important; }
+    h2 { font-size: 32px !important; }
+    nav > div { padding: 0 16px !important; flex-wrap: wrap; justify-content: space-between; }
+    nav button, nav a { font-size: 11px !important; padding: 6px 10px !important; }
+    nav > div > div > a { display: none !important; }
+  }
 </style>
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 </head>
 <body>
+
+<!-- Toast de notificação global -->
+<div id="toast">
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M2.5 7l2.5 2.5L11 3.5"/>
+  </svg>
+  <span id="toast-msg">Link copiado!</span>
+</div>
+
 <div id="root"></div>
 
-<script type="text/babel" src="/blog/design-canvas.jsx"></script>
-<script type="text/babel" src="/blog/tweaks-panel.jsx"></script>
-<script type="text/babel" src="/blog/blog-shared.jsx"></script>
-<script type="text/babel" src="/blog/blog-home-cinema.jsx"></script>
-<script type="text/babel" src="/blog/blog-home-editorial.jsx"></script>
-<script type="text/babel" src="/blog/blog-post.jsx"></script>
-<script type="text/babel" src="/blog/blog-search.jsx"></script>
+<script type="text/babel" src="./blog-shared.jsx"></script>
+<script type="text/babel" src="./blog-home-cinema.jsx"></script>
+<script type="text/babel" src="./blog-post.jsx"></script>
+<script type="text/babel" src="./blog-search.jsx"></script>
 
 <script type="text/babel">
-function App() {
-  const [view, setView] = React.useState({ name: 'home' });
-  const [postId, setPostId] = React.useState('');
+// Utilitário global de toast
+window.showToast = function(msg, duration = 2400) {
+  const el = document.getElementById('toast');
+  const msgEl = document.getElementById('toast-msg');
+  if (!el || !msgEl) return;
+  msgEl.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(() => el.classList.remove('show'), duration);
+};
 
-  // Permite abrir um post a partir de links sugeridos no final da página
-  React.useEffect(() => {
-    window.openPost = (id) => { setPostId(id); setView({ name: 'post' }); window.scrollTo(0, 0); };
+function App() {
+  const [view, setView] = React.useState('home');
+  const [postId, setPostId] = React.useState('');
+  const [filterCat, setFilterCat] = React.useState('todos');
+
+  const openPost = React.useCallback((id) => {
+    setPostId(id);
+    setView('post');
+    window.scrollTo(0, 0);
   }, []);
 
-  const openPost = (id) => { setPostId(id); setView({ name: 'post' }); window.scrollTo(0, 0); };
-  const openSearch = () => setView({ name: 'search' });
-  const back = () => setView({ name: 'home' });
+  const openSearch = React.useCallback(() => setView('search'), []);
+  const goHome = React.useCallback((cat) => {
+    setView('home');
+    if (cat) setFilterCat(cat);
+    window.scrollTo(0, 0);
+  }, []);
 
-  // Controle de navegação do site
-  if (view.name === 'post') return <PostPage postId={postId} onBack={back} />;
-  if (view.name === 'search') return <SearchPage onClose={back} onOpenPost={openPost} />;
+  // Atalho de teclado ⌘K / Ctrl+K
+  React.useEffect(() => {
+    window.openPost = openPost;
+    const onKey = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setView('search');
+      }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [openPost]);
 
-  // Tela Inicial (Horizonte Cinematográfico)
-  return <HomeCinema onOpenPost={openPost} onOpenSearch={openSearch} />;
+  if (view === 'post')   return <PostPage postId={postId} onBack={goHome} onOpenSearch={openSearch} />;
+  if (view === 'search') return <SearchPage onClose={() => setView('home')} onOpenPost={openPost} />;
+
+  return <HomeCinema
+    onOpenPost={openPost}
+    onOpenSearch={openSearch}
+    initialCat={filterCat}
+    onCatChange={setFilterCat}
+  />;
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);
