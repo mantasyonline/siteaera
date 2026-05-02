@@ -709,7 +709,7 @@ h2.section-heading--white { color:white; }
     .solutions-grid-v2 { grid-template-columns:repeat(2, 1fr); }
     .differentials-grid { grid-template-columns:repeat(2, 1fr); }
     .app-access-bar { flex-direction:column; text-align:center; }
-    .app-access-bar-btns { justify-content:center; }
+    .app-access-bar-btns { justify-content:center; flex-wrap:wrap; }
 }
 
 @media (max-width:768px) {
