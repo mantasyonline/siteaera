@@ -252,7 +252,6 @@ const POSTS = [
     date: '22 Abr 2026',
     readTime: '8 min',
     image: 'sky',
-    featured: true,
     tags: ['ESG', 'Consumo Consciente', 'Estratégia Climática'],
   },
   {
@@ -331,6 +330,19 @@ const POSTS = [
     readTime: '5 min',
     image: 'mist',
     tags: ['Água', 'Outorga', 'Indústria'],
+  },
+  {
+    id: 'pme-jornada-esg',
+    title: 'Como pequenas e médias empresas podem começar uma jornada ESG',
+    excerpt: 'Um passo a passo prático para estruturar governança, métricas ambientais e relatórios de impacto sem inflar a operação — começando pelo que já existe na sua empresa.',
+    category: 'esg',
+    author: 'Equipe AERA',
+    authorRole: 'Editorial',
+    date: '06 Mai 2026',
+    readTime: '8 min',
+    image: 'mist',
+    featured: true,
+    tags: ['ESG', 'PME', 'Governança', 'Sustentabilidade'],
   },
 ];
 
@@ -458,6 +470,26 @@ const ARTICLE_BODY_ISO_2026 = [
   { type: 'p', text: 'O prazo de transição até 2029 não deve ser motivo para inércia. O primeiro passo estratégico é realizar uma Análise de Gaps (Gap Analysis) confrontando o seu SGA atual com as novas exigências de ciclo de vida e planejamento de mudanças. Revisar o controle de parceiros e garantir que seus indicadores de fato reflitam mitigação ambiental são os passaportes para uma transição sem sustos.' }
 ];
 
+const ARTICLE_BODY_PME_ESG = [
+  { type: 'lead', text: 'Existe uma percepção comum de que ESG é coisa de empresa grande. De multinacional com relatório anual de 200 páginas, equipe dedicada de sustentabilidade e consultoria internacional na porta. Mas essa ideia está ficando cada vez mais para trás, e a boa notícia é que muita empresa pequena já está na frente sem nem ter percebido.' },
+  { type: 'h2', text: 'O que você provavelmente já faz' },
+  { type: 'p', text: 'Se a sua empresa separa o lixo, tem alguma preocupação com o bem-estar dos funcionários, ou simplesmente opera dentro da lei, você já pratica ESG. O problema, na maioria das vezes, não é ausência de ação. É ausência de registro, estrutura e narrativa. A diferença entre uma empresa que "já faz coisas sustentáveis" e uma empresa com agenda ESG é basicamente essa: organização e intenção.' },
+  { type: 'p', text: 'Pesquisas recentes mostram que a grande maioria das PMEs já adota algum tipo de prática ESG no dia a dia. O que falta, em geral, é transformar essas práticas em algo gerenciável e comunicável.' },
+  { type: 'h2', text: 'Por onde começar de verdade' },
+  { type: 'p', text: 'O primeiro movimento é fazer um diagnóstico honesto. Não é preciso contratar ninguém para isso agora. Olha para dentro da operação: quanto a empresa consome de energia e água por mês? Qual é o destino dos resíduos gerados? Existe alguma política formal de contratação ou de relacionamento com fornecedores? Essas perguntas simples já revelam muito.' },
+  { type: 'p', text: 'A partir daí, o próximo passo é escolher dois ou três pontos prioritários para trabalhar, aqueles que fazem mais sentido para o seu setor e para o tamanho da sua operação. Uma meta de reduzir o consumo de energia em 15% nos próximos 12 meses é infinitamente mais útil do que um plano genérico de "ser sustentável". Concretude é o que transforma intenção em resultado.' },
+  { type: 'h2', text: 'Governança não precisa ser complicada' },
+  { type: 'p', text: 'A palavra "governança" intimida, mas na prática ela significa apenas que alguém dentro da empresa é responsável por acompanhar essas metas e que existe um processo mínimo de decisão. Para uma PME, isso pode ser tão simples quanto uma reunião mensal para revisar indicadores e um canal aberto para feedbacks da equipe.' },
+  { type: 'p', text: 'O que a estrutura de governança faz é garantir que o ESG não seja apenas um projeto de momento, mas algo integrado à gestão. Sem essa âncora, os esforços tendem a se perder com o tempo ou ficarem dependentes da motivação de uma única pessoa.' },
+  { type: 'h2', text: 'Métricas não precisam ser sofisticadas' },
+  { type: 'p', text: 'Um relatório de impacto não precisa ser extenso para ser honesto e útil. Para começar, basta monitorar alguns indicadores básicos: consumo mensal de energia e água, geração de resíduos por tipo de destinação, taxa de rotatividade e horas de treinamento por funcionário. Com esses dados em mão, você já consegue identificar tendências, comunicar evolução e, eventualmente, atrair fornecedores, clientes e investidores que valorizam essa transparência.' },
+  { type: 'p', text: 'Em 2026, esse movimento deixou de ser diferencial para se tornar condição de acesso a certas cadeias de valor. Empresas maiores estão começando a exigir critérios ESG de quem fornece para elas, e isso afeta diretamente quem quer crescer e manter contratos relevantes.' },
+  { type: 'h2', text: 'Começar pelo que existe' },
+  { type: 'p', text: 'A jornada ESG de uma PME não começa do zero. Começa pelo mapeamento do que já existe, pela formalização do que já é feito e pela escolha consciente de onde melhorar. Esse caminho é muito mais acessível do que parece, e os resultados aparecem antes do que se imagina: redução de custos operacionais, melhora no clima interno, acesso a linhas de crédito com juros menores e uma reputação que se constrói de forma consistente.' },
+  { type: 'p', text: 'Não é uma transformação que acontece da noite para o dia, e não precisa ser. É uma jornada que começa com perguntas simples e avança no ritmo da empresa. O importante é começar.' },
+  { type: 'quote', text: 'Se você quer estruturar a jornada ESG da sua empresa sem complicar a operação, a equipe da AERA pode te ajudar. Entre em contato pelo e-mail comercial@aerasustentavel.com.br e vamos conversar sobre o que faz sentido para o seu negócio.' },
+];
+
 const ARTICLES_CONTENT = {
   'iso-14001-2026':  ARTICLE_BODY_ISO_2026,
   'consumidor-clima': ARTICLE_BODY_CLIMA,
@@ -468,6 +500,7 @@ const ARTICLES_CONTENT = {
   'economia-circular': ARTICLE_BODY_CIRCULAR,
   'creditos-carbono': ARTICLE_BODY_CARBONO,
   'agua-industrial': ARTICLE_BODY_AGUA,
+  'pme-jornada-esg': ARTICLE_BODY_PME_ESG,
 };
 
 const COMMENTS = [];
