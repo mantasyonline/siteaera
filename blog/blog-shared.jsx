@@ -64,6 +64,24 @@ async function sharePost(post) {
 
 // Aerial-view SVG placeholder — generative gradient + subtle topographic feel
 function AerialPlaceholder({ variant = 'sky', label, style, children }) {
+  // Support real image paths (relative, absolute, or http)
+  const isRealImage = variant && (variant.startsWith('./') || variant.startsWith('/') || variant.startsWith('http') || variant.includes('.png') || variant.includes('.jpg') || variant.includes('.webp'));
+  if (isRealImage) {
+    return (
+      <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden', background: '#0A1628', ...style }}>
+        <img src={variant} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center' }} />
+        {label && (
+          <div style={{
+            position: 'absolute', bottom: 12, left: 14,
+            fontFamily: 'ui-monospace, "SF Mono", Menlo, monospace',
+            fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase',
+            color: 'rgba(255,255,255,0.78)', textShadow: '0 1px 4px rgba(10,22,40,.4)',
+          }}>{label}</div>
+        )}
+        {children}
+      </div>
+    );
+  }
   const v = AERIAL_VARIANTS[variant] || AERIAL_VARIANTS.sky;
   const id = React.useId();
   return (
@@ -230,6 +248,81 @@ const CATEGORIES = [
 ];
 
 const POSTS = [
+  // ─── Série: O ESG na Vida Real ───────────────────────────────────────
+  {
+    id: 'esg-vida-real-intro',
+    title: 'O ESG não senta na mesa do chefe. Ele senta na sua.',
+    excerpt: 'Por que cada decisão operacional — do frete negociado à segregação de resíduos no galpão — define o valor financeiro da sua empresa. Lançamento da série "O ESG na Vida Real".',
+    category: 'esg',
+    author: 'Equipe AERA',
+    authorRole: 'Editorial',
+    date: '01 Mai 2026',
+    readTime: '4 min',
+    image: './images/aera-esg-intro.png',
+    featured: true,
+    tags: ['ESG', 'Sustentabilidade Corporativa', 'Gestão de Riscos', 'Série'],
+  },
+  {
+    id: 'esg-vida-real-cap1',
+    title: 'O Comercial, o Marketing e a armadilha do discurso vazio',
+    excerpt: 'Como usar a sustentabilidade como argumento real de vendas sem cair no Greenwashing — e por que a transparência operacional virou o maior diferencial competitivo.',
+    category: 'esg',
+    author: 'Equipe AERA',
+    authorRole: 'Editorial',
+    date: '08 Mai 2026',
+    readTime: '5 min',
+    image: './images/aera-esg-cap1.png',
+    tags: ['ESG', 'Marketing', 'Vendas', 'Greenwashing', 'Série'],
+  },
+  {
+    id: 'esg-vida-real-cap2',
+    title: 'A Logística, Compras e o preço oculto do contrato mais barato',
+    excerpt: 'O fornecedor mais barato pode ser a sua maior vulnerabilidade jurídica. Como a cadeia de suprimentos define a reputação e o risco ambiental da operação.',
+    category: 'esg',
+    author: 'Equipe AERA',
+    authorRole: 'Editorial',
+    date: '15 Mai 2026',
+    readTime: '5 min',
+    image: './images/aera-esg-cap2.png',
+    tags: ['ESG', 'Logística', 'Compras', 'Cadeia de Suprimentos', 'Série'],
+  },
+  {
+    id: 'esg-vida-real-cap3',
+    title: 'O Financeiro, a Controladoria e o novo Serasa corporativo',
+    excerpt: 'O desempenho ESG tornou-se o critério invisível nos comitês de crédito. Como a gestão ambiental impacta diretamente o custo do capital e o balanço da empresa.',
+    category: 'esg',
+    author: 'Equipe AERA',
+    authorRole: 'Editorial',
+    date: '22 Mai 2026',
+    readTime: '5 min',
+    image: './images/aera-esg-cap3.png',
+    tags: ['ESG', 'Financeiro', 'Controladoria', 'Crédito Verde', 'Série'],
+  },
+  {
+    id: 'esg-vida-real-cap4',
+    title: 'O RH, a Operação e a cultura que sustenta o discurso',
+    excerpt: 'Estratégia ESG que não chega ao chão de fábrica é documento engavetado. Como RH e Operação se tornam os pilares reais da sustentabilidade corporativa.',
+    category: 'esg',
+    author: 'Equipe AERA',
+    authorRole: 'Editorial',
+    date: '29 Mai 2026',
+    readTime: '5 min',
+    image: './images/aera-esg-cap4.png',
+    tags: ['ESG', 'RH', 'Operação', 'Cultura Organizacional', 'Série'],
+  },
+  {
+    id: 'esg-vida-real-cap5',
+    title: 'A tecnologia e o fim das planilhas isoladas',
+    excerpt: 'ESG sem dados confiáveis e auditáveis é apenas poesia corporativa. Como dashboards, APIs e automação conectam todas as áreas e transformam conformidade em vantagem competitiva.',
+    category: 'esg',
+    author: 'Equipe AERA',
+    authorRole: 'Editorial',
+    date: '05 Jun 2026',
+    readTime: '5 min',
+    image: './images/aera-esg-cap5.png',
+    tags: ['ESG', 'Tecnologia', 'Dados', 'Dashboards', 'Série'],
+  },
+  // ─── Posts editoriais ────────────────────────────────────────────────
   {
     id: 'iso-14001-2026',
     title: 'ISO 14001:2026: O que muda na nova versão recém-publicada',
@@ -341,9 +434,104 @@ const POSTS = [
     date: '06 Mai 2026',
     readTime: '8 min',
     image: 'mist',
-    featured: true,
     tags: ['ESG', 'PME', 'Governança', 'Sustentabilidade'],
   },
+];
+
+// ─── Série: O ESG na Vida Real ───────────────────────────────────────────────
+
+const ARTICLE_BODY_ESG_INTRO = [
+  { type: 'lead', text: 'Você já parou para pensar que aquela decisão de frete que você toma numa terça-feira à tarde, ou a forma como você negocia com um novo fornecedor, pode alterar o valor de mercado da empresa onde você trabalha?' },
+  { type: 'p', text: 'Quando falamos em ESG (Ambiental, Social e Governança), a rádio peão costuma dizer: "Isso aí é problema da turma do Compliance, do Pessoal da Qualidade ou do chato do Meio Ambiente." Essa é a maior armadilha do mundo corporativo moderno.' },
+  { type: 'h2', text: 'O ESG saiu da sala da diretoria' },
+  { type: 'p', text: 'O ESG não é mais um "selo verde" ou um projeto de filantropia para ficar bonito no relatório anual. Hoje, o ESG é a nova métrica de saúde financeira e sobrevivência de um negócio. E adivinha? Essa saúde é construída no dia a dia, na SUA mesa.' },
+  { type: 'p', text: 'Se a operação falha, o indicador acende vermelho. Se o indicador fica vermelho, o crédito no banco fica mais caro, o grande cliente cancela o contrato e o bônus de todo mundo vai pro espaço. Simples assim.' },
+  { type: 'h2', text: 'A série: O ESG na Vida Real' },
+  { type: 'p', text: 'Nas próximas semanas, vamos tirar o ESG das nuvens, tirar os termos difíceis e aterrissar esse conceito na realidade de cada departamento. Vamos entender, na prática, como o seu trabalho diário está conectado a essa revolução.' },
+  { type: 'list', items: [
+    'Episódio 1 — O Comercial e Marketing: O que vende e o que é armadilha? Como usar a sustentabilidade como argumento de vendas sem cair no crime do Greenwashing.',
+    'Episódio 2 — A Logística e Compras: O ESG na boleia e no galpão: Por que o fornecedor mais barato pode custar a reputação da sua empresa?',
+    'Episódio 3 — O Financeiro e a Controladoria: O ESG na planilha: Como os bancos e investidores olham para a sua gestão de resíduos antes de liberar crédito.',
+    'Episódio 4 — O RH e a Operação: Do recrutamento ao chão de fábrica: A licença para operar começa na segurança e na segregação do resíduo na fonte.',
+    'Episódio 5 — A Tecnologia: Como a governança de dados conecta todas as áreas sem perder o controle.',
+  ] },
+  { type: 'quote', text: 'Sustentabilidade não é um departamento, é um jeito de trabalhar. E você? De qual departamento você é e como acha que o ESG impacta a sua rotina hoje?' },
+];
+
+const ARTICLE_BODY_ESG_CAP1 = [
+  { type: 'lead', text: 'Você está na linha de frente. O cliente exige práticas sustentáveis no edital de concorrência ou o consumidor final pressiona por um posicionamento mais responsável. A tentação de usar o ESG puramente como um gatilho de vendas é enorme.' },
+  { type: 'p', text: 'Mas é exatamente na pressa de vender uma imagem sustentável que as empresas caem no maior risco de reputação da atualidade: o Greenwashing, a famosa "maquiagem verde". Vender uma narrativa que não se comprova na operação diária deixou de ser apenas um tropeço de comunicação. Hoje, é um passivo financeiro e jurídico.' },
+  { type: 'h2', text: 'Greenwashing: o passivo que se esconde no discurso' },
+  { type: 'p', text: 'O mercado corporativo, os investidores e o consumidor final estão vacinados contra discursos vazios e promessas genéricas. Se o time comercial bate no peito em uma reunião para dizer que a empresa é "zero aterro" ou "neutra em carbono", ele precisa ter a garantia absoluta de que a operação está fazendo a lição de casa.' },
+  { type: 'p', text: 'É necessário que o galpão esteja segregando resíduos com rigor, que a destinação final seja rastreável e que o inventário de Gases de Efeito Estufa (GEE) esteja atualizado e baseado em dados reais. Uma foto de descarte irregular na internet ou uma denúncia na cadeia de fornecedores destrói em minutos a campanha de marketing que custou milhões.' },
+  { type: 'h2', text: 'Como o Comercial e o Marketing devem atuar na era do ESG real' },
+  { type: 'numlist', items: [
+    'A transparência é o novo diferencial de vendas. O cliente corporativo maduro (B2B) prefere a honestidade. É muito mais forte apresentar um dashboard mostrando que a empresa reduziu em 15% o envio de resíduos para aterro nos últimos doze meses do que prometer uma perfeição irreal sem provas.',
+    'Venda dados, não apenas intenções. No pilar Ambiental, a matemática não mente. Certificados de destinação final, relatórios de inventário de emissões e indicadores de eficiência energética valem muito mais do que qualquer selo de procedência duvidosa.',
+    'O fim do silo corporativo. Antes de aprovar qualquer peça de comunicação sobre sustentabilidade, o marketing precisa validar as informações com a operação, com a engenharia ambiental e com compras.',
+  ] },
+  { type: 'p', text: 'O papel do marketing não é inventar uma narrativa verde, mas dar visibilidade a uma transformação real e contínua que já acontece na operação da empresa. O comercial que compreende essa dinâmica para de vender apenas produtos e passa a vender segurança, compliance e mitigação de riscos para o seu cliente.' },
+  { type: 'quote', text: 'Com qual frequência vocês sentam com a operação técnica para validar os dados ambientais e sociais antes de levá-los ao mercado? O discurso do panfleto bate com a realidade do galpão?' },
+];
+
+const ARTICLE_BODY_ESG_CAP2 = [
+  { type: 'lead', text: 'O setor de Compras e a Logística operam os motores que mantêm qualquer indústria funcionando. Historicamente, o sucesso nessas áreas foi medido por duas variáveis implacáveis: custo e prazo. Mas na era do ESG, essa equação pode ser fatal para o negócio.' },
+  { type: 'p', text: 'O risco não mora apenas dentro dos muros da sua empresa. Ele se estende por toda a sua cadeia de suprimentos. Quando o critério de contratação ignora a conformidade ambiental e as práticas sociais, o fornecedor mais barato pode se transformar na sua maior vulnerabilidade jurídica e de reputação.' },
+  { type: 'h2', text: 'A Logística e a matemática das emissões' },
+  { type: 'p', text: 'Na movimentação de cargas, otimizar rotas, consolidar fretes e avaliar o tipo de frota contratada deixaram de ser apenas estratégias para cortar gastos com combustíveis. Trata-se de mitigação direta de impacto climático. O transporte é um dos maiores responsáveis pelas emissões de Gases de Efeito Estufa (GEE). Cada rota ineficiente reflete negativamente no inventário de emissões da companhia. A logística eficiente é, por definição, uma logística de baixo carbono.' },
+  { type: 'h2', text: 'O poder e o risco do setor de Compras' },
+  { type: 'p', text: 'A mesa de Compras é a grande fronteira de Governança e responsabilidade Social da empresa. A homologação de um novo fornecedor precisa ir muito além da capacidade de entrega e do CNPJ ativo. Se a sua empresa adquire insumos de uma operação que utiliza mão de obra em condições precárias, ou que opera com licenças ambientais vencidas, o risco contamina o seu produto final.' },
+  { type: 'numlist', items: [
+    'Logística e emissões: Cada rota ineficiente reflete no inventário de emissões. A gestão operacional de resíduos exige rastreabilidade ponta a ponta — o transportador terceirizado precisa provar destino final licenciado.',
+    'Rastreio e gestão operacional: O descarte irregular feito por um terceiro volta para a conta do gerador, trazendo multas e danos incalculáveis à marca.',
+    'Auditoria da cadeia de suprimentos: Garante que você não está financiando passivos ocultos de fornecedores com licenças vencidas ou práticas trabalhistas irregulares.',
+  ] },
+  { type: 'quote', text: 'Profissionais de Logística e Compras não são apenas fechadores de contratos ou expedidores de carga. Eles são os verdadeiros guardiões da gestão de riscos da empresa.' },
+  { type: 'p', text: 'Um processo de compras estruturado sob a ótica ESG blinda a operação, atrai clientes mais exigentes e garante a perenidade do negócio. O critério de menor preço ainda atropela a avaliação de conformidade dos seus parceiros de negócio?' },
+];
+
+const ARTICLE_BODY_ESG_CAP3 = [
+  { type: 'lead', text: 'A área Financeira e a Controladoria são os guardiões do fluxo de caixa, da rentabilidade e da alocação eficiente de recursos. As regras do jogo financeiro global mudaram: hoje, grandes bancos e fundos de investimento avaliam os indicadores ambientais e de governança com o mesmo rigor que analisam um DRE.' },
+  { type: 'p', text: 'O desempenho ESG tornou-se um verdadeiro "Serasa corporativo". Mas como, na prática, a gestão ambiental impacta a planilha do Diretor Financeiro?' },
+  { type: 'h2', text: 'O custo do capital e a precificação do risco' },
+  { type: 'p', text: 'Empresas que não possuem clareza sobre seus passivos ambientais ou que gerenciam seus resíduos de forma amadora são classificadas pelo mercado como negócios de alto risco. Se há risco de multas severas, paralisação das operações por embargo de órgãos fiscalizadores ou escândalos na cadeia produtiva, as instituições financeiras entendem que a chance de inadimplência aumenta. O resultado é direto: o crédito fica mais restrito e os juros sobem.' },
+  { type: 'p', text: 'Em contrapartida, operações que comprovam eficiência ambiental acessam linhas de crédito verde com taxas significativamente menores.' },
+  { type: 'h2', text: 'Três frentes de impacto financeiro do ESG' },
+  { type: 'numlist', items: [
+    'O custo do capital: Passivos ambientais não declarados encarecem o crédito. A conformidade ambiental auditável abre portas para linhas de crédito verde com taxas menores.',
+    'A ineficiência como ralo de recursos: Resíduo gerado em excesso significa matéria-prima comprada, processada e não convertida em receita — gerando ainda custo extra para descarte. Uma gestão inteligente transforma esse centro de custo em eficiência.',
+    'Governança e auditoria de dados: A controladoria garante que os dados reportados sejam reais e auditáveis, permitindo ao Financeiro sentar à mesa com investidores e comprovar, com números, que a operação está blindada contra passivos futuros.',
+  ] },
+  { type: 'quote', text: 'O capital inteligente foge da imprevisibilidade. Na sua empresa, a área Financeira já enxerga a gestão ambiental como um indicador de risco de crédito, ou ainda trata esse tema apenas como uma despesa obrigatória no fim do mês?' },
+];
+
+const ARTICLE_BODY_ESG_CAP4 = [
+  { type: 'lead', text: 'Quando o assunto é ESG, é fácil acreditar que tudo se resolve com a contratação de uma consultoria e a assinatura de novas diretrizes pela diretoria. Mas a verdade é que o papel aceita qualquer estratégia. A execução e a cultura acontecem nas relações humanas e no chão de fábrica.' },
+  { type: 'p', text: 'Se o RH e a Operação não estiverem alinhados com o propósito corporativo, qualquer meta ambiental ou social será apenas um documento engavetado.' },
+  { type: 'h2', text: 'O RH e a engenharia da cultura corporativa (Pilar Social)' },
+  { type: 'p', text: 'O RH não é apenas um processador de folhas de pagamento. No contexto ESG, ele é o arquiteto do ambiente interno. Hoje, a retenção de talentos está diretamente ligada aos valores da empresa. Profissionais altamente qualificados, especialmente as novas gerações, recusam propostas de companhias envolvidas em escândalos éticos, falta de diversidade ou ambientes tóxicos.' },
+  { type: 'p', text: 'O papel estratégico do RH é garantir a inclusão, o desenvolvimento de lideranças éticas e a construção de um ambiente de trabalho justo. É o RH que transforma o discurso do pilar Social em uma cultura que as pessoas realmente vivenciam todos os dias.' },
+  { type: 'h2', text: 'A Operação e o momento da verdade (Pilar Ambiental na prática)' },
+  { type: 'p', text: 'A alta gestão e o time de QSMA podem desenhar o melhor projeto de gestão de resíduos ou de transição energética do mundo. Mas se o operador, lá na ponta, não realizar a segregação correta do material na fonte, todo o sistema falha e o dado que vai para o relatório fica comprometido.' },
+  { type: 'p', text: 'Executar os procedimentos corretamente, evitar o desperdício de matéria-prima e manter o rigor nos processos não são detalhes mecânicos; são as ações que garantem a conformidade ambiental e evitam passivos para a companhia.' },
+  { type: 'h2', text: 'A sinergia que transforma obrigação em hábito' },
+  { type: 'p', text: 'A virada de chave do ESG acontece quando o RH (Cultura) e as Lideranças Operacionais (Execução) se alinham através da educação corporativa. Quando um operador compreende que segregar um resíduo de forma correta não é apenas "uma regra chata da qualidade", mas uma atitude que ajuda a manter grandes contratos ativos e garante a estabilidade do negócio, o comportamento muda.' },
+  { type: 'quote', text: 'Uma empresa só é verdadeiramente sustentável quando a sua cultura interna é forte o suficiente para que as decisões corretas sejam tomadas mesmo quando ninguém está olhando.' },
+];
+
+const ARTICLE_BODY_ESG_CAP5 = [
+  { type: 'lead', text: 'Até aqui, vimos que o ESG transita pela mesa do Comercial, entra nos galpões de Logística, dita as taxas do Financeiro e molda a cultura no RH. A sustentabilidade corporativa é, na prática, um organismo complexo. Como conectar todas essas pontas de forma segura sem perder o controle da operação?' },
+  { type: 'p', text: 'A resposta dita a regra de sobrevivência dos negócios nesta década: o fim do "eu acho" e a adoção rigorosa da governança de dados. A maior vulnerabilidade das indústrias é a dependência de planilhas manuais, fragmentadas e sujeitas a falhas operacionais. O mercado global não aceita mais estimativas otimistas. Ele exige comprovação e rastreabilidade.' },
+  { type: 'h2', text: 'Como a tecnologia se torna o divisor de águas' },
+  { type: 'numlist', items: [
+    'A era dos Dashboards: Não basta gerar a informação; é crucial visualizá-la de forma estratégica e em tempo real. A gestão operacional de resíduos ou o controle de inventário de GEE exigem painéis de controle dinâmicos que cruzam volume gerado, destinação final e impacto financeiro.',
+    'Rastreabilidade e mitigação na raiz: A tecnologia permite monitorar a conformidade de toda a cadeia de forma ativa — bloqueando, por exemplo, a contratação de um serviço caso a licença ambiental de um transportador não esteja validada pelo sistema.',
+    'Automação para focar na engenharia do negócio: Ferramentas automatizadas e APIs assumem o trabalho de coleta e organização de dados, liberando engenharia e gestão para analisar cenários preditivos, identificar gargalos e redesenhar processos para a economia circular.',
+  ] },
+  { type: 'quote', text: 'O ESG sem dados confiáveis e auditáveis é apenas poesia corporativa. A tecnologia transforma intenções em ativos financeiros inquestionáveis.' },
+  { type: 'h2', text: 'O próximo passo' },
+  { type: 'p', text: 'Com este episódio, encerramos a série "O ESG na Vida Real". Se a sua empresa ainda enxerga a gestão de resíduos, a conformidade legal e os inventários ambientais como um centro de custos burocrático, ou se os dados críticos da operação ainda dependem de planilhas isoladas, é hora de mudar a estratégia.' },
+  { type: 'p', text: 'Na AERA, atuamos exatamente nessa dor. Prestamos a consultoria estratégica e técnica necessária para estruturar a jornada ESG do zero, conectando a realidade do chão de fábrica com os indicadores que a diretoria e os investidores exigem. Acesse www.aerasustentavel.com.br e vamos conversar.' },
 ];
 
 const ARTICLE_BODY_CLIMA = [
@@ -491,6 +679,12 @@ const ARTICLE_BODY_PME_ESG = [
 ];
 
 const ARTICLES_CONTENT = {
+  'esg-vida-real-intro': ARTICLE_BODY_ESG_INTRO,
+  'esg-vida-real-cap1':  ARTICLE_BODY_ESG_CAP1,
+  'esg-vida-real-cap2':  ARTICLE_BODY_ESG_CAP2,
+  'esg-vida-real-cap3':  ARTICLE_BODY_ESG_CAP3,
+  'esg-vida-real-cap4':  ARTICLE_BODY_ESG_CAP4,
+  'esg-vida-real-cap5':  ARTICLE_BODY_ESG_CAP5,
   'iso-14001-2026':  ARTICLE_BODY_ISO_2026,
   'consumidor-clima': ARTICLE_BODY_CLIMA,
   'mtr-digital':     ARTICLE_BODY_MTR,
