@@ -2,6 +2,7 @@
 
 function PostPage({ postId, onBack, onOpenSearch }) {
   const palette = lightPal;
+  const isMobile = useIsMobile();
   const post = POSTS.find(p => p.id === postId) || POSTS[0];
   const contentBlocks = ARTICLES_CONTENT[postId] || ARTICLES_CONTENT['consumidor-clima'];
 
@@ -36,7 +37,7 @@ function PostPage({ postId, onBack, onOpenSearch }) {
       <PostNav palette={palette} onOpenSearch={onOpenSearch} onBack={onBack} />
 
       {/* Botão voltar */}
-      <div style={{ maxWidth: 760, margin: '0 auto', padding: '32px 32px 0' }}>
+      <div style={{ maxWidth: 760, margin: '0 auto', padding: isMobile ? '24px 16px 0' : '32px 32px 0' }}>
         <button onClick={() => onBack()} style={{ display: 'inline-flex', alignItems: 'center', gap: 8,
           background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit',
           fontSize: 13, color: palette.muted, padding: 0 }}>
@@ -45,11 +46,11 @@ function PostPage({ postId, onBack, onOpenSearch }) {
       </div>
 
       {/* Cabeçalho do artigo */}
-      <header style={{ maxWidth: 760, margin: '0 auto', padding: '32px 32px 48px' }}>
+      <header style={{ maxWidth: 760, margin: '0 auto', padding: isMobile ? '24px 16px 40px' : '32px 32px 48px' }}>
         <div style={{ marginBottom: 24 }}>
           <CategoryTag cat={post.category} />
         </div>
-        <h1 style={{ fontSize: 48, fontWeight: 800, lineHeight: 1.12, letterSpacing: '-0.025em',
+        <h1 style={{ fontSize: isMobile ? 28 : 48, fontWeight: 800, lineHeight: 1.18, letterSpacing: '-0.025em',
           color: palette.text, marginBottom: 24, textWrap: 'balance' }}>
           {post.title}
         </h1>
@@ -72,8 +73,8 @@ function PostPage({ postId, onBack, onOpenSearch }) {
       </header>
 
       {/* Imagem hero */}
-      <figure style={{ maxWidth: 1100, margin: '0 auto 48px', padding: '0 32px' }}>
-        <div style={{ aspectRatio: '16 / 8', borderRadius: 6, overflow: 'hidden', position: 'relative' }}>
+      <figure style={{ maxWidth: 1100, margin: '0 auto 48px', padding: isMobile ? '0 16px' : '0 32px' }}>
+        <div style={{ aspectRatio: isMobile ? '4 / 3' : '16 / 8', borderRadius: 6, overflow: 'hidden', position: 'relative' }}>
           <AerialPlaceholder variant={post.image} label="Cobertura aérea · Brasil · 22.04.26" />
           <div style={{ position: 'absolute', top: 20, right: 20, padding: '10px 14px',
             background: 'rgba(255,255,255,0.95)', borderRadius: 4, fontFamily: 'ui-monospace, monospace',
@@ -88,7 +89,7 @@ function PostPage({ postId, onBack, onOpenSearch }) {
       </figure>
 
       {/* Corpo do artigo */}
-      <article style={{ maxWidth: 680, margin: '0 auto', padding: '0 32px 80px' }}>
+      <article style={{ maxWidth: 680, margin: '0 auto', padding: isMobile ? '0 16px 64px' : '0 32px 80px' }}>
         {contentBlocks.map((block, i) => <Block key={i} block={block} palette={palette} />)}
 
         {/* Tags */}
@@ -124,13 +125,13 @@ function PostPage({ postId, onBack, onOpenSearch }) {
       <Comments palette={palette} postId={post.id} />
 
       {/* Artigos relacionados */}
-      <section style={{ borderTop: `1px solid ${palette.border}`, padding: '64px 32px', background: palette.bgAlt }}>
+      <section style={{ borderTop: `1px solid ${palette.border}`, padding: isMobile ? '40px 16px' : '64px 32px', background: palette.bgAlt }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BRAND.blue, marginBottom: 12 }}>Continue lendo</div>
-          <h3 style={{ fontSize: 28, fontWeight: 700, color: palette.text, letterSpacing: '-0.01em', marginBottom: 32 }}>
+          <h3 style={{ fontSize: isMobile ? 22 : 28, fontWeight: 700, color: palette.text, letterSpacing: '-0.01em', marginBottom: 32 }}>
             Outras coberturas no horizonte
           </h3>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: isMobile ? 24 : 32 }}>
             {allRelated.map(p => (
               <PostCard key={p.id} post={p} palette={palette}
                 onClick={() => { onBack(); setTimeout(() => window.openPost && window.openPost(p.id), 0); }} />
@@ -147,28 +148,31 @@ function PostPage({ postId, onBack, onOpenSearch }) {
 
 // Nav simplificada para página de artigo
 function PostNav({ palette, onOpenSearch, onBack }) {
+  const isMobile = useIsMobile();
   return (
     <nav style={{ position: 'sticky', top: 3, zIndex: 50,
       background: `${palette.bg}EE`, backdropFilter: 'blur(20px)',
       borderBottom: `1px solid ${palette.border}`,
       height: 64, display: 'flex', alignItems: 'center' }}>
-      <div style={{ maxWidth: 1280, width: '100%', margin: '0 auto', padding: '0 48px', display: 'flex', alignItems: 'center', gap: 40 }}>
+      <div style={{ maxWidth: 1280, width: '100%', margin: '0 auto', padding: isMobile ? '0 16px' : '0 48px', display: 'flex', alignItems: 'center', gap: isMobile ? 12 : 40 }}>
         <AeraLogo color={BRAND.blue} textColor={BRAND.navy} sub={false} size="sm" homeUrl="../" />
         <button onClick={() => onBack()} style={{ fontSize: 11, padding: '3px 8px', borderRadius: 4,
           background: BRAND.bgAlt, color: BRAND.textMuted,
           fontWeight: 600, letterSpacing: '0.05em', border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}>
           ← BLOG
         </button>
-        <div style={{ marginLeft: 'auto', display: 'flex', gap: 12, alignItems: 'center' }}>
-          <button onClick={onOpenSearch} style={{ display: 'inline-flex', alignItems: 'center', gap: 8,
-            padding: '8px 12px', background: BRAND.bgAlt, border: `1px solid ${palette.border}`,
-            color: palette.muted, borderRadius: 8, cursor: 'pointer', fontFamily: 'inherit', fontSize: 12 }}>
-            <Icon.search /> Buscar
-            <kbd style={{ marginLeft: 8, fontSize: 10, padding: '2px 5px', background: '#fff', borderRadius: 3, fontFamily: 'ui-monospace, monospace' }}>⌘K</kbd>
-          </button>
-          <a href="../aera-app.html" style={{ padding: '9px 18px', background: BRAND.blue, color: '#fff',
-            borderRadius: 8, fontSize: 13, fontWeight: 600, textDecoration: 'none', display: 'inline-block' }}>
-            Acessar AERA APP
+        <div style={{ marginLeft: 'auto', display: 'flex', gap: 8, alignItems: 'center' }}>
+          {!isMobile && (
+            <button onClick={onOpenSearch} style={{ display: 'inline-flex', alignItems: 'center', gap: 8,
+              padding: '8px 12px', background: BRAND.bgAlt, border: `1px solid ${palette.border}`,
+              color: palette.muted, borderRadius: 8, cursor: 'pointer', fontFamily: 'inherit', fontSize: 12 }}>
+              <Icon.search /> Buscar
+              <kbd style={{ marginLeft: 8, fontSize: 10, padding: '2px 5px', background: '#fff', borderRadius: 3, fontFamily: 'ui-monospace, monospace' }}>⌘K</kbd>
+            </button>
+          )}
+          <a href="../aera-app.html" style={{ padding: isMobile ? '8px 12px' : '9px 18px', background: BRAND.blue, color: '#fff',
+            borderRadius: 8, fontSize: isMobile ? 12 : 13, fontWeight: 600, textDecoration: 'none', display: 'inline-block', whiteSpace: 'nowrap' }}>
+            {isMobile ? 'AERA APP' : 'Acessar AERA APP'}
           </a>
         </div>
       </div>
@@ -275,6 +279,7 @@ function IconBtn({ palette, active, onClick, title, children }) {
 
 // Seção de comentários com threading e persistência em memória por sessão
 function Comments({ palette, postId }) {
+  const isMobile = useIsMobile();
   const [list, setList] = React.useState([]);
   const [val, setVal] = React.useState('');
 
@@ -291,7 +296,7 @@ function Comments({ palette, postId }) {
   };
 
   return (
-    <section style={{ maxWidth: 760, margin: '0 auto', padding: '0 32px 64px' }}>
+    <section style={{ maxWidth: 760, margin: '0 auto', padding: isMobile ? '0 16px 48px' : '0 32px 64px' }}>
       <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BRAND.blue, marginBottom: 12 }}>
         Discussão · {list.length} {list.length === 1 ? 'comentário' : 'comentários'}
       </div>

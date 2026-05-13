@@ -69,7 +69,7 @@ function AerialPlaceholder({ variant = 'sky', label, style, children }) {
   if (isRealImage) {
     return (
       <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden', background: '#0A1628', ...style }}>
-        <img src={variant} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center' }} />
+        <img src={variant} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
         {label && (
           <div style={{
             position: 'absolute', bottom: 12, left: 14,
