@@ -69,7 +69,7 @@ function AerialPlaceholder({ variant = 'sky', label, style, children }) {
   if (isRealImage) {
     return (
       <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden', background: '#0A1628', ...style }}>
-        <img src={variant} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
+        <img src={variant} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center' }} />
         {label && (
           <div style={{
             position: 'absolute', bottom: 12, left: 14,
@@ -258,7 +258,7 @@ const POSTS = [
     authorRole: 'Editorial',
     date: '01 Mai 2026',
     readTime: '4 min',
-    image: './images/aera-esg-intro.png',
+    image: '/blog/images/aera-esg-intro.png',
     featured: true,
     tags: ['ESG', 'Sustentabilidade Corporativa', 'Gestão de Riscos', 'Série'],
   },
@@ -271,7 +271,7 @@ const POSTS = [
     authorRole: 'Editorial',
     date: '08 Mai 2026',
     readTime: '5 min',
-    image: './images/aera-esg-cap1.png',
+    image: '/blog/images/aera-esg-cap1.png',
     tags: ['ESG', 'Marketing', 'Vendas', 'Greenwashing', 'Série'],
   },
   {
@@ -283,7 +283,7 @@ const POSTS = [
     authorRole: 'Editorial',
     date: '15 Mai 2026',
     readTime: '5 min',
-    image: './images/aera-esg-cap2.png',
+    image: '/blog/images/aera-esg-cap2.png',
     tags: ['ESG', 'Logística', 'Compras', 'Cadeia de Suprimentos', 'Série'],
   },
   {
@@ -295,7 +295,7 @@ const POSTS = [
     authorRole: 'Editorial',
     date: '22 Mai 2026',
     readTime: '5 min',
-    image: './images/aera-esg-cap3.png',
+    image: '/blog/images/aera-esg-cap3.png',
     tags: ['ESG', 'Financeiro', 'Controladoria', 'Crédito Verde', 'Série'],
   },
   {
@@ -307,7 +307,7 @@ const POSTS = [
     authorRole: 'Editorial',
     date: '29 Mai 2026',
     readTime: '5 min',
-    image: './images/aera-esg-cap4.png',
+    image: '/blog/images/aera-esg-cap4.png',
     tags: ['ESG', 'RH', 'Operação', 'Cultura Organizacional', 'Série'],
   },
   {
@@ -319,7 +319,7 @@ const POSTS = [
     authorRole: 'Editorial',
     date: '05 Jun 2026',
     readTime: '5 min',
-    image: './images/aera-esg-cap5.png',
+    image: '/blog/images/aera-esg-cap5.png',
     tags: ['ESG', 'Tecnologia', 'Dados', 'Dashboards', 'Série'],
   },
   // ─── Posts editoriais ────────────────────────────────────────────────

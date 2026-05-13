@@ -31,7 +31,7 @@ function SearchPage({ onClose, onOpenPost, dark = false, embedded = false }) {
       <header style={{ borderBottom: `1px solid ${palette.border}`, padding: '20px 40px', position: embedded ? 'static' : 'sticky', top: 0,
         background: dark ? 'rgba(6,16,31,0.96)' : 'rgba(248,250,254,0.97)', backdropFilter: 'blur(20px)', zIndex: 10 }}>
         <div style={{ maxWidth: 960, margin: '0 auto', display: 'flex', alignItems: 'center', gap: 16 }}>
-          <AeraLogo color={BRAND.blue} textColor={palette.text} sub={false} size="sm" />
+          <AeraLogo color={BRAND.blue} textColor={dark ? '#fff' : BRAND.blue} sub={false} size="sm" />
           <span style={{ fontSize: 11, padding: '3px 8px', borderRadius: 4, background: palette.bgAlt,
             color: palette.muted, fontWeight: 600, letterSpacing: '0.05em' }}>BUSCA</span>
           <div style={{ flex: 1 }} />

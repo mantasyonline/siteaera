@@ -74,15 +74,27 @@ function PostPage({ postId, onBack, onOpenSearch }) {
 
       {/* Imagem hero */}
       <figure style={{ maxWidth: 1100, margin: '0 auto 48px', padding: isMobile ? '0 16px' : '0 32px' }}>
-        <div style={{ aspectRatio: isMobile ? '4 / 3' : '16 / 8', borderRadius: 6, overflow: 'hidden', position: 'relative' }}>
-          <AerialPlaceholder variant={post.image} label="Cobertura aérea · Brasil · 22.04.26" />
-          <div style={{ position: 'absolute', top: 20, right: 20, padding: '10px 14px',
-            background: 'rgba(255,255,255,0.95)', borderRadius: 4, fontFamily: 'ui-monospace, monospace',
-            fontSize: 10, lineHeight: 1.5, color: BRAND.navy }}>
-            <div style={{ color: BRAND.blue, fontWeight: 700, letterSpacing: '0.08em' }}>23.55°S · 46.63°W</div>
-            <div>Alt 10.500 m · 264 ppm</div>
+        {post.image && (post.image.startsWith('/') || post.image.startsWith('http') || post.image.includes('.png') || post.image.includes('.jpg') || post.image.includes('.webp')) ? (
+          <div style={{ borderRadius: 6, overflow: 'hidden', position: 'relative', background: '#0A1628' }}>
+            <img src={post.image} alt="" style={{ width: '100%', height: 'auto', display: 'block' }} />
+            <div style={{ position: 'absolute', top: 20, right: 20, padding: '10px 14px',
+              background: 'rgba(255,255,255,0.95)', borderRadius: 4, fontFamily: 'ui-monospace, monospace',
+              fontSize: 10, lineHeight: 1.5, color: BRAND.navy }}>
+              <div style={{ color: BRAND.blue, fontWeight: 700, letterSpacing: '0.08em' }}>23.55°S · 46.63°W</div>
+              <div>Alt 10.500 m · 264 ppm</div>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div style={{ aspectRatio: isMobile ? '4 / 3' : '16 / 8', borderRadius: 6, overflow: 'hidden', position: 'relative' }}>
+            <AerialPlaceholder variant={post.image} label="Cobertura aérea · Brasil · 22.04.26" />
+            <div style={{ position: 'absolute', top: 20, right: 20, padding: '10px 14px',
+              background: 'rgba(255,255,255,0.95)', borderRadius: 4, fontFamily: 'ui-monospace, monospace',
+              fontSize: 10, lineHeight: 1.5, color: BRAND.navy }}>
+              <div style={{ color: BRAND.blue, fontWeight: 700, letterSpacing: '0.08em' }}>23.55°S · 46.63°W</div>
+              <div>Alt 10.500 m · 264 ppm</div>
+            </div>
+          </div>
+        )}
         <figcaption style={{ fontSize: 12, color: palette.muted, marginTop: 12, textAlign: 'center', fontStyle: 'italic' }}>
           Vista aérea como metáfora da perspectiva estratégica sobre sustentabilidade.
         </figcaption>
@@ -155,7 +167,7 @@ function PostNav({ palette, onOpenSearch, onBack }) {
       borderBottom: `1px solid ${palette.border}`,
       height: 64, display: 'flex', alignItems: 'center' }}>
       <div style={{ maxWidth: 1280, width: '100%', margin: '0 auto', padding: isMobile ? '0 16px' : '0 48px', display: 'flex', alignItems: 'center', gap: isMobile ? 12 : 40 }}>
-        <AeraLogo color={BRAND.blue} textColor={BRAND.navy} sub={false} size="sm" homeUrl="../" />
+        <AeraLogo color={BRAND.blue} textColor={BRAND.blue} sub={false} size="sm" homeUrl="../" />
         <button onClick={() => onBack()} style={{ fontSize: 11, padding: '3px 8px', borderRadius: 4,
           background: BRAND.bgAlt, color: BRAND.textMuted,
           fontWeight: 600, letterSpacing: '0.05em', border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}>

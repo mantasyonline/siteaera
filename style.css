@@ -467,7 +467,7 @@ h2.section-heading--white { color:white; }
     display:grid; grid-template-columns:1.8fr 1fr 1fr 1fr; gap:48px;
     padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,.07); margin-bottom:28px;
 }
-.footer-brand img { height:40px; margin-bottom:14px; filter:brightness(0) invert(1); opacity:.85; }
+.footer-brand img { height:40px; margin-bottom:14px; background:#fff; padding:5px 8px; border-radius:6px; }
 .footer-brand p { font-size:.9rem; line-height:1.7; max-width:280px; }
 .footer-socials { display:flex; gap:10px; margin-top:18px; }
 .footer-socials a {

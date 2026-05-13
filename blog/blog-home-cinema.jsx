@@ -189,7 +189,7 @@ function Nav({ palette, onOpenSearch, onFilterCat, variant = 'cinema' }) {
         padding: isMobile ? '0 16px' : '0 32px',
         display: 'flex', alignItems: 'center', gap: isMobile ? 10 : 32 }}>
         {/* Logo com link para o site principal */}
-        <AeraLogo color={BRAND.blue} textColor={onDark ? '#fff' : BRAND.navy} sub={false} size="sm" homeUrl="../" />
+        <AeraLogo color={BRAND.blue} textColor={BRAND.blue} sub={false} size="sm" homeUrl="../" />
         <span style={{ fontSize: 10, padding: '2px 7px', borderRadius: 4, flexShrink: 0,
           background: onDark ? 'rgba(255,255,255,0.1)' : BRAND.bgAlt,
           color: onDark ? 'rgba(255,255,255,0.7)' : BRAND.textMuted,
