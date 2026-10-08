@@ -1,0 +1,4 @@
+# Arquivos internos (editor, Claude): não vão para o site público
+.idea/
+.claude/
+Site Aera Publico/

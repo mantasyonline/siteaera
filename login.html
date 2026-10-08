@@ -147,6 +147,20 @@
         .back-link:hover { color:#1877F2; }
         .back-link svg { width:14px; height:14px; }
     </style>
+    <!-- Ícone, endereço oficial e prévia de compartilhamento (WhatsApp, LinkedIn) -->
+    <link rel="icon" type="image/png" href="aera_icon.png">
+    <link rel="apple-touch-icon" href="aera_icon.png">
+    <meta name="robots" content="noindex">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AERA Soluções Ambientais e Sustentáveis">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:title" content="Entrar — AERA APP">
+    <meta property="og:description" content="Acesse o AERA APP — sua plataforma de gestão ambiental e sustentabilidade.">
+    <meta property="og:url" content="https://www.aerasustentavel.com.br/login.html">
+    <meta property="og:image" content="https://www.aerasustentavel.com.br/og-aera.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
 
@@ -167,53 +181,20 @@
 
     <!-- Card de login -->
     <div class="login-card">
-        <h1 class="login-card-title">Bem-vindo de volta</h1>
-        <p class="login-card-sub">Acesse sua conta para continuar</p>
+        <h1 class="login-card-title">Acesse o AERAPP</h1>
+        <p class="login-card-sub">O login é feito na própria plataforma, em ambiente seguro.</p>
 
-        <!-- Alerta de erro geral -->
-        <div class="alert-error" id="alert-error">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            <p id="alert-error-msg">E-mail ou senha incorretos.</p>
-        </div>
+        <!-- O site NÃO pede senha: o botão leva ao AERAPP (AERA_APP_URL em script.js). Sem a URL configurada,
+             mostra o aviso de acesso sob solicitação. -->
+        <a href="#" class="btn-submit" id="btn-entrar" style="display:none;text-decoration:none;text-align:center;">
+            Entrar no AERAPP
+        </a>
 
-        <form id="login-form" novalidate>
-            <div class="form-group">
-                <label class="form-label" for="email">
-                    E-mail <span style="color:#1877F2;">*</span>
-                </label>
-                <input class="form-input" id="email" type="email" name="email"
-                       placeholder="seu@email.com.br" autocomplete="email" required>
-                <p class="form-error" id="email-error">Informe um e-mail válido.</p>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label" for="password">
-                    Senha <span style="color:#1877F2;">*</span>
-                    <a href="#">Esqueci minha senha</a>
-                </label>
-                <div class="input-wrap">
-                    <input class="form-input" id="password" type="password" name="password"
-                           placeholder="••••••••" autocomplete="current-password" required>
-                    <button type="button" class="pwd-toggle" id="pwd-toggle" aria-label="Mostrar senha">
-                        <svg id="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                            <circle cx="12" cy="12" r="3"/>
-                        </svg>
-                    </button>
-                </div>
-                <p class="form-error" id="password-error">A senha é obrigatória.</p>
-            </div>
-
-            <button type="submit" class="btn-submit" id="btn-submit">
-                Entrar
-            </button>
-        </form>
-
-        <!-- Demo notice (aparece quando o app não está configurado) -->
-        <div class="demo-notice" id="demo-notice">
+        <!-- Aviso (aparece enquanto o AERAPP não está publicado) -->
+        <div class="demo-notice visible" id="demo-notice">
             <p>
-                <strong>Prévia da tela de login do AERA APP.</strong><br>
-                A plataforma está em configuração final. Fale com nossa equipe para solicitar seu acesso.
+                <strong>O AERAPP está em implantação.</strong><br>
+                O acesso é liberado sob solicitação. Fale com nossa equipe para agendar uma demonstração ou solicitar seu acesso.
             </p>
             <a href="https://wa.me/5511986490720?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20acesso%20ao%20AERA%20APP." target="_blank" rel="noopener" class="btn-wa">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
@@ -228,81 +209,20 @@
         </p>
     </div>
 
-    <p class="login-copy">&copy; 2026 AERA — Soluções Ambientais e Sustentáveis</p>
+    <p class="login-copy">&copy; 2026 AERA | Soluções Ambientais e Sustentáveis</p>
 </div>
 
 <script src="script.js"></script>
 <script>
-(function() {
-    /* ---- Mostrar/ocultar senha ---- */
-    const pwdInput  = document.getElementById('password');
-    const pwdToggle = document.getElementById('pwd-toggle');
-    const eyeIcon   = document.getElementById('eye-icon');
-
-    const eyeOpen = `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
-    const eyeOff  = `<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>`;
-
-    if (pwdToggle) {
-        pwdToggle.addEventListener('click', function () {
-            const show = pwdInput.type === 'password';
-            pwdInput.type = show ? 'text' : 'password';
-            eyeIcon.innerHTML = show ? eyeOff : eyeOpen;
-        });
+(function () {
+    /* Com a URL do AERAPP configurada (script.js), o botão leva direto ao login da plataforma. */
+    var url = (typeof AERA_APP_URL !== 'undefined' && AERA_APP_URL && AERA_APP_URL !== '#') ? AERA_APP_URL : null;
+    if (url) {
+        var btn = document.getElementById('btn-entrar');
+        btn.href = url;
+        btn.style.display = 'block';
+        document.getElementById('demo-notice').classList.remove('visible');
     }
-
-    /* ---- Validação e submit ---- */
-    const form        = document.getElementById('login-form');
-    const btnSubmit   = document.getElementById('btn-submit');
-    const alertBox    = document.getElementById('alert-error');
-    const alertMsg    = document.getElementById('alert-error-msg');
-    const demoNotice  = document.getElementById('demo-notice');
-    const emailInput  = document.getElementById('email');
-    const emailErr    = document.getElementById('email-error');
-    const passwordErr = document.getElementById('password-error');
-
-    function showError(el, errEl) { el.classList.add('error'); errEl.classList.add('visible'); }
-    function clearError(el, errEl) { el.classList.remove('error'); errEl.classList.remove('visible'); }
-
-    emailInput.addEventListener('input', () => clearError(emailInput, emailErr));
-    pwdInput.addEventListener('input',   () => clearError(pwdInput, passwordErr));
-
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        const emailVal = emailInput.value.trim();
-        const pwdVal   = pwdInput.value;
-        let valid = true;
-
-        alertBox.classList.remove('visible');
-        clearError(emailInput, emailErr);
-        clearError(pwdInput, passwordErr);
-
-        if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
-            showError(emailInput, emailErr); valid = false;
-        }
-        if (!pwdVal) {
-            showError(pwdInput, passwordErr); valid = false;
-        }
-        if (!valid) return;
-
-        /* Loading state */
-        btnSubmit.disabled = true;
-        btnSubmit.innerHTML = '<div class="spinner"></div> Entrando...';
-
-        /* Se AERA_APP_URL está configurado, redireciona para o app real */
-        if (typeof AERA_APP_URL !== 'undefined' && AERA_APP_URL && AERA_APP_URL !== '#') {
-            setTimeout(() => { window.location.href = AERA_APP_URL; }, 600);
-            return;
-        }
-
-        /* Demo: mostra notice de configuração pendente */
-        setTimeout(function () {
-            btnSubmit.disabled = false;
-            btnSubmit.innerHTML = 'Entrar';
-            demoNotice.classList.add('visible');
-            demoNotice.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 1200);
-    });
 })();
 </script>
 </body>
