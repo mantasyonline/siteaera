@@ -5,7 +5,7 @@
    Insira abaixo a URL de acesso à Plataforma quando disponível.
    Todos os botões e links da página serão atualizados automaticamente.
    ============================================================ */
-const AERA_APP_URL = '#'; // ← CONFIGURAR: cole aqui a URL da Plataforma quando estiver disponível
+const AERA_APP_URL = 'https://app.aerasustentavel.com.br/login'; // AERAPP no ar desde 11/10/2026
 
 /* URL da página de login local (prévia) — usada enquanto AERA_APP_URL não está configurado */
 const AERA_APP_LOGIN_PREVIEW = 'login.html';
